@@ -1,49 +1,49 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
+import Overlay from "./components/Overlay";
+import Settings from "./components/Settings";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  const [currentView, setCurrentView] = useState<'main' | 'settings'>('main');
 
   return (
     <main className="container">
-      <h1>Welcome to Tauri + React</h1>
+      <h1>Welcome to AI Quick Actions</h1>
+      <p>Press Ctrl+Shift+Alt+A to open the overlay from anywhere!</p>
 
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="row" style={{ marginTop: '2rem' }}>
+        <button
+          onClick={() => setCurrentView('main')}
+          style={{
+            marginRight: '1rem',
+            padding: '0.5rem 1rem',
+            backgroundColor: currentView === 'main' ? '#007bff' : '#6c757d',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px'
+          }}
+        >
+          Main View
+        </button>
+        <button
+          onClick={() => setCurrentView('settings')}
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: currentView === 'settings' ? '#007bff' : '#6c757d',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px'
+          }}
+        >
+          Settings
+        </button>
       </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
 
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
+      <div style={{ marginTop: '2rem' }}>
+        {currentView === 'main' && <Overlay />}
+        {currentView === 'settings' && <Settings />}
+      </div>
     </main>
   );
 }
