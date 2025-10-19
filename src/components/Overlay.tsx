@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Edit3, MessageSquare, PenTool, Loader2, Copy, Check } from 'lucide-react';
 
 interface OverlayProps {}
@@ -78,6 +79,34 @@ const Overlay: React.FC<OverlayProps> = () => {
         apiKey,
         tone: action === 'tone' ? selectedTone : undefined
       });
+
+      // For proofread action, hide window and go back to previous app
+      if (action === 'proofread') {
+        // Automatically copy result to clipboard to replace user's selection
+        await invoke('set_clipboard_text', { text: result });
+
+        // Close the overlay window and return to previous app
+        const appWindow = getCurrentWindow();
+        await appWindow.hide();
+
+        // Show a brief notification that text is ready to paste
+        try {
+          // Try to show a system notification
+          if ('Notification' in window) {
+            new Notification('Text Proofread Complete', {
+              body: 'Proofread text copied to clipboard. Use Ctrl+V to paste.',
+              icon: '/tauri.svg',
+              silent: true
+            });
+          }
+        } catch (e) {
+          // Notifications might not be available, that's okay
+          console.log('Notification not available');
+        }
+
+        setIsLoading(false);
+        return;
+      }
 
       setOutputText(result);
 
