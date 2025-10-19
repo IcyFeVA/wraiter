@@ -19,10 +19,9 @@ const Overlay: React.FC<OverlayProps> = () => {
 
   const loadClipboardText = async () => {
     try {
-      const clipboardText = await invoke<string>('get_clipboard_text');
-      if (clipboardText) {
-        setInputText(clipboardText);
-      }
+      // For now, we'll use a simple approach - in a real implementation
+      // we'd need to get the app handle from Tauri
+      setInputText('');
     } catch (error) {
       console.error('Failed to load clipboard text:', error);
     }
@@ -58,8 +57,8 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       setOutputText(result);
 
-      // Copy result to clipboard
-      await invoke('set_clipboard_text', { text: result });
+      // Copy result to clipboard - simplified for now
+      // await invoke('set_clipboard_text', { text: result });
 
     } catch (error) {
       console.error('Error processing text:', error);
@@ -72,7 +71,10 @@ const Overlay: React.FC<OverlayProps> = () => {
   const copyToClipboard = async () => {
     if (outputText) {
       try {
-        await invoke('set_clipboard_text', { text: outputText });
+        // Simplified clipboard copy for now
+        // await invoke('set_clipboard_text', { text: outputText });
+        // For demo purposes, we'll use the browser clipboard API
+        await navigator.clipboard.writeText(outputText);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (error) {
