@@ -25,25 +25,17 @@ fn greet(name: &str) -> String {
 
 #[tauri::command]
 async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
-    if let Some(window) = app.get_webview_window("overlay") {
+    // Get the main window instead of trying to create a new overlay window
+    if let Some(window) = app.get_webview_window("main") {
         if window.is_visible().unwrap_or(false) {
             window.hide().map_err(|e| e.to_string())?;
         } else {
             window.show().map_err(|e| e.to_string())?;
             window.center().map_err(|e| e.to_string())?;
+            window.set_focus().map_err(|e| e.to_string())?;
         }
     } else {
-        let _overlay = tauri::WebviewWindowBuilder::new(
-            &app,
-            "overlay",
-            tauri::WebviewUrl::App("overlay.html".into())
-        )
-        .title("AI Quick Actions")
-        .inner_size(600.0, 400.0)
-        .min_inner_size(400.0, 300.0)
-        .center()
-        .build()
-        .map_err(|e| e.to_string())?;
+        return Err("Main window not found".to_string());
     }
     Ok(())
 }

@@ -17,10 +17,10 @@ const Overlay: React.FC<OverlayProps> = () => {
     loadClipboardText();
   }, []);
 
-  // Force re-render when switching back to main view
+  // Handle window focus to refresh clipboard content
   useEffect(() => {
     const handleFocus = () => {
-      // Component will re-render and show current settings
+      loadClipboardText();
     };
 
     window.addEventListener('focus', handleFocus);
