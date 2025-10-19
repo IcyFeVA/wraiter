@@ -1,14 +1,16 @@
-import { useState } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { useState, useRef } from "react";
+import { useWindowResize } from "./hooks/useWindowResize";
 import "./App.css";
 import Overlay from "./components/Overlay";
 import Settings from "./components/Settings";
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings'>('main');
+  const contentRef = useRef<HTMLDivElement>(null);
+  useWindowResize(contentRef);
 
   return (
-    <div id="app" style={{
+    <div id="app" ref={contentRef} style={{
       width: '100%',
     }}>
       {/* Draggable top bar */}
@@ -40,8 +42,7 @@ function App() {
         }}
       />
 
-{/* Do not delete this , we need it later */}
-      {/* <div style={{ marginBottom: '1rem' }}>
+      <div style={{ marginBottom: '1rem' }}>
         <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
           <button
             onClick={() => setCurrentView('main')}
@@ -72,7 +73,7 @@ function App() {
             Settings
           </button>
         </div>
-      </div> */}
+      </div>
 
       {currentView === 'main' && <Overlay />}
       {currentView === 'settings' && <Settings />}

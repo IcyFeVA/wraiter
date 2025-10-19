@@ -14,7 +14,6 @@ const Settings: React.FC<SettingsProps> = () => {
   const [apiKey, setApiKey] = useState('');
   const [models, setModels] = useState<Model[]>([]);
   const [selectedModel, setSelectedModel] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
@@ -177,20 +176,19 @@ const Settings: React.FC<SettingsProps> = () => {
           </div>
           <button
             onClick={saveApiKey}
-            disabled={isLoading}
             style={{
               padding: '0.75rem 1rem',
               backgroundColor: '#007bff',
               color: 'white',
               border: 'none',
               borderRadius: '4px',
-              cursor: isLoading ? 'not-allowed' : 'pointer',
+              cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem'
             }}
           >
-            {isLoading ? <Loader2 size={16} className="spin" /> : <Key size={16} />}
+            <Key size={16} />
             Save Key
           </button>
         </div>
