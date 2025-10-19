@@ -86,6 +86,11 @@ button {
   margin-right: 5px;
 }
 
+.drag-region {
+  -webkit-app-region: drag;
+  app-region: drag;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
