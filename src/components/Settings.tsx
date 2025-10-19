@@ -37,6 +37,12 @@ const Settings: React.FC<SettingsProps> = () => {
       return;
     }
 
+    // Basic API key format validation for OpenRouter
+    if (!apiKey.startsWith('sk-or-v1-')) {
+      setMessage({ type: 'error', text: 'Invalid API key format. OpenRouter API keys should start with "sk-or-v1-"' });
+      return;
+    }
+
     localStorage.setItem('openrouter_api_key', apiKey);
     setMessage({ type: 'success', text: 'API key saved successfully!' });
 
@@ -66,11 +72,14 @@ const Settings: React.FC<SettingsProps> = () => {
 
       // Set default model if none selected
       if (!selectedModel && formattedModels.length > 0) {
-        // Try to find Gemini 2.0 Flash first
+        // Try to find a free model first, then Gemini 2.0 Flash
+        const freeModel = formattedModels.find(m =>
+          m.id.includes('free') || m.id.includes('gemini-2.0-flash-exp:free')
+        );
         const geminiModel = formattedModels.find(m =>
           m.id.includes('gemini-2.0-flash') || m.name.toLowerCase().includes('gemini')
         );
-        const defaultModel = geminiModel || formattedModels[0];
+        const defaultModel = freeModel || geminiModel || formattedModels[0];
         setSelectedModel(defaultModel.id);
         localStorage.setItem('selected_model', defaultModel.id);
       }
@@ -138,6 +147,18 @@ const Settings: React.FC<SettingsProps> = () => {
       {/* API Key Section */}
       <div style={{ marginBottom: '2rem' }}>
         <h3 style={{ marginBottom: '1rem', color: '#333' }}>OpenRouter API Key</h3>
+        <p style={{ marginBottom: '1rem', color: '#666', fontSize: '0.875rem' }}>
+          Get your API key from{' '}
+          <a
+            href="https://openrouter.ai/keys"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#007bff', textDecoration: 'none' }}
+          >
+            openrouter.ai/keys
+          </a>
+          {' '}(free account available)
+        </p>
         <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
           <div style={{ flex: 1 }}>
             <input

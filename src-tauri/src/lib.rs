@@ -90,7 +90,18 @@ async fn fetch_openrouter_models(api_key: String) -> Result<Vec<serde_json::Valu
                     Err(e) => Err(format!("Failed to parse models response: {}", e))
                 }
             } else {
-                Err(format!("API request failed with status: {}", status))
+                match resp.text().await {
+                    Ok(error_text) => {
+                        if status == 401 {
+                            Err(format!("Authentication failed (401 Unauthorized): {}", error_text))
+                        } else if status == 403 {
+                            Err(format!("Access forbidden (403 Forbidden): {}", error_text))
+                        } else {
+                            Err(format!("API request failed ({}): {}", status, error_text))
+                        }
+                    },
+                    Err(_) => Err(format!("API request failed with status: {}", status))
+                }
             }
         }
         Err(e) => Err(format!("Failed to connect to OpenRouter API: {}", e))
@@ -157,7 +168,18 @@ async fn process_text_with_ai(
             } else {
                 let status = resp.status();
                 match resp.text().await {
-                    Ok(error_text) => Err(format!("API request failed ({}): {}", status, error_text)),
+                    Ok(error_text) => {
+                        // Parse the error response to provide better error messages
+                        if status == 401 {
+                            Err(format!("Authentication failed (401 Unauthorized): {}", error_text))
+                        } else if status == 403 {
+                            Err(format!("Access forbidden (403 Forbidden): {}", error_text))
+                        } else if status == 429 {
+                            Err(format!("Rate limit exceeded (429 Too Many Requests): {}", error_text))
+                        } else {
+                            Err(format!("API request failed ({}): {}", status, error_text))
+                        }
+                    },
                     Err(_) => Err(format!("API request failed with status: {}", status))
                 }
             }

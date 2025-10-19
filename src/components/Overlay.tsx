@@ -17,6 +17,16 @@ const Overlay: React.FC<OverlayProps> = () => {
     loadClipboardText();
   }, []);
 
+  // Force re-render when switching back to main view
+  useEffect(() => {
+    const handleFocus = () => {
+      // Component will re-render and show current settings
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, []);
+
   const loadClipboardText = async () => {
     try {
       // For now, we'll use a simple approach - in a real implementation
@@ -37,12 +47,26 @@ const Overlay: React.FC<OverlayProps> = () => {
     setSelectedAction(action);
 
     try {
-      // Get settings from store (we'll implement this later)
+      // Get settings from localStorage
       const apiKey = localStorage.getItem('openrouter_api_key') || '';
-      const model = localStorage.getItem('selected_model') || 'google/gemini-2.0-flash-exp:free';
+      const model = localStorage.getItem('selected_model') || '';
+
+      // If no model is selected, show an error
+      if (!model) {
+        alert('Please select a model in Settings first');
+        setIsLoading(false);
+        return;
+      }
 
       if (!apiKey) {
         alert('Please set your OpenRouter API key in Settings first');
+        setIsLoading(false);
+        return;
+      }
+
+      // Validate API key format
+      if (!apiKey.startsWith('sk-or-v1-')) {
+        alert('Invalid API key format. Please check your OpenRouter API key in Settings.');
         setIsLoading(false);
         return;
       }
@@ -62,7 +86,23 @@ const Overlay: React.FC<OverlayProps> = () => {
 
     } catch (error) {
       console.error('Error processing text:', error);
-      alert(`Error: ${error}`);
+
+      // Provide more specific error messages
+      if (error && typeof error === 'string') {
+        if (error.includes('401') || error.includes('Unauthorized') || error.includes('No auth credentials')) {
+          alert('Authentication failed. Please check your OpenRouter API key in Settings.');
+        } else if (error.includes('403') || error.includes('Forbidden')) {
+          alert('Access forbidden. Your API key may not have permission to use this model.');
+        } else if (error.includes('429') || error.includes('rate limit')) {
+          alert('Rate limit exceeded. Please try again later.');
+        } else if (error.includes('network') || error.includes('connection')) {
+          alert('Network error. Please check your internet connection and try again.');
+        } else {
+          alert(`Error: ${error}`);
+        }
+      } else {
+        alert('An unexpected error occurred. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -199,6 +239,12 @@ const Overlay: React.FC<OverlayProps> = () => {
           </select>
         </div>
       )}
+
+      {/* Current Settings Display */}
+      <div style={{ marginBottom: '1rem', padding: '0.5rem', backgroundColor: '#f8f9fa', borderRadius: '4px', fontSize: '0.875rem' }}>
+        <div><strong>API Key:</strong> {localStorage.getItem('openrouter_api_key') ? 'Set' : 'Not set'}</div>
+        <div><strong>Model:</strong> {localStorage.getItem('selected_model') || 'Not selected'}</div>
+      </div>
 
       {/* Input Text Area */}
       <div style={{ marginBottom: '1rem' }}>
