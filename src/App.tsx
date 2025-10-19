@@ -9,8 +9,8 @@ function App() {
 
   return (
     <div id="app" style={{
-      width: '100vw',
-      height: '100vh',
+      width: '100%',
+      height: '100%',
       backgroundColor: 'black'
     }}>
       {/* Draggable top bar */}

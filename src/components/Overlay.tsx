@@ -136,7 +136,10 @@ const Overlay: React.FC<OverlayProps> = () => {
   return (
     <div style={{
       padding: '1rem',
+      paddingTop: '2rem', // Extra top padding for the drag region
       margin: '0 auto',
+      width: '100%',
+      boxSizing: 'border-box',
     }}>
 
       {/* Action Buttons */}
@@ -257,7 +260,8 @@ const Overlay: React.FC<OverlayProps> = () => {
             borderRadius: '3px',
             resize: 'vertical',
             fontFamily: 'inherit',
-            fontSize: '0.875rem'
+            fontSize: '0.875rem',
+            boxSizing: 'border-box'
           }}
         />
       </div>
@@ -307,7 +311,8 @@ const Overlay: React.FC<OverlayProps> = () => {
               borderRadius: '3px',
               backgroundColor: '#f8fff9',
               fontFamily: 'inherit',
-              fontSize: '0.875rem'
+              fontSize: '0.875rem',
+              boxSizing: 'border-box'
             }}
           />
         </div>
