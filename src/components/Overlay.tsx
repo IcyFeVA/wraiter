@@ -136,14 +136,8 @@ const Overlay: React.FC<OverlayProps> = () => {
   return (
     <div style={{
       padding: '1rem',
-      maxWidth: '600px',
       margin: '0 auto',
-      backgroundColor: 'rgba(255, 255, 255, 0.95)',
-      borderRadius: '6px',
-      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-      backdropFilter: 'blur(10px)'
     }}>
-      <h2 style={{ marginBottom: '0.75rem', color: '#333', fontSize: '1.25rem' }}>AI Quick Actions</h2>
 
       {/* Action Buttons */}
       <div style={{
@@ -216,14 +210,6 @@ const Overlay: React.FC<OverlayProps> = () => {
       {/* Tone Selection (only show for tone action) */}
       {selectedAction === 'tone' && (
         <div style={{ marginBottom: '1rem' }}>
-          <label style={{
-            display: 'block',
-            marginBottom: '0.5rem',
-            fontWeight: 'bold',
-            color: '#333'
-          }}>
-            Select Tone:
-          </label>
           <select
             value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
@@ -244,10 +230,10 @@ const Overlay: React.FC<OverlayProps> = () => {
       )}
 
       {/* Current Settings Display */}
-      <div style={{ marginBottom: '1rem', padding: '0.5rem', backgroundColor: '#f8f9fa', borderRadius: '4px', fontSize: '0.875rem' }}>
+      {/* <div style={{ marginBottom: '1rem', padding: '0.5rem', backgroundColor: 'transparent', borderRadius: '4px', fontSize: '0.875rem' }}>
         <div><strong>API Key:</strong> {localStorage.getItem('openrouter_api_key') ? 'Set' : 'Not set'}</div>
         <div><strong>Model:</strong> {localStorage.getItem('selected_model') || 'Not selected'}</div>
-      </div>
+      </div> */}
 
       {/* Input Text Area */}
       <div style={{ marginBottom: '1rem' }}>
