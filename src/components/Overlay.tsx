@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { getCurrentWindow } from '@tauri-apps/api/window';
+import { getCurrentWindow, LogicalSize } from '@tauri-apps/api/window';
 import { Edit3, MessageSquare, PenTool, Loader2, Copy, Check } from 'lucide-react';
 
 interface OverlayProps {}
@@ -9,6 +9,17 @@ const Overlay: React.FC<OverlayProps> = () => {
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  // Update window height when content changes
+  const updateWindowHeight = useCallback(async () => {
+    if (contentRef.current) {
+      const height = Math.min(contentRef.current.scrollHeight + 32, 700); // 32px for padding
+      const window = await getCurrentWindow();
+      const { width } = await window.outerSize();
+      await window.setSize(new LogicalSize(width, height));
+    }
+  }, []);
   const [selectedAction, setSelectedAction] = useState<'proofread' | 'tone' | 'draft'>('proofread');
   const [selectedTone, setSelectedTone] = useState('professional');
   const [copied, setCopied] = useState(false);
@@ -17,6 +28,28 @@ const Overlay: React.FC<OverlayProps> = () => {
     // Load clipboard text when component mounts
     loadClipboardText();
   }, []);
+
+  // Update window height when content changes
+  useEffect(() => {
+    const observer = new ResizeObserver(() => {
+      updateWindowHeight();
+    });
+
+    if (contentRef.current) {
+      observer.observe(contentRef.current);
+    }
+
+    return () => {
+      if (contentRef.current) {
+        observer.unobserve(contentRef.current);
+      }
+    };
+  }, [updateWindowHeight]);
+
+  // Update window height when input/output text changes
+  useEffect(() => {
+    updateWindowHeight();
+  }, [inputText, outputText, selectedAction, isLoading, updateWindowHeight]);
 
   // Handle window focus to refresh clipboard content
   useEffect(() => {
@@ -165,13 +198,14 @@ const Overlay: React.FC<OverlayProps> = () => {
   ];
 
   return (
-    <div style={{
-      padding: '1rem',
-      paddingTop: '2rem', // Extra top padding for the drag region
-      margin: '0 auto',
-      width: '100%',
-      boxSizing: 'border-box',
-    }}>
+    <div
+      ref={contentRef}
+      style={{
+        width: '100%',
+        marginTop: '2rem', // Extra top padding for the drag region
+        boxSizing: 'border-box',
+        overflowY: 'auto',
+      }}>
 
       {/* Action Buttons */}
       <div style={{

@@ -10,8 +10,6 @@ function App() {
   return (
     <div id="app" style={{
       width: '100%',
-      height: '100%',
-      backgroundColor: 'black'
     }}>
       {/* Draggable top bar */}
       <div
@@ -19,7 +17,7 @@ function App() {
         style={{
           width: '100%',
           height: '20px',
-          backgroundColor: 'rgba(20, 16, 29, 1)',
+          backgroundColor: 'rgba(255, 255, 255, 1)',
           cursor: 'grab',
           position: 'fixed',
           top: 0,
