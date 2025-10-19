@@ -5,7 +5,7 @@ export const useWindowResize = (contentRef: React.RefObject<HTMLDivElement | nul
   const updateWindowHeight = useCallback(async () => {
     if (contentRef.current) {
       // Adjust the height calculation as needed
-      const height = Math.min((contentRef.current as HTMLDivElement).scrollHeight, 700);
+      const height = Math.min((contentRef.current as HTMLDivElement).scrollHeight + 32, 700); // 32px for padding
       const window = await getCurrentWindow();
       const { width } = await window.outerSize();
       await window.setSize(new LogicalSize(width, height));
