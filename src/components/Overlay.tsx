@@ -29,11 +29,11 @@ const Overlay: React.FC<OverlayProps> = () => {
 
   const loadClipboardText = async () => {
     try {
-      // For now, we'll use a simple approach - in a real implementation
-      // we'd need to get the app handle from Tauri
-      setInputText('');
+      const clipboardText = await invoke<string>('get_clipboard_text');
+      setInputText(clipboardText || '');
     } catch (error) {
       console.error('Failed to load clipboard text:', error);
+      setInputText('');
     }
   };
 
@@ -81,8 +81,10 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       setOutputText(result);
 
-      // Copy result to clipboard - simplified for now
-      // await invoke('set_clipboard_text', { text: result });
+      // Automatically copy result to clipboard to replace user's selection
+      await invoke('set_clipboard_text', { text: result });
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
 
     } catch (error) {
       console.error('Error processing text:', error);
@@ -111,10 +113,7 @@ const Overlay: React.FC<OverlayProps> = () => {
   const copyToClipboard = async () => {
     if (outputText) {
       try {
-        // Simplified clipboard copy for now
-        // await invoke('set_clipboard_text', { text: outputText });
-        // For demo purposes, we'll use the browser clipboard API
-        await navigator.clipboard.writeText(outputText);
+        await invoke('set_clipboard_text', { text: outputText });
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (error) {
@@ -136,38 +135,40 @@ const Overlay: React.FC<OverlayProps> = () => {
 
   return (
     <div style={{
-      padding: '2rem',
-      maxWidth: '800px',
+      padding: '1rem',
+      maxWidth: '600px',
       margin: '0 auto',
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderRadius: '6px',
+      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+      backdropFilter: 'blur(10px)'
     }}>
-      <h2 style={{ marginBottom: '1.5rem', color: '#333' }}>AI Quick Actions</h2>
+      <h2 style={{ marginBottom: '0.75rem', color: '#333', fontSize: '1.25rem' }}>AI Quick Actions</h2>
 
       {/* Action Buttons */}
       <div style={{
         display: 'flex',
-        gap: '0.5rem',
-        marginBottom: '1rem',
+        gap: '0.25rem',
+        marginBottom: '0.75rem',
         flexWrap: 'wrap'
       }}>
         <button
           onClick={() => handleAction('proofread')}
           disabled={isLoading}
           style={{
-            padding: '0.75rem 1rem',
+            padding: '0.5rem 0.75rem',
             backgroundColor: selectedAction === 'proofread' ? '#007bff' : '#f8f9fa',
             color: selectedAction === 'proofread' ? 'white' : '#333',
             border: '1px solid #dee2e6',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.25rem',
+            fontSize: '0.875rem'
           }}
         >
-          <Edit3 size={16} />
+          <Edit3 size={14} />
           Proofread
         </button>
 
@@ -175,18 +176,19 @@ const Overlay: React.FC<OverlayProps> = () => {
           onClick={() => handleAction('tone')}
           disabled={isLoading}
           style={{
-            padding: '0.75rem 1rem',
+            padding: '0.5rem 0.75rem',
             backgroundColor: selectedAction === 'tone' ? '#007bff' : '#f8f9fa',
             color: selectedAction === 'tone' ? 'white' : '#333',
             border: '1px solid #dee2e6',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.25rem',
+            fontSize: '0.875rem'
           }}
         >
-          <MessageSquare size={16} />
+          <MessageSquare size={14} />
           Change Tone
         </button>
 
@@ -194,18 +196,19 @@ const Overlay: React.FC<OverlayProps> = () => {
           onClick={() => handleAction('draft')}
           disabled={isLoading}
           style={{
-            padding: '0.75rem 1rem',
+            padding: '0.5rem 0.75rem',
             backgroundColor: selectedAction === 'draft' ? '#007bff' : '#f8f9fa',
             color: selectedAction === 'draft' ? 'white' : '#333',
             border: '1px solid #dee2e6',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '0.25rem',
+            fontSize: '0.875rem'
           }}
         >
-          <PenTool size={16} />
+          <PenTool size={14} />
           Draft
         </button>
       </div>
@@ -262,12 +265,13 @@ const Overlay: React.FC<OverlayProps> = () => {
           placeholder="Enter text here or use selected text from clipboard..."
           style={{
             width: '100%',
-            height: '120px',
-            padding: '0.75rem',
+            height: '80px',
+            padding: '0.5rem',
             border: '1px solid #dee2e6',
-            borderRadius: '4px',
+            borderRadius: '3px',
             resize: 'vertical',
-            fontFamily: 'inherit'
+            fontFamily: 'inherit',
+            fontSize: '0.875rem'
           }}
         />
       </div>
@@ -311,12 +315,13 @@ const Overlay: React.FC<OverlayProps> = () => {
             readOnly
             style={{
               width: '100%',
-              height: '120px',
-              padding: '0.75rem',
+              height: '80px',
+              padding: '0.5rem',
               border: '1px solid #28a745',
-              borderRadius: '4px',
+              borderRadius: '3px',
               backgroundColor: '#f8fff9',
-              fontFamily: 'inherit'
+              fontFamily: 'inherit',
+              fontSize: '0.875rem'
             }}
           />
         </div>

@@ -9,38 +9,40 @@ function App() {
 
   return (
     <main className="container">
-      <h1>Welcome to AI Quick Actions</h1>
-      <p>Press Ctrl+Shift+Alt+A to open the overlay from anywhere!</p>
-
-      <div className="row" style={{ marginTop: '2rem' }}>
-        <button
-          onClick={() => setCurrentView('main')}
-          style={{
-            marginRight: '1rem',
-            padding: '0.5rem 1rem',
-            backgroundColor: currentView === 'main' ? '#007bff' : '#6c757d',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px'
-          }}
-        >
-          Main View
-        </button>
-        <button
-          onClick={() => setCurrentView('settings')}
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: currentView === 'settings' ? '#007bff' : '#6c757d',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px'
-          }}
-        >
-          Settings
-        </button>
+      <div style={{ marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+          <button
+            onClick={() => setCurrentView('main')}
+            style={{
+              padding: '0.4rem 0.8rem',
+              backgroundColor: currentView === 'main' ? '#007bff' : '#f8f9fa',
+              color: currentView === 'main' ? 'white' : '#333',
+              border: '1px solid #dee2e6',
+              borderRadius: '3px',
+              fontSize: '0.875rem',
+              cursor: 'pointer'
+            }}
+          >
+            Main
+          </button>
+          <button
+            onClick={() => setCurrentView('settings')}
+            style={{
+              padding: '0.4rem 0.8rem',
+              backgroundColor: currentView === 'settings' ? '#007bff' : '#f8f9fa',
+              color: currentView === 'settings' ? 'white' : '#333',
+              border: '1px solid #dee2e6',
+              borderRadius: '3px',
+              fontSize: '0.875rem',
+              cursor: 'pointer'
+            }}
+          >
+            Settings
+          </button>
+        </div>
       </div>
 
-      <div style={{ marginTop: '2rem' }}>
+      <div>
         {currentView === 'main' && <Overlay />}
         {currentView === 'settings' && <Settings />}
       </div>

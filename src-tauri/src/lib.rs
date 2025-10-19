@@ -2,6 +2,7 @@
 use tauri::Manager;
 use serde::{Deserialize, Serialize};
 use tauri_plugin_clipboard_manager::ClipboardExt;
+use tauri_plugin_global_shortcut::{Code, Modifiers, ShortcutState};
 
 #[derive(Serialize, Deserialize)]
 struct ProcessTextRequest {
@@ -201,9 +202,23 @@ pub fn run() {
             fetch_openrouter_models,
             process_text_with_ai
         ])
-        .setup(|_app| {
-            // Global shortcut registration will be handled differently in Tauri v2
-            // For now, let's get the basic functionality working
+        .setup(|app| {
+            // Register global shortcut for overlay (Ctrl+Shift+Alt+A)
+            let app_handle = app.handle().clone();
+            app.handle().plugin(
+                tauri_plugin_global_shortcut::Builder::new()
+                    .with_shortcuts(["CommandOrControl+Shift+Alt+A"])?
+                    .with_handler(move |_app, _shortcut, event| {
+                        if event.state == ShortcutState::Pressed {
+                            let app_handle = app_handle.clone();
+                            tauri::async_runtime::spawn(async move {
+                                let _ = show_overlay(app_handle).await;
+                            });
+                        }
+                    })
+                    .build(),
+            )?;
+
             Ok(())
         })
         .run(tauri::generate_context!())
