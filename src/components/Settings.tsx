@@ -112,87 +112,50 @@ const Settings: React.FC<SettingsProps> = () => {
   };
 
   return (
-    <div style={{
-      padding: '8px',
-      maxWidth: '800px',
-      margin: '0 auto',
-      backgroundColor: '#1a1a2e',
-      border: '2px inset #16213e'
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-        <SettingsIcon size={16} style={{ marginRight: '4px', color: '#00d4ff' }} />
-        <h2 style={{ margin: 0, color: '#00d4ff', fontSize: '14px', fontWeight: 'normal' }}>Settings</h2>
-      </div>
+    <div className="settings-container">
+      {/* <div className="settings-header">
+        <SettingsIcon size={16} className="settings-icon" />
+        <h2 className="settings-title">Settings</h2>
+      </div> */}
 
       {/* Message Display */}
       {message && (
-        <div style={{
-          padding: '4px 8px',
-          marginBottom: '8px',
-          border: '2px outset #16213e',
-          backgroundColor: message.type === 'success' ? '#16213e' : '#16213e',
-          color: message.type === 'success' ? '#00ff88' : '#ff6b6b',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '4px',
-          fontSize: '11px'
-        }}>
-          {message.type === 'success' ? <Check size={12} color="#00ff88" /> : <AlertCircle size={12} color="#ff6b6b" />}
-          {message.text}
+        <div className={message.type === 'success' ? 'message-display success' : 'message-display error'}>
+          {message.type === 'success' ? <Check size={12} className="message-icon success" /> : <AlertCircle size={12} className="message-icon error" />}
+          <span className="message-text">{message.text}</span>
         </div>
       )}
 
       {/* API Key Section */}
-      <div style={{ marginBottom: '8px' }}>
-        <h3 style={{ marginBottom: '4px', color: '#00d4ff', fontSize: '11px', fontWeight: 'normal' }}>OpenRouter API Key</h3>
-        <p style={{ marginBottom: '8px', color: '#00d4ff', fontSize: '11px' }}>
+      <div className="settings-section">
+        <h3 className="section-title">OpenRouter API Key</h3>
+        <p className="api-key-description">
           Get your API key from{' '}
           <a
             href="https://openrouter.ai/keys"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#ff6b9d', textDecoration: 'none' }}
+            className="api-key-link"
           >
             openrouter.ai/keys
           </a>
           {' '}(free account available)
         </p>
-        <div style={{ display: 'flex', gap: '4px', marginBottom: '8px' }}>
-          <div style={{ flex: 1 }}>
+        <div className="input-row">
+          <div className="input-container">
             <input
               type="password"
               value={apiKey}
               onChange={(e) => setApiKey(e.target.value)}
               placeholder="Enter your OpenRouter API key..."
-              style={{
-                width: '100%',
-                padding: '2px 4px',
-                border: '2px inset #16213e',
-                borderRadius: '0px',
-                fontFamily: 'monospace',
-                fontSize: '11px',
-                backgroundColor: '#16213e',
-                color: '#00d4ff'
-              }}
+              className="api-key-input"
             />
           </div>
           <button
             onClick={saveApiKey}
-            style={{
-              padding: '2px 8px',
-              backgroundColor: '#16213e',
-              color: '#00d4ff',
-              border: '2px outset #16213e',
-              borderRadius: '0px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '11px',
-              minHeight: '20px'
-            }}
+            className="save-key-button"
           >
-            <Key size={12} color="#00d4ff" />
+            <Key size={12} className="button-icon" />
             Save Key
           </button>
         </div>
@@ -200,42 +163,22 @@ const Settings: React.FC<SettingsProps> = () => {
         <button
           onClick={fetchModels}
           disabled={isLoadingModels || !apiKey}
-          style={{
-            padding: '2px 8px',
-            backgroundColor: (isLoadingModels || !apiKey) ? '#0e1a33' : '#16213e',
-            color: '#00d4ff',
-            border: '2px outset #16213e',
-            borderRadius: '0px',
-            cursor: (isLoadingModels || !apiKey) ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '11px',
-            minHeight: '20px'
-          }}
+          className={isLoadingModels || !apiKey ? 'load-models-button disabled' : 'load-models-button'}
         >
-          {isLoadingModels ? <Loader2 size={12} className="spin" color="#00d4ff" /> : null}
+          {isLoadingModels ? <Loader2 size={12} className="spin button-icon" /> : null}
           {isLoadingModels ? 'Loading Models...' : 'Load Available Models'}
         </button>
       </div>
 
       {/* Model Selection Section */}
       {models.length > 0 && (
-        <div style={{ marginBottom: '8px' }}>
-          <h3 style={{ marginBottom: '4px', color: '#00d4ff', fontSize: '11px', fontWeight: 'normal' }}>Model Selection</h3>
-          <div style={{ marginBottom: '8px' }}>
+        <div className="settings-section">
+          <h3 className="section-title">Model Selection</h3>
+          <div className="select-container">
             <select
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
-              style={{
-                width: '100%',
-                padding: '2px 4px',
-                border: '2px inset #16213e',
-                borderRadius: '0px',
-                fontSize: '11px',
-                backgroundColor: '#16213e',
-                color: '#00d4ff'
-              }}
+              className="model-select"
             >
               <option value="">Select a model...</option>
               {models.map(model => (
@@ -249,16 +192,7 @@ const Settings: React.FC<SettingsProps> = () => {
           <button
             onClick={saveModelSelection}
             disabled={!selectedModel}
-            style={{
-              padding: '2px 8px',
-              backgroundColor: selectedModel ? '#16213e' : '#0e1a33',
-              color: '#00d4ff',
-              border: '2px outset #16213e',
-              borderRadius: '0px',
-              cursor: selectedModel ? 'pointer' : 'not-allowed',
-              fontSize: '11px',
-              minHeight: '20px'
-            }}
+            className={!selectedModel ? 'save-model-button disabled' : 'save-model-button'}
           >
             Save Model Selection
           </button>
@@ -266,15 +200,9 @@ const Settings: React.FC<SettingsProps> = () => {
       )}
 
       {/* Current Settings Display */}
-      <div style={{ marginBottom: '8px' }}>
-        <h3 style={{ marginBottom: '4px', color: '#00d4ff', fontSize: '11px', fontWeight: 'normal' }}>Current Settings</h3>
-        <div style={{
-          padding: '4px 8px',
-          backgroundColor: '#16213e',
-          border: '2px inset #16213e',
-          fontSize: '11px',
-          color: '#00d4ff'
-        }}>
+      <div className="settings-section">
+        <h3 className="section-title">Current Settings</h3>
+        <div className="current-settings-display">
           <div><strong>API Key:</strong> {apiKey ? '••••••••' : 'Not set'}</div>
           <div><strong>Selected Model:</strong> {selectedModel || 'Not set'}</div>
           <div><strong>Available Models:</strong> {models.length}</div>
@@ -282,20 +210,11 @@ const Settings: React.FC<SettingsProps> = () => {
       </div>
 
       {/* Danger Zone */}
-      <div style={{ borderTop: '2px inset #16213e', paddingTop: '8px' }}>
-        <h3 style={{ marginBottom: '4px', color: '#ff6b6b', fontSize: '11px', fontWeight: 'normal' }}>Danger Zone</h3>
+      <div className="danger-zone">
+        <h3 className="danger-title">Danger Zone</h3>
         <button
           onClick={clearSettings}
-          style={{
-            padding: '2px 8px',
-            backgroundColor: '#16213e',
-            color: '#ff6b6b',
-            border: '2px outset #16213e',
-            borderRadius: '0px',
-            cursor: 'pointer',
-            fontSize: '11px',
-            minHeight: '20px'
-          }}
+          className="clear-settings-button"
         >
           Clear All Settings
         </button>

@@ -11,8 +11,8 @@
   line-height: 16px;
   font-weight: 400;
 
-  color: #00d4ff;
-  background-color: rgb(12, 13, 22);
+  color: #000000;
+  background-color: #e6e6e6;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -45,12 +45,12 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #007AFF;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #535bf2;
+  color: #0056CC;
 }
 
 h1 {
@@ -59,14 +59,14 @@ h1 {
 
 input,
 button {
-  border-radius: 0px;
-  border: 2px outset #16213e;
+  border-radius: 4px;
+  border: 2px outset #c0c0c0;
   padding: 2px 8px;
   font-size: 11px;
   font-weight: 400;
   font-family: inherit;
-  color: #00d4ff;
-  background-color: #16213e;
+  color: #000000;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
   transition: none;
   box-shadow: none;
   min-height: 20px;
@@ -77,13 +77,13 @@ button {
 }
 
 button:hover {
-  border: 2px outset #1e2d4f;
-  background-color: #1e2d4f;
+  border: 2px outset #a0a0a0;
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
 }
 
 button:active {
-  border: 2px inset #0e1a33;
-  background-color: #16213e;
+  border: 2px inset #808080;
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
 }
 
 input,
@@ -98,24 +98,405 @@ button {
 .drag-region {
   -webkit-app-region: drag;
   app-region: drag;
-  border-bottom: 1px solid rgb(29, 29, 78);
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.active-tab {
+  background: linear-gradient(to bottom, #007AFF, #0056CC) !important;
+  color: #ffffff !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.inactive-tab {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.active-tab:hover,
+.inactive-tab:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.active-tab:active,
+.inactive-tab:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
+}
+
+.overlay-container {
+  background: linear-gradient(to bottom, #f8f8f8, #e8e8e8) !important;
+  border: 2px inset #c0c0c0 !important;
+}
+
+.action-button {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.action-button.active {
+  background: linear-gradient(to bottom, #007AFF, #0056CC) !important;
+  color: #ffffff !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.action-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.action-button:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
+}
+
+.tone-select {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.input-label,
+.output-label {
+  color: #000000 !important;
+  font-weight: bold !important;
+}
+
+.text-input,
+.text-output {
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
+  color: #000000 !important;
+  border: 2px inset #c0c0c0 !important;
+}
+
+.copy-button {
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.copy-button.copied {
+  background: linear-gradient(to bottom, #00d4ff, #00a8cc) !important;
+  color: #ffffff !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.copy-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.copy-button:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
+}
+
+.loading-indicator {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px !important;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  border: 2px inset #c0c0c0 !important;
+  margin-top: 8px !important;
+}
+
+.spinner {
+  animation: spin 1s linear infinite !important;
+  color: #007AFF !important;
+  margin-right: 8px !important;
+}
+
+.loading-text {
+  font-size: 11px !important;
+  color: #000000 !important;
+}
+
+.settings-container {
+  padding: 8px !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  background: linear-gradient(to bottom, #f8f8f8, #e8e8e8) !important;
+  border: 2px inset #c0c0c0 !important;
+}
+
+.settings-header {
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 8px !important;
+}
+
+.settings-icon {
+  margin-right: 4px !important;
+  color: #007AFF !important;
+}
+
+.settings-title {
+  margin: 0 !important;
+  color: #000000 !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+
+.message-display.success {
+  padding: 4px 8px !important;
+  margin-bottom: 8px !important;
+  background: linear-gradient(to bottom, #d0d0d0, #d0d0d0) !important;
+  color: #008000 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+}
+
+.message-display.error {
+  padding: 4px 8px !important;
+  margin-bottom: 8px !important;
+  border: 2px outset #c0c0c0 !important;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #ff0000 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+}
+
+.message-icon.success {
+  color: #008000 !important;
+}
+
+.message-icon.error {
+  color: #ff0000 !important;
+}
+
+.message-text {
+  flex: 1 !important;
+}
+
+.settings-section {
+  margin-bottom: 8px !important;
+}
+
+.section-title {
+  margin-bottom: 4px !important;
+  color: #000000 !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+}
+
+.api-key-description {
+  margin-bottom: 8px !important;
+  color: #000000 !important;
+  font-size: 11px !important;
+}
+
+.api-key-link {
+  color: #007AFF !important;
+  text-decoration: none !important;
+}
+
+.api-key-link:hover {
+  color: #0056CC !important;
+  text-decoration: underline !important;
+}
+
+.input-row {
+  display: flex !important;
+  gap: 4px !important;
+  margin-bottom: 8px !important;
+}
+
+.input-container {
+  flex: 1 !important;
+}
+
+.api-key-input {
+  width: 100% !important;
+  padding: 2px 4px !important;
+  border: 2px inset #c0c0c0 !important;
+  border-radius: 4px !important;
+  font-family: monospace !important;
+  font-size: 11px !important;
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
+  color: #000000 !important;
+}
+
+.save-key-button {
+  padding: 2px 8px !important;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  min-height: 20px !important;
+}
+
+.save-key-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.save-key-button:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
+}
+
+.button-icon {
+  color: #007AFF !important;
+}
+
+.load-models-button {
+  padding: 2px 8px !important;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  min-height: 20px !important;
+}
+
+.load-models-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.load-models-button:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
+}
+
+.load-models-button.disabled {
+  background: linear-gradient(to bottom, #cccccc, #aaaaaa) !important;
+  color: #666666 !important;
+  cursor: not-allowed !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.select-container {
+  margin-bottom: 8px !important;
+}
+
+.model-select {
+  width: 100% !important;
+  padding: 2px 4px !important;
+  border: 2px inset #c0c0c0 !important;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
+  color: #000000 !important;
+}
+
+.save-model-button {
+  padding: 2px 8px !important;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #000000 !important;
+  border: 2px outset #c0c0c0 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 11px !important;
+  min-height: 20px !important;
+}
+
+.save-model-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.save-model-button:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
+}
+
+.save-model-button.disabled {
+  background: linear-gradient(to bottom, #cccccc, #aaaaaa) !important;
+  color: #666666 !important;
+  cursor: not-allowed !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.current-settings-display {
+  padding: 4px 8px !important;
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
+  border: 2px inset #c0c0c0 !important;
+  font-size: 11px !important;
+  color: #000000 !important;
+}
+
+.danger-zone {
+  border-top: 2px inset #c0c0c0 !important;
+  padding-top: 8px !important;
+}
+
+.danger-title {
+  margin-bottom: 4px !important;
+  color: #ff0000 !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+}
+
+.clear-settings-button {
+  padding: 2px 8px !important;
+  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
+  color: #ff0000 !important;
+  border: 2px outset #c0c0c0 !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-size: 11px !important;
+  min-height: 20px !important;
+}
+
+.clear-settings-button:hover {
+  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
+  border: 2px outset #a0a0a0 !important;
+}
+
+.clear-settings-button:active {
+  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
+  border: 2px inset #808080 !important;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color: #f6f6f6;
+    /* color: #ffffff; */
+    /* background-color: #dadada; */
+  }
+
+  a {
+    color: #4A90E2;
   }
 
   a:hover {
-    color: #24c8db;
+    color: #357ABD;
   }
 
   input,
   button {
     color: #ffffff;
-    background-color: #0f0f0f98;
+    background: linear-gradient(to bottom, #404040, #202020);
+    border: 2px outset #606060;
   }
+
+  button:hover {
+    background: linear-gradient(to bottom, #505050, #303030);
+    border: 2px outset #707070;
+  }
+
   button:active {
-    background-color: #0f0f0f69;
+    background: linear-gradient(to bottom, #303030, #101010);
+    border: 2px inset #505050;
+  }
+
+  .drag-region {
+    border-bottom: 1px solid #606060;
   }
 }

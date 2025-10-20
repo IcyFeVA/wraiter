@@ -166,14 +166,13 @@ const Overlay: React.FC<OverlayProps> = () => {
 
   return (
     <div
+      className="overlay-container"
       style={{
         width: '100%',
         marginTop: '8px',
         padding: '8px',
         boxSizing: 'border-box',
         overflowY: 'auto',
-        backgroundColor: '#1a1a2e',
-        border: '2px inset #16213e'
       }}>
 
       {/* Action Buttons */}
@@ -186,12 +185,8 @@ const Overlay: React.FC<OverlayProps> = () => {
         <button
           onClick={() => handleAction('proofread')}
           disabled={isLoading}
+          className={selectedAction === 'proofread' ? 'action-button active' : 'action-button'}
           style={{
-            padding: '2px 8px',
-            backgroundColor: selectedAction === 'proofread' ? '#00d4ff' : '#16213e',
-            color: selectedAction === 'proofread' ? '#1a1a2e' : '#00d4ff',
-            border: '2px outset #16213e',
-            borderRadius: '0px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -207,12 +202,8 @@ const Overlay: React.FC<OverlayProps> = () => {
         <button
           onClick={() => handleAction('tone')}
           disabled={isLoading}
+          className={selectedAction === 'tone' ? 'action-button active' : 'action-button'}
           style={{
-            padding: '2px 8px',
-            backgroundColor: selectedAction === 'tone' ? '#00d4ff' : '#16213e',
-            color: selectedAction === 'tone' ? '#1a1a2e' : '#00d4ff',
-            border: '2px outset #16213e',
-            borderRadius: '0px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -228,12 +219,8 @@ const Overlay: React.FC<OverlayProps> = () => {
         <button
           onClick={() => handleAction('draft')}
           disabled={isLoading}
+          className={selectedAction === 'draft' ? 'action-button active' : 'action-button'}
           style={{
-            padding: '2px 8px',
-            backgroundColor: selectedAction === 'draft' ? '#00d4ff' : '#16213e',
-            color: selectedAction === 'draft' ? '#1a1a2e' : '#00d4ff',
-            border: '2px outset #16213e',
-            borderRadius: '0px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -253,14 +240,10 @@ const Overlay: React.FC<OverlayProps> = () => {
           <select
             value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
+            className="tone-select"
             style={{
-              padding: '2px 4px',
-              border: '2px inset #16213e',
-              borderRadius: '0px',
               width: '120px',
               fontSize: '11px',
-              backgroundColor: '#16213e',
-              color: '#00d4ff'
             }}
           >
             {toneOptions.map(tone => (
@@ -280,30 +263,20 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       {/* Input Text Area */}
       <div style={{ marginBottom: '8px' }}>
-        <label style={{
-          display: 'block',
-          marginBottom: '2px',
-          fontWeight: 'normal',
-          color: '#00d4ff',
-          fontSize: '11px'
-        }}>
+        <label className="input-label">
           Input Text:
         </label>
         <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           placeholder="Enter text here or use selected text from clipboard..."
+          className="text-input"
           style={{
             width: '100%',
             height: '60px',
-            padding: '2px',
-            border: '2px inset #16213e',
-            borderRadius: '0px',
             resize: 'vertical',
             fontFamily: 'monospace',
             fontSize: '11px',
-            backgroundColor: '#16213e',
-            color: '#00d4ff',
             boxSizing: 'border-box'
           }}
         />
@@ -318,21 +291,13 @@ const Overlay: React.FC<OverlayProps> = () => {
             alignItems: 'center',
             marginBottom: '2px'
           }}>
-            <label style={{
-              fontWeight: 'normal',
-              color: '#00d4ff',
-              fontSize: '11px'
-            }}>
+            <label className="output-label">
               Output:
             </label>
             <button
               onClick={copyToClipboard}
+              className={copied ? 'copy-button copied' : 'copy-button'}
               style={{
-                padding: '2px 8px',
-                backgroundColor: copied ? '#00d4ff' : '#16213e',
-                color: copied ? '#1a1a2e' : '#00d4ff',
-                border: '2px outset #16213e',
-                borderRadius: '0px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
@@ -348,14 +313,10 @@ const Overlay: React.FC<OverlayProps> = () => {
           <textarea
             value={outputText}
             readOnly
+            className="text-output"
             style={{
               width: '100%',
               height: '60px',
-              padding: '2px',
-              border: '2px inset #16213e',
-              borderRadius: '0px',
-              backgroundColor: '#16213e',
-              color: '#00d4ff',
               fontFamily: 'monospace',
               fontSize: '11px',
               boxSizing: 'border-box'
@@ -366,21 +327,9 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       {/* Loading Indicator */}
       {isLoading && (
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '8px',
-          backgroundColor: '#16213e',
-          border: '2px inset #16213e',
-          marginTop: '8px'
-        }}>
-          <Loader2 size={16} style={{
-            animation: 'spin 1s linear infinite',
-            marginRight: '8px',
-            color: '#00d4ff'
-          }} />
-          <span style={{ fontSize: '11px', color: '#00d4ff' }}>
+        <div className="loading-indicator">
+          <Loader2 size={16} className="spinner" />
+          <span className="loading-text">
             Processing with AI...
           </span>
         </div>

@@ -26,7 +26,6 @@ function App() {
           zIndex: 9999,
           WebkitUserSelect: 'none',
           userSelect: 'none',
-          backgroundColor: '#000002ff',
         }}
         data-tauri-drag-region="true"
         onMouseDown={(e) => {
@@ -46,26 +45,22 @@ function App() {
         <div style={{ display: 'flex', gap: '2px' }}>
           <button
             onClick={() => setCurrentView('main')}
+            className={currentView === 'main' ? 'active-tab' : 'inactive-tab'}
             style={{
-              backgroundColor: currentView === 'main' ? '#00d4ff' : '#020218ff',
-              color: currentView === 'main' ? '#1a1a2e' : '#00d4ff',
               fontSize: '11px',
               padding: '2px 8px',
               minWidth: '50px',
-              // border: '2px outset #16213e'
             }}
           >
             MAIN
           </button>
           <button
             onClick={() => setCurrentView('settings')}
+            className={currentView === 'settings' ? 'active-tab' : 'inactive-tab'}
             style={{
-              backgroundColor: currentView === 'settings' ? '#00d4ff' : '#020218ff',
-              color: currentView === 'settings' ? '#1a1a2e' : '#00d4ff',
               fontSize: '11px',
               padding: '2px 8px',
               minWidth: '50px',
-              border: '2px outset #16213e'
             }}
           >
             AI SETTINGS
