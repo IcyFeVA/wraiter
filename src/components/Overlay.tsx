@@ -212,35 +212,12 @@ const Overlay: React.FC<OverlayProps> = () => {
   ];
 
   return (
-    <div
-      className="overlay-container"
-      style={{
-        width: '100%',
-        marginTop: '8px',
-        padding: '8px',
-        boxSizing: 'border-box',
-        overflowY: 'auto',
-      }}>
-
-      {/* Action Buttons */}
-      <div style={{
-        display: 'flex',
-        gap: '2px',
-        marginBottom: '8px',
-        flexWrap: 'wrap'
-      }}>
+    <div className="overlay-container">
+      <div className="action-buttons-container">
         <button
           onClick={() => handleActionSelect('proofread')}
           disabled={isLoading}
-          className={selectedAction === 'proofread' ? 'action-button active' : 'action-button'}
-          style={{
-            cursor: isLoading ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '11px',
-            minHeight: '20px'
-          }}
+          className={`action-button ${selectedAction === 'proofread' ? 'active' : ''}`}
         >
           <Edit3 size={12} />
           Proofread
@@ -249,15 +226,7 @@ const Overlay: React.FC<OverlayProps> = () => {
         <button
           onClick={() => handleActionSelect('tone')}
           disabled={isLoading}
-          className={selectedAction === 'tone' ? 'action-button active' : 'action-button'}
-          style={{
-            cursor: isLoading ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '11px',
-            minHeight: '20px'
-          }}
+          className={`action-button ${selectedAction === 'tone' ? 'active' : ''}`}
         >
           <MessageSquare size={12} />
           Change Tone
@@ -266,40 +235,20 @@ const Overlay: React.FC<OverlayProps> = () => {
         <button
           onClick={() => handleActionSelect('draft')}
           disabled={isLoading}
-          className={selectedAction === 'draft' ? 'action-button active' : 'action-button'}
-          style={{
-            cursor: isLoading ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: '11px',
-            minHeight: '20px'
-          }}
+          className={`action-button ${selectedAction === 'draft' ? 'active' : ''}`}
         >
           <PenTool size={12} />
           Draft
         </button>
       </div>
 
-      {/* Tone Selection (show for tone action) */}
       {selectedAction === 'tone' && (
-        <div style={{
-          marginBottom: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <label style={{ fontSize: '11px', whiteSpace: 'nowrap' }}>
-            Tone:
-          </label>
+        <div className="tone-selection-container">
+          <label className="tone-label">Tone:</label>
           <select
             value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
             className="tone-select"
-            style={{
-              flex: 1,
-              fontSize: '11px',
-            }}
           >
             {toneOptions.map(tone => (
               <option key={tone} value={tone}>
@@ -310,26 +259,12 @@ const Overlay: React.FC<OverlayProps> = () => {
         </div>
       )}
 
-      {/* Send Button (show for all actions) */}
       {selectedAction && (
-        <div style={{
-          marginBottom: '8px',
-          display: 'flex',
-          justifyContent: 'flex-end'
-        }}>
+        <div className="send-button-container">
           <button
             onClick={handleSendToAI}
             disabled={isLoading}
             className="send-button"
-            style={{
-              cursor: isLoading ? 'not-allowed' : 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontSize: '11px',
-              minHeight: '20px',
-              padding: '4px 8px'
-            }}
           >
             <MessageSquare size={12} />
             Send to AI
@@ -337,59 +272,26 @@ const Overlay: React.FC<OverlayProps> = () => {
         </div>
       )}
 
-      {/* Current Settings Display */}
-      {/* <div style={{ marginBottom: '1rem', padding: '0.5rem', backgroundColor: 'transparent', borderRadius: '4px', fontSize: '0.875rem' }}>
-        <div><strong>API Key:</strong> {localStorage.getItem('openrouter_api_key') ? 'Set' : 'Not set'}</div>
-        <div><strong>Model:</strong> {localStorage.getItem('selected_model') || 'Not selected'}</div>
-      </div> */}
-
-      {/* Input Text Area */}
-      <div style={{ marginBottom: '8px' }}>
-        <label className="input-label">
-          Input:
-        </label>
+      <div className="input-container">
+        <label className="input-label">Input:</label>
         <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           placeholder="Enter text here or use selected text from clipboard..."
           className="text-input"
-          style={{
-            width: '100%',
-            height: '60px',
-            resize: 'vertical',
-            fontFamily: 'monospace',
-            fontSize: '11px',
-            boxSizing: 'border-box'
-          }}
         />
       </div>
 
-      {/* Output Text Area (hide for proofread and when auto-close is enabled for tone/draft) */}
       {outputText && !(
         selectedAction === 'proofread' ||
         (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft'))
       ) && (
-        <div style={{ marginBottom: '4px', borderTop: '1px dashed #00ffff5a', paddingTop: '8px' }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '2px'
-          }}>
-            <label className="output-label">
-              Output:
-            </label>
+        <div className="output-container">
+          <div className="output-header">
+            <label className="output-label">Output:</label>
             <button
               onClick={copyToClipboard}
-              className={copied ? 'copy-button copied' : 'copy-button'}
-              style={{
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontSize: '11px',
-                minHeight: '18px'
-              }}
+              className={`copy-button ${copied ? 'copied' : ''}`}
             >
               {copied ? <Check size={12} /> : <Copy size={12} />}
               {copied ? 'Copied!' : 'Copy'}
@@ -399,24 +301,14 @@ const Overlay: React.FC<OverlayProps> = () => {
             value={outputText}
             readOnly
             className="text-output"
-            style={{
-              width: '100%',
-              height: '60px',
-              fontFamily: 'monospace',
-              fontSize: '11px',
-              boxSizing: 'border-box'
-            }}
           />
         </div>
       )}
 
-      {/* Loading Indicator */}
       {isLoading && (
         <div className="loading-indicator">
           <Loader2 size={16} className="spinner" />
-          <span className="loading-text">
-            Processing with AI...
-          </span>
+          <span className="loading-text">Processing with AI...</span>
         </div>
       )}
 

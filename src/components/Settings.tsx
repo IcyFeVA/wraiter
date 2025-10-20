@@ -257,20 +257,11 @@ const Settings: React.FC<SettingsProps> = () => {
 
       {/* AI Settings Section */}
       <div className="settings-section">
-        {/* <h3 className="section-title">AI Settings</h3> */}
-
-        <div style={{ height: "16px" }}></div>
+        <div className="spacer-16" />
 
         {/* Max Tokens Setting */}
-        <div style={{ marginBottom: "12px" }}>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "4px",
-              fontSize: "11px",
-              fontWeight: "bold",
-            }}
-          >
+        <div className="setting-row">
+          <label className="setting-label">
             Max Tokens:
           </label>
           <div className="select-container">
@@ -281,49 +272,24 @@ const Settings: React.FC<SettingsProps> = () => {
               placeholder="2000"
               min="1"
               max="10000"
-              className="model-select"
-              style={{
-                width: "100%",
-                padding: "4px 8px",
-                fontSize: "11px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                boxSizing: "border-box",
-                backgroundColor: "#fff",
-              }}
+              className="settings-input"
             />
           </div>
-          <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>
+          <div className="setting-description">
             Maximum tokens to use for AI responses (default: 2000)
           </div>
         </div>
 
         {/* Default Tone Setting */}
-        <div style={{ marginBottom: "12px" }}>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "4px",
-              fontSize: "11px",
-              fontWeight: "bold",
-            }}
-          >
+        <div className="setting-row">
+          <label className="setting-label">
             Default Tone:
           </label>
           <div className="select-container">
             <select
               value={defaultTone}
               onChange={(e) => setDefaultTone(e.target.value)}
-              className="model-select"
-              style={{
-                width: "100%",
-                padding: "4px 8px",
-                fontSize: "11px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                boxSizing: "border-box",
-                backgroundColor: "#fff",
-              }}
+              className="settings-select"
             >
               <option value="professional">Professional</option>
               <option value="casual">Casual</option>
@@ -335,45 +301,28 @@ const Settings: React.FC<SettingsProps> = () => {
               <option value="concise">Concise</option>
             </select>
           </div>
-          <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>
+          <div className="setting-description">
             For "Change Tone" action
           </div>
         </div>
 
         {/* Auto-close Setting */}
-        <div style={{ marginBottom: "8px" }}>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "4px",
-              fontSize: "11px",
-              fontWeight: "bold",
-            }}
-          >
+        <div className="setting-row">
+          <label className="setting-label">
             Auto-Close:
           </label>
           <div className="select-container">
-            <label
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                fontSize: "11px",
-                cursor: "pointer",
-                padding: "0 4px",
-                width: "100%",
-              }}
-            >
+            <label className="checkbox-label">
               <input
                 type="checkbox"
                 checked={autoClose}
                 onChange={(e) => setAutoClose(e.target.checked)}
-                style={{ margin: 0 }}
+                className="checkbox"
               />
               <span>Close window after copying result (proofread always auto-closes)</span>
             </label>
           </div>
-          <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>
+          <div className="setting-description">
             Automatically copy result to clipboard and hide window
           </div>
         </div>

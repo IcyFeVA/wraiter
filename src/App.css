@@ -58,13 +58,15 @@ h1 {
 }
 
 input,
-button {
+button,
+select,
+textarea {
   border-radius: 0px;
   border: 1px solid var(--border-color);
   padding: 2px 8px;
   font-size: var(--font-size);
   font-weight: var(--font-weight);
-  font-family: inherit;
+  font-family: var(--font-family);
   color: var(--color);
   background: transparent;
   transition: all 0.3s ease;
@@ -150,6 +152,54 @@ button {
 .action-button:active {
   background: var(--action-button-active-background-color);
   border: 1px solid var(--action-button-active-border-color);
+}
+
+.action-buttons-container {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.tone-selection-container {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tone-label {
+  font-size: var(--font-size);
+  white-space: nowrap;
+}
+
+.send-button-container {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size);
+  min-height: 20px;
+  padding: 4px 8px;
+}
+
+.output-container {
+  margin-bottom: 4px;
+  border-top: 1px dashed var(--drag-region-border-bottom-color);
+  padding-top: 8px;
+}
+
+.output-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
 }
 
 .tone-select {
@@ -278,6 +328,52 @@ button {
 
 .settings-section {
   margin-bottom: 8px;
+}
+
+.spacer-16 {
+  height: 16px;
+}
+
+.setting-row {
+  margin-bottom: 12px;
+}
+
+.setting-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--font-size);
+  font-weight: bold;
+}
+
+.settings-input,
+.settings-select {
+  width: 100%;
+  padding: 4px 8px;
+  font-size: var(--font-size);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: var(--background-color);
+}
+
+.setting-description {
+  font-size: var(--font-size);
+  color: #666;
+  margin-top: 2px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size);
+  cursor: pointer;
+  padding: 0 4px;
+  width: 100%;
+}
+
+.checkbox {
+  margin: 0;
 }
 
 .section-title {
