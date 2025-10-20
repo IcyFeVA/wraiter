@@ -48,7 +48,8 @@ function App() {
             onClick={() => setCurrentView('main')}
             style={{
               padding: '0.4rem 0.8rem',
-              backgroundColor: currentView === 'main' ? '#007bff' : '#f8f9fa',
+              backgroundColor: currentView === 'main' ? '#007bff'
+ : '#f8f9fa',
               color: currentView === 'main' ? 'white' : '#333',
               border: '1px solid #dee2e6',
               borderRadius: '3px',
@@ -62,7 +63,8 @@ function App() {
             onClick={() => setCurrentView('settings')}
             style={{
               padding: '0.4rem 0.8rem',
-              backgroundColor: currentView === 'settings' ? '#007bff' : '#f8f9fa',
+              backgroundColor: currentView === 'settings' ? '#007bff'
+ : '#f8f9fa',
               color: currentView === 'settings' ? 'white' : '#333',
               border: '1px solid #dee2e6',
               borderRadius: '3px',

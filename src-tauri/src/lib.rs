@@ -181,6 +181,15 @@ async fn process_text_with_ai(
     }
 }
 
+#[tauri::command]
+async fn resize_window(app: tauri::AppHandle, height: f64) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window("main") {
+        let size = tauri::PhysicalSize::new(window.outer_size().unwrap().width, height as u32);
+        window.set_size(size).map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -192,7 +201,8 @@ pub fn run() {
             get_clipboard_text,
             set_clipboard_text,
             fetch_openrouter_models,
-            process_text_with_ai
+            process_text_with_ai,
+            resize_window
         ])
         .setup(|app| {
             // Register global shortcut for overlay (Ctrl+Shift+Alt+A)
