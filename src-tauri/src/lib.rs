@@ -184,7 +184,7 @@ async fn process_text_with_ai(
 #[tauri::command]
 async fn resize_window(app: tauri::AppHandle, height: f64) -> Result<(), String> {
     if let Some(window) = app.get_webview_window("main") {
-        let size = tauri::PhysicalSize::new(window.outer_size().unwrap().width, height as u32);
+        let size = tauri::LogicalSize::new(500.0, height);
         window.set_size(size).map_err(|e| e.to_string())?;
     }
     Ok(())
