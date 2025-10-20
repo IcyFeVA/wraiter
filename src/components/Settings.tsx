@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Key, Loader2, Check, AlertCircle } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface SettingsProps {}
 
@@ -11,6 +12,7 @@ interface Model {
 }
 
 const Settings: React.FC<SettingsProps> = () => {
+  const { theme, setTheme } = useTheme();
   const [apiKey, setApiKey] = useState('');
   const [models, setModels] = useState<Model[]>([]);
   const [selectedModel, setSelectedModel] = useState('');
@@ -377,24 +379,20 @@ const Settings: React.FC<SettingsProps> = () => {
         </div>
       </div>
 
-      {/* Current Settings Display */}
-      {/* <div className="settings-section">
-        <h3 className="section-title">Current Settings</h3>
-        <div className="current-settings-display">
-          <div><strong>API Key:</strong> {apiKey ? '••••••••' : 'Not set'}</div>
-          <div>
-            <strong>Selected Model:</strong> {selectedModel || "Not set"}
-          </div>
-          <div><strong>Available Models:</strong> {models.length}</div>
-          <div>
-            <strong>Max Tokens:</strong> {maxTokens}
-          </div>
-          <div>
-            <strong>Default Tone:</strong> {defaultTone}
-          </div>
-          <div><strong>Auto-close:</strong> {autoClose ? 'Enabled' : 'Disabled'}</div>
+      {/* Theme Selection Section */}
+      <div className="settings-section">
+        <h3 className="section-title">Theme</h3>
+        <div className="select-container">
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua')}
+            className="model-select"
+          >
+            <option value="NSX">NSX</option>
+            <option value="Aqua">Aqua</option>
+          </select>
         </div>
-      </div> */}
+      </div>
 
       {/* Danger Zone */}
       <div className="danger-zone">

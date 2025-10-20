@@ -3,16 +3,16 @@ import { useWindowResize } from "./hooks/useWindowResize";
 import "./App.css";
 import Overlay from "./components/Overlay";
 import Settings from "./components/Settings";
+import { useTheme } from "./contexts/ThemeContext";
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings'>('main');
   const contentRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
   useWindowResize(contentRef);
 
   return (
-    <div id="app" ref={contentRef} style={{
-      width: '100%',
-    }}>
+    <div id="app" ref={contentRef} className={`theme-${theme.toLowerCase()}`}>
       <div style={{ marginTop: '8px', marginBottom: '8px' }}>
         <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
           <button
