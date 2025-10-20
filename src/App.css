@@ -6,13 +6,13 @@
   filter: drop-shadow(0 0 2em #61dafb);
 }
 :root {
-  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Courier New', monospace;
+  font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
   font-size: 11px;
   line-height: 16px;
   font-weight: 400;
 
-  color: #000000;
-  background-color: #e6e6e6;
+  color: #00ffff;
+  background-color: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -59,16 +59,15 @@ h1 {
 
 input,
 button {
-  border-radius: 4px;
-  border: 2px outset #c0c0c0;
+  border-radius: 0px;
+  border: 1px solid #00ffff;
   padding: 2px 8px;
   font-size: 11px;
   font-weight: 400;
   font-family: inherit;
-  color: #000000;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0);
-  transition: none;
-  box-shadow: none;
+  color: #00ffff;
+  background: transparent;
+  transition: all 0.3s ease;
   min-height: 20px;
 }
 
@@ -77,13 +76,15 @@ button {
 }
 
 button:hover {
-  border: 2px outset #a0a0a0;
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+  border: 1px solid #ff6600;
+  background: rgba(0, 255, 255, 0.1);
+  /* box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; */
 }
 
 button:active {
-  border: 2px inset #808080;
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
+  border: 1px solid #ff6600;
+  background: rgba(255, 102, 0, 0.2);
+  /* box-shadow: 0 0 5px #ff6600; */
 }
 
 input,
@@ -98,99 +99,113 @@ button {
 .drag-region {
   -webkit-app-region: drag;
   app-region: drag;
-  border-bottom: 1px solid #c0c0c0;
+  border-bottom: 1px solid #00ffff3b;
+  /* box-shadow: 0 0 5px #00ffff; */
+  background-color: #000000;
 }
 
 .active-tab {
-  background: linear-gradient(to bottom, #007AFF, #0056CC) !important;
-  color: #ffffff !important;
-  border: 2px outset #c0c0c0 !important;
+  background: rgb(50, 1, 185) !important;
+  color: #00ffff !important;
+  border: 1px solid #000000 !important;
 }
 
 .inactive-tab {
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.158) !important;
+  color: #00ffff !important;
+  border: 1px solid #000000 !important;
 }
 
 .active-tab:hover,
 .inactive-tab:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  background: rgba(0, 255, 255, 0.301) !important;
+  border: 1px solid rgb(0, 0, 0) !important;
+  /* box-shadow: 0 0 0 #00ffff !important; */
 }
 
 .active-tab:active,
 .inactive-tab:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 5px #ff6600 !important; */
 }
 
 .overlay-container {
-  background: linear-gradient(to bottom, #f8f8f8, #e8e8e8) !important;
-  border: 2px inset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .action-button {
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
+  background: black !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
 }
 
 .action-button.active {
-  background: linear-gradient(to bottom, #007AFF, #0056CC) !important;
-  color: #ffffff !important;
-  border: 2px outset #c0c0c0 !important;
+  background: rgb(0, 255, 255) !important;
+  color: #000505 !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: 0 0 8px #00ffff !important; */
 }
 
 .action-button:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  background: rgba(0, 255, 255, 0.1) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 10px #00ffff !important; */
 }
 
 .action-button:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 5px #ff6600 !important; */
 }
 
 .tone-select {
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
+  background: transparent !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: 0 0 3px #00ffff !important; */
 }
 
 .input-label,
 .output-label {
-  color: #000000 !important;
+  color: #00ffff !important;
   font-weight: bold !important;
 }
 
 .text-input,
 .text-output {
-  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
-  color: #000000 !important;
-  border: 2px inset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .copy-button {
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
+  background: transparent !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: 0 0 3px #00ffff !important; */
 }
 
 .copy-button.copied {
-  background: linear-gradient(to bottom, #00d4ff, #00a8cc) !important;
-  color: #ffffff !important;
-  border: 2px outset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.2) !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: 0 0 8px #00ffff !important; */
 }
 
 .copy-button:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  background: rgba(0, 255, 255, 0.1) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 10px #00ffff !important; */
 }
 
 .copy-button:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 5px #ff6600 !important; */
 }
 
 .loading-indicator {
@@ -198,28 +213,30 @@ button {
   align-items: center !important;
   justify-content: center !important;
   padding: 8px !important;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  border: 2px inset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  border: 1px solid #00ffff !important;
   margin-top: 8px !important;
+  /* box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .spinner {
   animation: spin 1s linear infinite !important;
-  color: #007AFF !important;
+  color: #00ffff !important;
   margin-right: 8px !important;
 }
 
 .loading-text {
   font-size: 11px !important;
-  color: #000000 !important;
+  color: #00ffff !important;
 }
 
 .settings-container {
   padding: 8px !important;
   max-width: 800px !important;
   margin: 0 auto !important;
-  background: linear-gradient(to bottom, #f8f8f8, #e8e8e8) !important;
-  border: 2px inset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .settings-header {
@@ -230,12 +247,12 @@ button {
 
 .settings-icon {
   margin-right: 4px !important;
-  color: #007AFF !important;
+  color: #00ffff !important;
 }
 
 .settings-title {
   margin: 0 !important;
-  color: #000000 !important;
+  color: #00ffff !important;
   font-size: 14px !important;
   font-weight: normal !important;
 }
@@ -243,32 +260,35 @@ button {
 .message-display.success {
   padding: 4px 8px !important;
   margin-bottom: 8px !important;
-  background: linear-gradient(to bottom, #d0d0d0, #d0d0d0) !important;
-  color: #008000 !important;
+  background: rgba(0, 255, 0, 0.1) !important;
+  color: #00ff00 !important;
   display: flex !important;
   align-items: center !important;
   gap: 4px !important;
   font-size: 11px !important;
+  border: 1px solid #00ff00 !important;
+  /* box-shadow: 0 0 3px #00ff00 !important; */
 }
 
 .message-display.error {
   padding: 4px 8px !important;
   margin-bottom: 8px !important;
-  border: 2px outset #c0c0c0 !important;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #ff0000 !important;
+  border: 1px solid #ff6600 !important;
+  background: rgba(255, 102, 0, 0.1) !important;
+  color: #ff6600 !important;
   display: flex !important;
   align-items: center !important;
   gap: 4px !important;
   font-size: 11px !important;
+  /* box-shadow: 0 0 3px #ff6600 !important; */
 }
 
 .message-icon.success {
-  color: #008000 !important;
+  color: #00ff00 !important;
 }
 
 .message-icon.error {
-  color: #ff0000 !important;
+  color: #ff6600 !important;
 }
 
 .message-text {
@@ -281,24 +301,24 @@ button {
 
 .section-title {
   margin-bottom: 4px !important;
-  color: #000000 !important;
+  color: #00ffff !important;
   font-size: 11px !important;
   font-weight: bold !important;
 }
 
 .api-key-description {
   margin-bottom: 8px !important;
-  color: #000000 !important;
+  color: #00ffff !important;
   font-size: 11px !important;
 }
 
 .api-key-link {
-  color: #007AFF !important;
+  color: #00ffff !important;
   text-decoration: none !important;
 }
 
 .api-key-link:hover {
-  color: #0056CC !important;
+  color: #ff6600 !important;
   text-decoration: underline !important;
 }
 
@@ -315,71 +335,78 @@ button {
 .api-key-input {
   width: 100% !important;
   padding: 2px 4px !important;
-  border: 2px inset #c0c0c0 !important;
-  border-radius: 4px !important;
+  border: 1px solid #00ffff !important;
+  border-radius: 0px !important;
   font-family: monospace !important;
   font-size: 11px !important;
-  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
-  color: #000000 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  color: #00ffff !important;
+  /* box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .save-key-button {
   padding: 2px 8px !important;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
-  border-radius: 4px !important;
+  background: black !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  border-radius: 0px !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
   gap: 4px !important;
   font-size: 11px !important;
   min-height: 20px !important;
+  /* box-shadow: 0 0 3px #00ffff !important; */
 }
 
 .save-key-button:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 10px #00ffff !important; */
 }
 
 .save-key-button:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 5px #ff6600 !important; */
 }
 
 .button-icon {
-  color: #007AFF !important;
+  color: #00ffff !important;
 }
 
 .load-models-button {
   padding: 2px 8px !important;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
-  border-radius: 4px !important;
+  background: transparent !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  border-radius: 0px !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
   gap: 4px !important;
   font-size: 11px !important;
   min-height: 20px !important;
+  /* box-shadow: 0 0 3px #00ffff !important; */
 }
 
 .load-models-button:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  background: rgba(0, 255, 255, 0.1) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 10px #00ffff !important; */
 }
 
 .load-models-button:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 5px #ff6600 !important; */
 }
 
 .load-models-button.disabled {
-  background: linear-gradient(to bottom, #cccccc, #aaaaaa) !important;
+  background: rgba(128, 128, 128, 0.2) !important;
   color: #666666 !important;
   cursor: not-allowed !important;
-  border: 2px outset #a0a0a0 !important;
+  border: 1px solid #666666 !important;
+  /* box-shadow: none !important; */
 }
 
 .select-container {
@@ -389,114 +416,108 @@ button {
 .model-select {
   width: 100% !important;
   padding: 2px 4px !important;
-  border: 2px inset #c0c0c0 !important;
-  border-radius: 4px !important;
+  border: 1px solid #00ffff !important;
+  border-radius: 0px !important;
   font-size: 11px !important;
-  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
-  color: #000000 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  color: #00ffff !important;
+  /* box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .save-model-button {
   padding: 2px 8px !important;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #000000 !important;
-  border: 2px outset #c0c0c0 !important;
-  border-radius: 4px !important;
+  background: transparent !important;
+  color: #00ffff !important;
+  border: 1px solid #00ffff !important;
+  border-radius: 0px !important;
   cursor: pointer !important;
   font-size: 11px !important;
   min-height: 20px !important;
+  /* box-shadow: 0 0 3px #00ffff !important; */
 }
 
 .save-model-button:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  background: rgba(0, 255, 255, 0.1) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 10px #00ffff !important; */
 }
 
 .save-model-button:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #ff6600 !important;
+  /* box-shadow: 0 0 5px #ff6600 !important; */
 }
 
 .save-model-button.disabled {
-  background: linear-gradient(to bottom, #cccccc, #aaaaaa) !important;
+  background: rgba(128, 128, 128, 0.2) !important;
   color: #666666 !important;
   cursor: not-allowed !important;
-  border: 2px outset #a0a0a0 !important;
+  border: 1px solid #666666 !important;
+  /* box-shadow: none !important; */
 }
 
 .current-settings-display {
   padding: 4px 8px !important;
-  background: linear-gradient(to bottom, #ffffff, #f0f0f0) !important;
-  border: 2px inset #c0c0c0 !important;
+  background: rgba(0, 255, 255, 0.05) !important;
+  border: 1px solid #00ffff !important;
   font-size: 11px !important;
-  color: #000000 !important;
+  color: #00ffff !important;
+  /* box-shadow: inset 0 0 5px rgba(0, 255, 255, 0.1) !important; */
 }
 
 .danger-zone {
-  border-top: 2px inset #c0c0c0 !important;
+  border-top: 1px solid #ff6600 !important;
   padding-top: 8px !important;
 }
 
 .danger-title {
   margin-bottom: 4px !important;
-  color: #ff0000 !important;
+  color: #ff6600 !important;
   font-size: 11px !important;
   font-weight: bold !important;
 }
 
 .clear-settings-button {
   padding: 2px 8px !important;
-  background: linear-gradient(to bottom, #f0f0f0, #d0d0d0) !important;
-  color: #ff0000 !important;
-  border: 2px outset #c0c0c0 !important;
-  border-radius: 4px !important;
+  background: transparent !important;
+  color: #ff6600 !important;
+  border: 1px solid #ff6600 !important;
+  border-radius: 0px !important;
   cursor: pointer !important;
   font-size: 11px !important;
   min-height: 20px !important;
+  /* box-shadow: 0 0 3px #ff6600 !important; */
 }
 
 .clear-settings-button:hover {
-  background: linear-gradient(to bottom, #e0e0e0, #c0c0c0) !important;
-  border: 2px outset #a0a0a0 !important;
+  background: rgba(255, 102, 0, 0.1) !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: 0 0 10px #ff6600 !important; */
 }
 
 .clear-settings-button:active {
-  background: linear-gradient(to bottom, #c0c0c0, #a0a0a0) !important;
-  border: 2px inset #808080 !important;
+  background: rgba(255, 102, 0, 0.2) !important;
+  border: 1px solid #00ffff !important;
+  /* box-shadow: 0 0 5px #00ffff !important; */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* color: #ffffff; */
-    /* background-color: #dadada; */
-  }
+/* TRON theme is optimized for dark environments */
 
-  a {
-    color: #4A90E2;
-  }
+/* Style dropdown options */
+select option {
+  background: #000000 !important;
+  color: #00ffff !important;
+  border: none !important;
+  padding: 2px 4px !important;
+}
 
-  a:hover {
-    color: #357ABD;
-  }
+select option:hover,
+select option:focus {
+  background: rgba(0, 255, 255, 0.1) !important;
+  color: #00ffff !important;
+}
 
-  input,
-  button {
-    color: #ffffff;
-    background: linear-gradient(to bottom, #404040, #202020);
-    border: 2px outset #606060;
-  }
-
-  button:hover {
-    background: linear-gradient(to bottom, #505050, #303030);
-    border: 2px outset #707070;
-  }
-
-  button:active {
-    background: linear-gradient(to bottom, #303030, #101010);
-    border: 2px inset #505050;
-  }
-
-  .drag-region {
-    border-bottom: 1px solid #606060;
-  }
+select option:checked {
+  background: rgba(0, 255, 255, 0.2) !important;
+  color: #00ffff !important;
 }
