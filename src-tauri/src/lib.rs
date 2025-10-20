@@ -133,7 +133,7 @@ async fn process_text_with_ai(
                 "content": text
             }
         ],
-        "max_tokens": 1000,
+        "max_tokens": 2000,
         "temperature": 0.7
     });
 

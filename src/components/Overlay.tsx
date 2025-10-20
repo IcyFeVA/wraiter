@@ -38,14 +38,17 @@ const Overlay: React.FC<OverlayProps> = () => {
     }
   };
 
-  const handleAction = async (action: 'proofread' | 'tone' | 'draft') => {
+  const handleActionSelect = (action: 'proofread' | 'tone' | 'draft') => {
+    setSelectedAction(action);
+  };
+
+  const handleSendToAI = async () => {
     if (!inputText.trim()) {
       alert('Please enter some text to process');
       return;
     }
 
     setIsLoading(true);
-    setSelectedAction(action);
 
     try {
       // Get settings from localStorage
@@ -74,14 +77,14 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       const result = await invoke<string>('process_text_with_ai', {
         text: inputText,
-        action,
+        action: selectedAction,
         model,
         apiKey,
-        tone: action === 'tone' ? selectedTone : undefined
+        tone: selectedAction === 'tone' ? selectedTone : undefined
       });
 
       // For proofread action, show result briefly then hide window
-      if (action === 'proofread') {
+      if (selectedAction === 'proofread') {
         setOutputText(result);
 
         // Automatically copy result to clipboard to replace user's selection
@@ -183,7 +186,7 @@ const Overlay: React.FC<OverlayProps> = () => {
         flexWrap: 'wrap'
       }}>
         <button
-          onClick={() => handleAction('proofread')}
+          onClick={() => handleActionSelect('proofread')}
           disabled={isLoading}
           className={selectedAction === 'proofread' ? 'action-button active' : 'action-button'}
           style={{
@@ -200,7 +203,7 @@ const Overlay: React.FC<OverlayProps> = () => {
         </button>
 
         <button
-          onClick={() => handleAction('tone')}
+          onClick={() => handleActionSelect('tone')}
           disabled={isLoading}
           className={selectedAction === 'tone' ? 'action-button active' : 'action-button'}
           style={{
@@ -217,7 +220,7 @@ const Overlay: React.FC<OverlayProps> = () => {
         </button>
 
         <button
-          onClick={() => handleAction('draft')}
+          onClick={() => handleActionSelect('draft')}
           disabled={isLoading}
           className={selectedAction === 'draft' ? 'action-button active' : 'action-button'}
           style={{
@@ -234,15 +237,23 @@ const Overlay: React.FC<OverlayProps> = () => {
         </button>
       </div>
 
-      {/* Tone Selection (only show for tone action) */}
+      {/* Tone Selection (show for tone action) */}
       {selectedAction === 'tone' && (
-        <div style={{ marginBottom: '8px' }}>
+        <div style={{
+          marginBottom: '8px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px'
+        }}>
+          <label style={{ fontSize: '11px', whiteSpace: 'nowrap' }}>
+            Tone:
+          </label>
           <select
             value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
             className="tone-select"
             style={{
-              width: '120px',
+              flex: 1,
               fontSize: '11px',
             }}
           >
@@ -252,6 +263,33 @@ const Overlay: React.FC<OverlayProps> = () => {
               </option>
             ))}
           </select>
+        </div>
+      )}
+
+      {/* Send Button (show for all actions) */}
+      {selectedAction && (
+        <div style={{
+          marginBottom: '8px',
+          display: 'flex',
+          justifyContent: 'flex-end'
+        }}>
+          <button
+            onClick={handleSendToAI}
+            disabled={isLoading}
+            className="send-button"
+            style={{
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              fontSize: '11px',
+              minHeight: '20px',
+              padding: '4px 8px'
+            }}
+          >
+            <MessageSquare size={12} />
+            Send to AI
+          </button>
         </div>
       )}
 
@@ -282,8 +320,8 @@ const Overlay: React.FC<OverlayProps> = () => {
         />
       </div>
 
-      {/* Output Text Area */}
-      {outputText && (
+      {/* Output Text Area (hide for proofread since it auto-closes) */}
+      {outputText && selectedAction !== 'proofread' && (
         <div style={{ marginBottom: '8px' }}>
           <div style={{
             display: 'flex',
