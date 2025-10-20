@@ -181,11 +181,13 @@ const Settings: React.FC<SettingsProps> = () => {
               className="model-select"
             >
               <option value="">Select a model...</option>
-              {models.map(model => (
-                <option key={model.id} value={model.id}>
-                  {model.name} {model.description ? ` - ${model.description}` : ''}
-                </option>
-              ))}
+              {[...models]
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(model => (
+                  <option key={model.id} value={model.id}>
+                    {model.name} {model.description ? ` - ${model.description}` : ''}
+                  </option>
+                ))}
             </select>
           </div>
 
