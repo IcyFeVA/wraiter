@@ -18,8 +18,7 @@ function App() {
         className="drag-region"
         style={{
           width: '100%',
-          height: '20px',
-          backgroundColor: 'rgba(255, 255, 255, 1)',
+          height: '16px',
           cursor: 'grab',
           position: 'fixed',
           top: 0,
@@ -42,19 +41,16 @@ function App() {
         }}
       />
 
-      <div style={{ marginBottom: '1rem' }}>
-        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+      <div style={{ marginTop: '18px', marginBottom: '8px' }}>
+        <div style={{ display: 'flex', gap: '2px', justifyContent: 'center' }}>
           <button
             onClick={() => setCurrentView('main')}
             style={{
-              padding: '0.4rem 0.8rem',
-              backgroundColor: currentView === 'main' ? '#007bff'
- : '#f8f9fa',
-              color: currentView === 'main' ? 'white' : '#333',
-              border: '1px solid #dee2e6',
-              borderRadius: '3px',
-              fontSize: '0.875rem',
-              cursor: 'pointer'
+              backgroundColor: currentView === 'main' ? '#808080' : '#c0c0c0',
+              color: currentView === 'main' ? '#ffffff' : '#000000',
+              fontSize: '11px',
+              padding: '2px 8px',
+              minWidth: '50px'
             }}
           >
             Main
@@ -62,14 +58,11 @@ function App() {
           <button
             onClick={() => setCurrentView('settings')}
             style={{
-              padding: '0.4rem 0.8rem',
-              backgroundColor: currentView === 'settings' ? '#007bff'
- : '#f8f9fa',
-              color: currentView === 'settings' ? 'white' : '#333',
-              border: '1px solid #dee2e6',
-              borderRadius: '3px',
-              fontSize: '0.875rem',
-              cursor: 'pointer'
+              backgroundColor: currentView === 'settings' ? '#808080' : '#c0c0c0',
+              color: currentView === 'settings' ? '#ffffff' : '#000000',
+              fontSize: '11px',
+              padding: '2px 8px',
+              minWidth: '50px'
             }}
           >
             Settings

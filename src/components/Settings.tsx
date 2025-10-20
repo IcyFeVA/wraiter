@@ -113,52 +113,51 @@ const Settings: React.FC<SettingsProps> = () => {
 
   return (
     <div style={{
-      padding: '2rem',
+      padding: '8px',
       maxWidth: '800px',
       margin: '0 auto',
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+      backgroundColor: '#c0c0c0',
+      border: '2px inset #c0c0c0'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <SettingsIcon size={24} style={{ marginRight: '0.5rem' }} />
-        <h2 style={{ margin: 0, color: '#333' }}>Settings</h2>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+        <SettingsIcon size={16} style={{ marginRight: '4px' }} />
+        <h2 style={{ margin: 0, color: '#000000', fontSize: '14px', fontWeight: 'normal' }}>Settings</h2>
       </div>
 
       {/* Message Display */}
       {message && (
         <div style={{
-          padding: '0.75rem',
-          marginBottom: '1rem',
-          borderRadius: '4px',
-          backgroundColor: message.type === 'success' ? '#d4edda' : '#f8d7da',
-          color: message.type === 'success' ? '#155724' : '#721c24',
-          border: `1px solid ${message.type === 'success' ? '#c3e6cb' : '#f5c6cb'}`,
+          padding: '4px 8px',
+          marginBottom: '8px',
+          border: '2px outset #c0c0c0',
+          backgroundColor: message.type === 'success' ? '#c0c0c0' : '#c0c0c0',
+          color: message.type === 'success' ? '#008000' : '#800000',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.5rem'
+          gap: '4px',
+          fontSize: '11px'
         }}>
-          {message.type === 'success' ? <Check size={16} /> : <AlertCircle size={16} />}
+          {message.type === 'success' ? <Check size={12} /> : <AlertCircle size={12} />}
           {message.text}
         </div>
       )}
 
       {/* API Key Section */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h3 style={{ marginBottom: '1rem', color: '#333' }}>OpenRouter API Key</h3>
-        <p style={{ marginBottom: '1rem', color: '#666', fontSize: '0.875rem' }}>
+      <div style={{ marginBottom: '8px' }}>
+        <h3 style={{ marginBottom: '4px', color: '#000000', fontSize: '11px', fontWeight: 'normal' }}>OpenRouter API Key</h3>
+        <p style={{ marginBottom: '8px', color: '#000000', fontSize: '11px' }}>
           Get your API key from{' '}
           <a
             href="https://openrouter.ai/keys"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#007bff', textDecoration: 'none' }}
+            style={{ color: '#800080', textDecoration: 'none' }}
           >
             openrouter.ai/keys
           </a>
           {' '}(free account available)
         </p>
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', gap: '4px', marginBottom: '8px' }}>
           <div style={{ flex: 1 }}>
             <input
               type="password"
@@ -167,28 +166,33 @@ const Settings: React.FC<SettingsProps> = () => {
               placeholder="Enter your OpenRouter API key..."
               style={{
                 width: '100%',
-                padding: '0.75rem',
-                border: '1px solid #dee2e6',
-                borderRadius: '4px',
-                fontFamily: 'monospace'
+                padding: '2px 4px',
+                border: '2px inset #c0c0c0',
+                borderRadius: '0px',
+                fontFamily: 'monospace',
+                fontSize: '11px',
+                backgroundColor: '#ffffff',
+                color: '#000000'
               }}
             />
           </div>
           <button
             onClick={saveApiKey}
             style={{
-              padding: '0.75rem 1rem',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
+              padding: '2px 8px',
+              backgroundColor: '#c0c0c0',
+              color: '#000000',
+              border: '2px outset #c0c0c0',
+              borderRadius: '0px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.5rem'
+              gap: '4px',
+              fontSize: '11px',
+              minHeight: '20px'
             }}
           >
-            <Key size={16} />
+            <Key size={12} />
             Save Key
           </button>
         </div>
@@ -197,36 +201,40 @@ const Settings: React.FC<SettingsProps> = () => {
           onClick={fetchModels}
           disabled={isLoadingModels || !apiKey}
           style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: isLoadingModels || !apiKey ? '#6c757d' : '#28a745',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
+            padding: '2px 8px',
+            backgroundColor: (isLoadingModels || !apiKey) ? '#808080' : '#c0c0c0',
+            color: '#000000',
+            border: '2px outset #c0c0c0',
+            borderRadius: '0px',
             cursor: (isLoadingModels || !apiKey) ? 'not-allowed' : 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5rem'
+            gap: '4px',
+            fontSize: '11px',
+            minHeight: '20px'
           }}
         >
-          {isLoadingModels ? <Loader2 size={16} className="spin" /> : null}
+          {isLoadingModels ? <Loader2 size={12} className="spin" /> : null}
           {isLoadingModels ? 'Loading Models...' : 'Load Available Models'}
         </button>
       </div>
 
       {/* Model Selection Section */}
       {models.length > 0 && (
-        <div style={{ marginBottom: '2rem' }}>
-          <h3 style={{ marginBottom: '1rem', color: '#333' }}>Model Selection</h3>
-          <div style={{ marginBottom: '1rem' }}>
+        <div style={{ marginBottom: '8px' }}>
+          <h3 style={{ marginBottom: '4px', color: '#000000', fontSize: '11px', fontWeight: 'normal' }}>Model Selection</h3>
+          <div style={{ marginBottom: '8px' }}>
             <select
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
               style={{
                 width: '100%',
-                padding: '0.75rem',
-                border: '1px solid #dee2e6',
-                borderRadius: '4px',
-                fontSize: '0.875rem'
+                padding: '2px 4px',
+                border: '2px inset #c0c0c0',
+                borderRadius: '0px',
+                fontSize: '11px',
+                backgroundColor: '#ffffff',
+                color: '#000000'
               }}
             >
               <option value="">Select a model...</option>
@@ -242,12 +250,14 @@ const Settings: React.FC<SettingsProps> = () => {
             onClick={saveModelSelection}
             disabled={!selectedModel}
             style={{
-              padding: '0.5rem 1rem',
-              backgroundColor: selectedModel ? '#007bff' : '#6c757d',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: selectedModel ? 'pointer' : 'not-allowed'
+              padding: '2px 8px',
+              backgroundColor: selectedModel ? '#c0c0c0' : '#808080',
+              color: '#000000',
+              border: '2px outset #c0c0c0',
+              borderRadius: '0px',
+              cursor: selectedModel ? 'pointer' : 'not-allowed',
+              fontSize: '11px',
+              minHeight: '20px'
             }}
           >
             Save Model Selection
@@ -256,13 +266,14 @@ const Settings: React.FC<SettingsProps> = () => {
       )}
 
       {/* Current Settings Display */}
-      <div style={{ marginBottom: '2rem' }}>
-        <h3 style={{ marginBottom: '1rem', color: '#333' }}>Current Settings</h3>
+      <div style={{ marginBottom: '8px' }}>
+        <h3 style={{ marginBottom: '4px', color: '#000000', fontSize: '11px', fontWeight: 'normal' }}>Current Settings</h3>
         <div style={{
-          padding: '1rem',
-          backgroundColor: '#f8f9fa',
-          borderRadius: '4px',
-          fontSize: '0.875rem'
+          padding: '4px 8px',
+          backgroundColor: '#c0c0c0',
+          border: '2px inset #c0c0c0',
+          fontSize: '11px',
+          color: '#000000'
         }}>
           <div><strong>API Key:</strong> {apiKey ? '••••••••' : 'Not set'}</div>
           <div><strong>Selected Model:</strong> {selectedModel || 'Not set'}</div>
@@ -271,17 +282,19 @@ const Settings: React.FC<SettingsProps> = () => {
       </div>
 
       {/* Danger Zone */}
-      <div style={{ borderTop: '1px solid #dee2e6', paddingTop: '1rem' }}>
-        <h3 style={{ marginBottom: '1rem', color: '#dc3545' }}>Danger Zone</h3>
+      <div style={{ borderTop: '2px inset #c0c0c0', paddingTop: '8px' }}>
+        <h3 style={{ marginBottom: '4px', color: '#800000', fontSize: '11px', fontWeight: 'normal' }}>Danger Zone</h3>
         <button
           onClick={clearSettings}
           style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
+            padding: '2px 8px',
+            backgroundColor: '#c0c0c0',
+            color: '#800000',
+            border: '2px outset #c0c0c0',
+            borderRadius: '0px',
+            cursor: 'pointer',
+            fontSize: '11px',
+            minHeight: '20px'
           }}
         >
           Clear All Settings
