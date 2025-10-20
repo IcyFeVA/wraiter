@@ -13,36 +13,8 @@ function App() {
     <div id="app" ref={contentRef} style={{
       width: '100%',
     }}>
-      {/* Draggable top bar */}
-      <div
-        className="drag-region"
-        style={{
-          width: '100%',
-          height: '12px',
-          cursor: 'grab',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          zIndex: 9999,
-          WebkitUserSelect: 'none',
-          userSelect: 'none',
-        }}
-        data-tauri-drag-region="true"
-        onMouseDown={(e) => {
-          if (e.button === 0) { // Left mouse button
-            e.currentTarget.style.cursor = 'grabbing';
-          }
-        }}
-        onMouseUp={(e) => {
-          e.currentTarget.style.cursor = 'grab';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.cursor = 'grab';
-        }}
-      />
-
-      <div style={{ marginTop: '20px', marginBottom: '8px' }}>
-        <div style={{ display: 'flex', gap: '2px' }}>
+      <div style={{ marginTop: '8px', marginBottom: '8px' }}>
+        <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }}>
           <button
             onClick={() => setCurrentView('main')}
             className={currentView === 'main' ? 'active-tab' : 'inactive-tab'}
@@ -65,6 +37,42 @@ function App() {
           >
             AI SETTINGS
           </button>
+
+          {/* Draggable area to the right of AI settings button */}
+          <div
+            className="drag-region"
+            style={{
+              height: '20px',
+              width: '30px',
+              cursor: 'grab',
+              flex: 1,
+              WebkitUserSelect: 'none',
+              userSelect: 'none',
+              border: '1px solid #00ffff3b',
+              marginLeft: '4px',
+              alignItems: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              color: '#736f8aff',
+            }}
+            data-tauri-drag-region="true"
+            onMouseDown={(e) => {
+              if (e.button === 0) { // Left mouse button
+                e.currentTarget.style.cursor = 'grabbing';
+              }
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.cursor = 'grab';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.cursor = 'grab';
+            }}
+          >
+            <div style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', display: 'flex', width: '100%', padding: '0 4px' }}>
+              <div style={{ fontSize: '12px', fontWeight: 'bold', fontFamily: 'monospace, Verdana' }}>NSX-T 1.0</div>
+              <div style={{ fontSize: '10px' }}>:::</div>
+            </div>
+          </div>
         </div>
       </div>
 

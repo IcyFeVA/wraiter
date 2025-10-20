@@ -6,7 +6,7 @@
   filter: drop-shadow(0 0 2em #61dafb);
 }
 :root {
-  font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+  font-family: 'monospace, Courier New', 'Consolas', 'Monaco', monospace;
   font-size: 11px;
   line-height: 16px;
   font-weight: 400;
