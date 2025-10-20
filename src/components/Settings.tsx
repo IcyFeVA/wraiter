@@ -16,18 +16,50 @@ const Settings: React.FC<SettingsProps> = () => {
   const [selectedModel, setSelectedModel] = useState('');
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [maxTokens, setMaxTokens] = useState('2000');
+  const [defaultTone, setDefaultTone] = useState('professional');
+  const [autoClose, setAutoClose] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     // Load saved settings
     loadSettings();
+    setIsLoaded(true);
   }, []);
+
+  // Auto-save max tokens setting (only after initial load)
+  useEffect(() => {
+    if (isLoaded && maxTokens) {
+      localStorage.setItem('max_tokens', maxTokens);
+    }
+  }, [maxTokens, isLoaded]);
+
+  // Auto-save default tone setting (only after initial load)
+  useEffect(() => {
+    if (isLoaded && defaultTone) {
+      localStorage.setItem('default_tone', defaultTone);
+    }
+  }, [defaultTone, isLoaded]);
+
+  // Auto-save auto-close setting (only after initial load)
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem('auto_close', autoClose.toString());
+    }
+  }, [autoClose, isLoaded]);
 
   const loadSettings = () => {
     const savedApiKey = localStorage.getItem('openrouter_api_key') || '';
     const savedModel = localStorage.getItem('selected_model') || '';
+    const savedMaxTokens = localStorage.getItem('max_tokens') || '2000';
+    const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
+    const savedAutoClose = localStorage.getItem('auto_close') !== 'false'; // Default to true
 
     setApiKey(savedApiKey);
     setSelectedModel(savedModel);
+    setMaxTokens(savedMaxTokens);
+    setDefaultTone(savedDefaultTone);
+    setAutoClose(savedAutoClose);
   };
 
   const saveApiKey = () => {
@@ -105,8 +137,14 @@ const Settings: React.FC<SettingsProps> = () => {
   const clearSettings = () => {
     localStorage.removeItem('openrouter_api_key');
     localStorage.removeItem('selected_model');
+    localStorage.removeItem('max_tokens');
+    localStorage.removeItem('default_tone');
+    localStorage.removeItem('auto_close');
     setApiKey('');
     setSelectedModel('');
+    setMaxTokens('2000');
+    setDefaultTone('professional');
+    setAutoClose(true);
     setModels([]);
     setMessage({ type: 'success', text: 'Settings cleared!' });
   };
@@ -120,8 +158,18 @@ const Settings: React.FC<SettingsProps> = () => {
 
       {/* Message Display */}
       {message && (
-        <div className={message.type === 'success' ? 'message-display success' : 'message-display error'}>
-          {message.type === 'success' ? <Check size={12} className="message-icon success" /> : <AlertCircle size={12} className="message-icon error" />}
+        <div
+          className={
+            message.type === "success"
+              ? "message-display success"
+              : "message-display error"
+          }
+        >
+          {message.type === "success" ? (
+            <Check size={12} className="message-icon success" />
+          ) : (
+            <AlertCircle size={12} className="message-icon error" />
+          )}
           <span className="message-text">{message.text}</span>
         </div>
       )}
@@ -130,7 +178,7 @@ const Settings: React.FC<SettingsProps> = () => {
       <div className="settings-section">
         <h3 className="section-title">OpenRouter API Key</h3>
         <p className="api-key-description">
-          Get your API key from{' '}
+          Get your API key from{" "}
           <a
             href="https://openrouter.ai/keys"
             target="_blank"
@@ -138,8 +186,8 @@ const Settings: React.FC<SettingsProps> = () => {
             className="api-key-link"
           >
             openrouter.ai/keys
-          </a>
-          {' '}(free account available)
+          </a>{" "}
+          (free account available)
         </p>
         <div className="input-row">
           <div className="input-container">
@@ -151,10 +199,7 @@ const Settings: React.FC<SettingsProps> = () => {
               className="api-key-input"
             />
           </div>
-          <button
-            onClick={saveApiKey}
-            className="save-key-button"
-          >
+          <button onClick={saveApiKey} className="save-key-button">
             <Key size={12} className="button-icon" />
             Save Key
           </button>
@@ -163,10 +208,16 @@ const Settings: React.FC<SettingsProps> = () => {
         <button
           onClick={fetchModels}
           disabled={isLoadingModels || !apiKey}
-          className={isLoadingModels || !apiKey ? 'load-models-button disabled' : 'load-models-button'}
+          className={
+            isLoadingModels || !apiKey
+              ? "load-models-button disabled"
+              : "load-models-button"
+          }
         >
-          {isLoadingModels ? <Loader2 size={12} className="spin button-icon" /> : null}
-          {isLoadingModels ? 'Loading Models...' : 'Load Available Models'}
+          {isLoadingModels ? (
+            <Loader2 size={12} className="spin button-icon" />
+          ) : null}
+          {isLoadingModels ? "Loading Models..." : "Load Available Models"}
         </button>
       </div>
 
@@ -183,9 +234,10 @@ const Settings: React.FC<SettingsProps> = () => {
               <option value="">Select a model...</option>
               {[...models]
                 .sort((a, b) => a.name.localeCompare(b.name))
-                .map(model => (
+                .map((model) => (
                   <option key={model.id} value={model.id}>
-                    {model.name} {model.description ? ` - ${model.description}` : ''}
+                    {model.name}{" "}
+                    {model.description ? ` - ${model.description}` : ""}
                   </option>
                 ))}
             </select>
@@ -194,30 +246,164 @@ const Settings: React.FC<SettingsProps> = () => {
           <button
             onClick={saveModelSelection}
             disabled={!selectedModel}
-            className={!selectedModel ? 'save-model-button disabled' : 'save-model-button'}
+            className={
+              !selectedModel
+                ? "save-model-button disabled"
+                : "save-model-button"
+            }
           >
             Save Model Selection
           </button>
         </div>
       )}
 
-      {/* Current Settings Display */}
+      {/* AI Settings Section */}
       <div className="settings-section">
+        {/* <h3 className="section-title">AI Settings</h3> */}
+
+        <div style={{ height: "16px" }}></div>
+
+        {/* Max Tokens Setting */}
+        <div style={{ marginBottom: "12px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "4px",
+              fontSize: "11px",
+              fontWeight: "bold",
+            }}
+          >
+            Max Tokens:
+          </label>
+          <div className="select-container">
+            <input
+              type="number"
+              value={maxTokens}
+              onChange={(e) => setMaxTokens(e.target.value)}
+              placeholder="2000"
+              min="1"
+              max="10000"
+              className="model-select"
+              style={{
+                width: "100%",
+                padding: "4px 8px",
+                fontSize: "11px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                boxSizing: "border-box",
+                backgroundColor: "#fff",
+              }}
+            />
+          </div>
+          <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>
+            Maximum tokens to use for AI responses (default: 2000)
+          </div>
+        </div>
+
+        {/* Default Tone Setting */}
+        <div style={{ marginBottom: "12px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "4px",
+              fontSize: "11px",
+              fontWeight: "bold",
+            }}
+          >
+            Default Tone:
+          </label>
+          <div className="select-container">
+            <select
+              value={defaultTone}
+              onChange={(e) => setDefaultTone(e.target.value)}
+              className="model-select"
+              style={{
+                width: "100%",
+                padding: "4px 8px",
+                fontSize: "11px",
+                border: "1px solid #ccc",
+                borderRadius: "4px",
+                boxSizing: "border-box",
+                backgroundColor: "#fff",
+              }}
+            >
+              <option value="professional">Professional</option>
+              <option value="casual">Casual</option>
+              <option value="friendly">Friendly</option>
+              <option value="formal">Formal</option>
+              <option value="enthusiastic">Enthusiastic</option>
+              <option value="empathetic">Empathetic</option>
+              <option value="confident">Confident</option>
+              <option value="concise">Concise</option>
+            </select>
+          </div>
+          <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>
+            For "Change Tone" action
+          </div>
+        </div>
+
+        {/* Auto-close Setting */}
+        <div style={{ marginBottom: "8px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "4px",
+              fontSize: "11px",
+              fontWeight: "bold",
+            }}
+          >
+            Auto-Close:
+          </label>
+          <div className="select-container">
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                fontSize: "11px",
+                cursor: "pointer",
+                padding: "0 4px",
+                width: "100%",
+              }}
+            >
+              <input
+                type="checkbox"
+                checked={autoClose}
+                onChange={(e) => setAutoClose(e.target.checked)}
+                style={{ margin: 0 }}
+              />
+              <span>Close window after copying result (proofread always auto-closes)</span>
+            </label>
+          </div>
+          <div style={{ fontSize: "11px", color: "#666", marginTop: "2px" }}>
+            Automatically copy result to clipboard and hide window
+          </div>
+        </div>
+      </div>
+
+      {/* Current Settings Display */}
+      {/* <div className="settings-section">
         <h3 className="section-title">Current Settings</h3>
         <div className="current-settings-display">
           <div><strong>API Key:</strong> {apiKey ? '••••••••' : 'Not set'}</div>
-          <div><strong>Selected Model:</strong> {selectedModel || 'Not set'}</div>
+          <div>
+            <strong>Selected Model:</strong> {selectedModel || "Not set"}
+          </div>
           <div><strong>Available Models:</strong> {models.length}</div>
+          <div>
+            <strong>Max Tokens:</strong> {maxTokens}
+          </div>
+          <div>
+            <strong>Default Tone:</strong> {defaultTone}
+          </div>
+          <div><strong>Auto-close:</strong> {autoClose ? 'Enabled' : 'Disabled'}</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Danger Zone */}
       <div className="danger-zone">
         <h3 className="danger-title">Danger Zone</h3>
-        <button
-          onClick={clearSettings}
-          className="clear-settings-button"
-        >
+        <button onClick={clearSettings} className="clear-settings-button">
           Clear All Settings
         </button>
       </div>

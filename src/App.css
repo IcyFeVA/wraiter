@@ -308,18 +308,16 @@ button {
 
 .api-key-description {
   margin-bottom: 8px !important;
-  color: #00ffff !important;
+  color: #ffffff !important;
   font-size: 11px !important;
 }
 
-.api-key-link {
+.api-key-link, .api-key-link:visited {
   color: #00ffff !important;
-  text-decoration: none !important;
 }
 
 .api-key-link:hover {
-  color: #ff6600 !important;
-  text-decoration: underline !important;
+  color: #0184ff !important;
 }
 
 .input-row {

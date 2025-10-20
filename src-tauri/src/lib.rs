@@ -10,6 +10,7 @@ struct ProcessTextRequest {
     action: String,
     model: String,
     tone: Option<String>,
+    max_tokens: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -107,7 +108,8 @@ async fn process_text_with_ai(
     action: String,
     model: String,
     api_key: String,
-    tone: Option<String>
+    tone: Option<String>,
+    max_tokens: Option<u32>
 ) -> Result<String, String> {
     let client = reqwest::Client::new();
 
@@ -133,7 +135,7 @@ async fn process_text_with_ai(
                 "content": text
             }
         ],
-        "max_tokens": 2000,
+        "max_tokens": max_tokens.unwrap_or(2000),
         "temperature": 0.7
     });
 

@@ -12,10 +12,19 @@ const Overlay: React.FC<OverlayProps> = () => {
   const [selectedAction, setSelectedAction] = useState<'proofread' | 'tone' | 'draft'>('proofread');
   const [selectedTone, setSelectedTone] = useState('professional');
   const [copied, setCopied] = useState(false);
+  const [autoCloseEnabled, setAutoCloseEnabled] = useState(true);
 
   useEffect(() => {
     // Load clipboard text when component mounts
     loadClipboardText();
+
+    // Load default tone setting
+    const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
+    setSelectedTone(savedDefaultTone);
+
+    // Load auto-close setting
+    const savedAutoClose = localStorage.getItem('auto_close') !== 'false';
+    setAutoCloseEnabled(savedAutoClose);
   }, []);
 
   // Handle window focus to refresh clipboard content
@@ -75,12 +84,17 @@ const Overlay: React.FC<OverlayProps> = () => {
         return;
       }
 
+      // Get max tokens setting
+      const maxTokens = localStorage.getItem('max_tokens') || '2000';
+      const autoCloseEnabled = localStorage.getItem('auto_close') !== 'false';
+
       const result = await invoke<string>('process_text_with_ai', {
         text: inputText,
         action: selectedAction,
         model,
         apiKey,
-        tone: selectedAction === 'tone' ? selectedTone : undefined
+        tone: selectedAction === 'tone' ? selectedTone : undefined,
+        maxTokens: parseInt(maxTokens)
       });
 
       // For proofread action, show result briefly then hide window
@@ -115,6 +129,36 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       setOutputText(result);
 
+      // Handle auto-close behavior for tone and draft actions
+      if (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft')) {
+        // Automatically copy result to clipboard to replace user's selection
+        await invoke('set_clipboard_text', { text: result });
+
+        // Show result for 2 seconds, then hide window
+        setTimeout(async () => {
+          const appWindow = getCurrentWindow();
+          await appWindow.hide();
+
+          // Show notification that text is ready to paste
+          try {
+            if ('Notification' in window) {
+              const actionName = selectedAction === 'tone' ? 'Tone Changed' : 'Draft Complete';
+              new Notification(`Text ${actionName}`, {
+                body: `${actionName} text copied to clipboard. Use Ctrl+V to paste.`,
+                icon: '/tauri.svg',
+                silent: true
+              });
+            }
+          } catch (e) {
+            console.log('Notification not available');
+          }
+        }, 100);
+
+        setIsLoading(false);
+        return;
+      }
+
+      // Default behavior: show result and copy button
       // Automatically copy result to clipboard to replace user's selection
       await invoke('set_clipboard_text', { text: result });
       setCopied(true);
@@ -302,7 +346,7 @@ const Overlay: React.FC<OverlayProps> = () => {
       {/* Input Text Area */}
       <div style={{ marginBottom: '8px' }}>
         <label className="input-label">
-          Input Text:
+          Input:
         </label>
         <textarea
           value={inputText}
@@ -320,9 +364,12 @@ const Overlay: React.FC<OverlayProps> = () => {
         />
       </div>
 
-      {/* Output Text Area (hide for proofread since it auto-closes) */}
-      {outputText && selectedAction !== 'proofread' && (
-        <div style={{ marginBottom: '8px' }}>
+      {/* Output Text Area (hide for proofread and when auto-close is enabled for tone/draft) */}
+      {outputText && !(
+        selectedAction === 'proofread' ||
+        (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft'))
+      ) && (
+        <div style={{ marginBottom: '4px', borderTop: '1px dashed #00ffff5a', paddingTop: '8px' }}>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
