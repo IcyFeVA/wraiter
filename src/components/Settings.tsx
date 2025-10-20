@@ -116,12 +116,12 @@ const Settings: React.FC<SettingsProps> = () => {
       padding: '8px',
       maxWidth: '800px',
       margin: '0 auto',
-      backgroundColor: '#c0c0c0',
-      border: '2px inset #c0c0c0'
+      backgroundColor: '#1a1a2e',
+      border: '2px inset #16213e'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-        <SettingsIcon size={16} style={{ marginRight: '4px' }} />
-        <h2 style={{ margin: 0, color: '#000000', fontSize: '14px', fontWeight: 'normal' }}>Settings</h2>
+        <SettingsIcon size={16} style={{ marginRight: '4px', color: '#00d4ff' }} />
+        <h2 style={{ margin: 0, color: '#00d4ff', fontSize: '14px', fontWeight: 'normal' }}>Settings</h2>
       </div>
 
       {/* Message Display */}
@@ -129,29 +129,29 @@ const Settings: React.FC<SettingsProps> = () => {
         <div style={{
           padding: '4px 8px',
           marginBottom: '8px',
-          border: '2px outset #c0c0c0',
-          backgroundColor: message.type === 'success' ? '#c0c0c0' : '#c0c0c0',
-          color: message.type === 'success' ? '#008000' : '#800000',
+          border: '2px outset #16213e',
+          backgroundColor: message.type === 'success' ? '#16213e' : '#16213e',
+          color: message.type === 'success' ? '#00ff88' : '#ff6b6b',
           display: 'flex',
           alignItems: 'center',
           gap: '4px',
           fontSize: '11px'
         }}>
-          {message.type === 'success' ? <Check size={12} /> : <AlertCircle size={12} />}
+          {message.type === 'success' ? <Check size={12} color="#00ff88" /> : <AlertCircle size={12} color="#ff6b6b" />}
           {message.text}
         </div>
       )}
 
       {/* API Key Section */}
       <div style={{ marginBottom: '8px' }}>
-        <h3 style={{ marginBottom: '4px', color: '#000000', fontSize: '11px', fontWeight: 'normal' }}>OpenRouter API Key</h3>
-        <p style={{ marginBottom: '8px', color: '#000000', fontSize: '11px' }}>
+        <h3 style={{ marginBottom: '4px', color: '#00d4ff', fontSize: '11px', fontWeight: 'normal' }}>OpenRouter API Key</h3>
+        <p style={{ marginBottom: '8px', color: '#00d4ff', fontSize: '11px' }}>
           Get your API key from{' '}
           <a
             href="https://openrouter.ai/keys"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#800080', textDecoration: 'none' }}
+            style={{ color: '#ff6b9d', textDecoration: 'none' }}
           >
             openrouter.ai/keys
           </a>
@@ -167,12 +167,12 @@ const Settings: React.FC<SettingsProps> = () => {
               style={{
                 width: '100%',
                 padding: '2px 4px',
-                border: '2px inset #c0c0c0',
+                border: '2px inset #16213e',
                 borderRadius: '0px',
                 fontFamily: 'monospace',
                 fontSize: '11px',
-                backgroundColor: '#ffffff',
-                color: '#000000'
+                backgroundColor: '#16213e',
+                color: '#00d4ff'
               }}
             />
           </div>
@@ -180,9 +180,9 @@ const Settings: React.FC<SettingsProps> = () => {
             onClick={saveApiKey}
             style={{
               padding: '2px 8px',
-              backgroundColor: '#c0c0c0',
-              color: '#000000',
-              border: '2px outset #c0c0c0',
+              backgroundColor: '#16213e',
+              color: '#00d4ff',
+              border: '2px outset #16213e',
               borderRadius: '0px',
               cursor: 'pointer',
               display: 'flex',
@@ -192,7 +192,7 @@ const Settings: React.FC<SettingsProps> = () => {
               minHeight: '20px'
             }}
           >
-            <Key size={12} />
+            <Key size={12} color="#00d4ff" />
             Save Key
           </button>
         </div>
@@ -202,9 +202,9 @@ const Settings: React.FC<SettingsProps> = () => {
           disabled={isLoadingModels || !apiKey}
           style={{
             padding: '2px 8px',
-            backgroundColor: (isLoadingModels || !apiKey) ? '#808080' : '#c0c0c0',
-            color: '#000000',
-            border: '2px outset #c0c0c0',
+            backgroundColor: (isLoadingModels || !apiKey) ? '#0e1a33' : '#16213e',
+            color: '#00d4ff',
+            border: '2px outset #16213e',
             borderRadius: '0px',
             cursor: (isLoadingModels || !apiKey) ? 'not-allowed' : 'pointer',
             display: 'flex',
@@ -214,7 +214,7 @@ const Settings: React.FC<SettingsProps> = () => {
             minHeight: '20px'
           }}
         >
-          {isLoadingModels ? <Loader2 size={12} className="spin" /> : null}
+          {isLoadingModels ? <Loader2 size={12} className="spin" color="#00d4ff" /> : null}
           {isLoadingModels ? 'Loading Models...' : 'Load Available Models'}
         </button>
       </div>
@@ -222,7 +222,7 @@ const Settings: React.FC<SettingsProps> = () => {
       {/* Model Selection Section */}
       {models.length > 0 && (
         <div style={{ marginBottom: '8px' }}>
-          <h3 style={{ marginBottom: '4px', color: '#000000', fontSize: '11px', fontWeight: 'normal' }}>Model Selection</h3>
+          <h3 style={{ marginBottom: '4px', color: '#00d4ff', fontSize: '11px', fontWeight: 'normal' }}>Model Selection</h3>
           <div style={{ marginBottom: '8px' }}>
             <select
               value={selectedModel}
@@ -230,11 +230,11 @@ const Settings: React.FC<SettingsProps> = () => {
               style={{
                 width: '100%',
                 padding: '2px 4px',
-                border: '2px inset #c0c0c0',
+                border: '2px inset #16213e',
                 borderRadius: '0px',
                 fontSize: '11px',
-                backgroundColor: '#ffffff',
-                color: '#000000'
+                backgroundColor: '#16213e',
+                color: '#00d4ff'
               }}
             >
               <option value="">Select a model...</option>
@@ -251,9 +251,9 @@ const Settings: React.FC<SettingsProps> = () => {
             disabled={!selectedModel}
             style={{
               padding: '2px 8px',
-              backgroundColor: selectedModel ? '#c0c0c0' : '#808080',
-              color: '#000000',
-              border: '2px outset #c0c0c0',
+              backgroundColor: selectedModel ? '#16213e' : '#0e1a33',
+              color: '#00d4ff',
+              border: '2px outset #16213e',
               borderRadius: '0px',
               cursor: selectedModel ? 'pointer' : 'not-allowed',
               fontSize: '11px',
@@ -267,13 +267,13 @@ const Settings: React.FC<SettingsProps> = () => {
 
       {/* Current Settings Display */}
       <div style={{ marginBottom: '8px' }}>
-        <h3 style={{ marginBottom: '4px', color: '#000000', fontSize: '11px', fontWeight: 'normal' }}>Current Settings</h3>
+        <h3 style={{ marginBottom: '4px', color: '#00d4ff', fontSize: '11px', fontWeight: 'normal' }}>Current Settings</h3>
         <div style={{
           padding: '4px 8px',
-          backgroundColor: '#c0c0c0',
-          border: '2px inset #c0c0c0',
+          backgroundColor: '#16213e',
+          border: '2px inset #16213e',
           fontSize: '11px',
-          color: '#000000'
+          color: '#00d4ff'
         }}>
           <div><strong>API Key:</strong> {apiKey ? '••••••••' : 'Not set'}</div>
           <div><strong>Selected Model:</strong> {selectedModel || 'Not set'}</div>
@@ -282,15 +282,15 @@ const Settings: React.FC<SettingsProps> = () => {
       </div>
 
       {/* Danger Zone */}
-      <div style={{ borderTop: '2px inset #c0c0c0', paddingTop: '8px' }}>
-        <h3 style={{ marginBottom: '4px', color: '#800000', fontSize: '11px', fontWeight: 'normal' }}>Danger Zone</h3>
+      <div style={{ borderTop: '2px inset #16213e', paddingTop: '8px' }}>
+        <h3 style={{ marginBottom: '4px', color: '#ff6b6b', fontSize: '11px', fontWeight: 'normal' }}>Danger Zone</h3>
         <button
           onClick={clearSettings}
           style={{
             padding: '2px 8px',
-            backgroundColor: '#c0c0c0',
-            color: '#800000',
-            border: '2px outset #c0c0c0',
+            backgroundColor: '#16213e',
+            color: '#ff6b6b',
+            border: '2px outset #16213e',
             borderRadius: '0px',
             cursor: 'pointer',
             fontSize: '11px',

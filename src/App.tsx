@@ -18,14 +18,15 @@ function App() {
         className="drag-region"
         style={{
           width: '100%',
-          height: '16px',
+          height: '12px',
           cursor: 'grab',
           position: 'fixed',
           top: 0,
           left: 0,
           zIndex: 9999,
           WebkitUserSelect: 'none',
-          userSelect: 'none'
+          userSelect: 'none',
+          backgroundColor: '#000002ff',
         }}
         data-tauri-drag-region="true"
         onMouseDown={(e) => {
@@ -41,31 +42,33 @@ function App() {
         }}
       />
 
-      <div style={{ marginTop: '18px', marginBottom: '8px' }}>
-        <div style={{ display: 'flex', gap: '2px', justifyContent: 'center' }}>
+      <div style={{ marginTop: '20px', marginBottom: '8px' }}>
+        <div style={{ display: 'flex', gap: '2px' }}>
           <button
             onClick={() => setCurrentView('main')}
             style={{
-              backgroundColor: currentView === 'main' ? '#808080' : '#c0c0c0',
-              color: currentView === 'main' ? '#ffffff' : '#000000',
+              backgroundColor: currentView === 'main' ? '#00d4ff' : '#020218ff',
+              color: currentView === 'main' ? '#1a1a2e' : '#00d4ff',
               fontSize: '11px',
               padding: '2px 8px',
-              minWidth: '50px'
+              minWidth: '50px',
+              // border: '2px outset #16213e'
             }}
           >
-            Main
+            MAIN
           </button>
           <button
             onClick={() => setCurrentView('settings')}
             style={{
-              backgroundColor: currentView === 'settings' ? '#808080' : '#c0c0c0',
-              color: currentView === 'settings' ? '#ffffff' : '#000000',
+              backgroundColor: currentView === 'settings' ? '#00d4ff' : '#020218ff',
+              color: currentView === 'settings' ? '#1a1a2e' : '#00d4ff',
               fontSize: '11px',
               padding: '2px 8px',
-              minWidth: '50px'
+              minWidth: '50px',
+              border: '2px outset #16213e'
             }}
           >
-            Settings
+            AI SETTINGS
           </button>
         </div>
       </div>

@@ -6,13 +6,13 @@
   filter: drop-shadow(0 0 2em #61dafb);
 }
 :root {
-  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', monospace, sans-serif;
+  font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Courier New', monospace;
   font-size: 11px;
   line-height: 16px;
   font-weight: 400;
 
-  color: #c0c0c0;
-  background-color: #c0c0c0;
+  color: #00d4ff;
+  background-color: rgb(12, 13, 22);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -60,13 +60,13 @@ h1 {
 input,
 button {
   border-radius: 0px;
-  border: 2px outset #c0c0c0;
+  border: 2px outset #16213e;
   padding: 2px 8px;
   font-size: 11px;
   font-weight: 400;
   font-family: inherit;
-  color: #000000;
-  background-color: #c0c0c0;
+  color: #00d4ff;
+  background-color: #16213e;
   transition: none;
   box-shadow: none;
   min-height: 20px;
@@ -77,13 +77,13 @@ button {
 }
 
 button:hover {
-  border: 2px outset #dfdfdf;
-  background-color: #dfdfdf;
+  border: 2px outset #1e2d4f;
+  background-color: #1e2d4f;
 }
 
 button:active {
-  border: 2px inset #808080;
-  background-color: #c0c0c0;
+  border: 2px inset #0e1a33;
+  background-color: #16213e;
 }
 
 input,
@@ -98,14 +98,12 @@ button {
 .drag-region {
   -webkit-app-region: drag;
   app-region: drag;
-  background: linear-gradient(to bottom, #dfdfdf 0%, #c0c0c0 100%);
-  border-bottom: 1px solid #808080;
+  border-bottom: 1px solid rgb(29, 29, 78);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
-    background-color: #2f2f2f;
   }
 
   a:hover {

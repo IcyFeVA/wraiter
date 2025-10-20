@@ -172,8 +172,8 @@ const Overlay: React.FC<OverlayProps> = () => {
         padding: '8px',
         boxSizing: 'border-box',
         overflowY: 'auto',
-        backgroundColor: '#c0c0c0',
-        border: '2px inset #c0c0c0'
+        backgroundColor: '#1a1a2e',
+        border: '2px inset #16213e'
       }}>
 
       {/* Action Buttons */}
@@ -188,9 +188,9 @@ const Overlay: React.FC<OverlayProps> = () => {
           disabled={isLoading}
           style={{
             padding: '2px 8px',
-            backgroundColor: selectedAction === 'proofread' ? '#808080' : '#c0c0c0',
-            color: selectedAction === 'proofread' ? '#ffffff' : '#000000',
-            border: '2px outset #c0c0c0',
+            backgroundColor: selectedAction === 'proofread' ? '#00d4ff' : '#16213e',
+            color: selectedAction === 'proofread' ? '#1a1a2e' : '#00d4ff',
+            border: '2px outset #16213e',
             borderRadius: '0px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
@@ -209,9 +209,9 @@ const Overlay: React.FC<OverlayProps> = () => {
           disabled={isLoading}
           style={{
             padding: '2px 8px',
-            backgroundColor: selectedAction === 'tone' ? '#808080' : '#c0c0c0',
-            color: selectedAction === 'tone' ? '#ffffff' : '#000000',
-            border: '2px outset #c0c0c0',
+            backgroundColor: selectedAction === 'tone' ? '#00d4ff' : '#16213e',
+            color: selectedAction === 'tone' ? '#1a1a2e' : '#00d4ff',
+            border: '2px outset #16213e',
             borderRadius: '0px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
@@ -230,9 +230,9 @@ const Overlay: React.FC<OverlayProps> = () => {
           disabled={isLoading}
           style={{
             padding: '2px 8px',
-            backgroundColor: selectedAction === 'draft' ? '#808080' : '#c0c0c0',
-            color: selectedAction === 'draft' ? '#ffffff' : '#000000',
-            border: '2px outset #c0c0c0',
+            backgroundColor: selectedAction === 'draft' ? '#00d4ff' : '#16213e',
+            color: selectedAction === 'draft' ? '#1a1a2e' : '#00d4ff',
+            border: '2px outset #16213e',
             borderRadius: '0px',
             cursor: isLoading ? 'not-allowed' : 'pointer',
             display: 'flex',
@@ -255,12 +255,12 @@ const Overlay: React.FC<OverlayProps> = () => {
             onChange={(e) => setSelectedTone(e.target.value)}
             style={{
               padding: '2px 4px',
-              border: '2px inset #c0c0c0',
+              border: '2px inset #16213e',
               borderRadius: '0px',
               width: '120px',
               fontSize: '11px',
-              backgroundColor: '#ffffff',
-              color: '#000000'
+              backgroundColor: '#16213e',
+              color: '#00d4ff'
             }}
           >
             {toneOptions.map(tone => (
@@ -284,7 +284,7 @@ const Overlay: React.FC<OverlayProps> = () => {
           display: 'block',
           marginBottom: '2px',
           fontWeight: 'normal',
-          color: '#000000',
+          color: '#00d4ff',
           fontSize: '11px'
         }}>
           Input Text:
@@ -297,13 +297,13 @@ const Overlay: React.FC<OverlayProps> = () => {
             width: '100%',
             height: '60px',
             padding: '2px',
-            border: '2px inset #c0c0c0',
+            border: '2px inset #16213e',
             borderRadius: '0px',
             resize: 'vertical',
             fontFamily: 'monospace',
             fontSize: '11px',
-            backgroundColor: '#ffffff',
-            color: '#000000',
+            backgroundColor: '#16213e',
+            color: '#00d4ff',
             boxSizing: 'border-box'
           }}
         />
@@ -320,7 +320,7 @@ const Overlay: React.FC<OverlayProps> = () => {
           }}>
             <label style={{
               fontWeight: 'normal',
-              color: '#000000',
+              color: '#00d4ff',
               fontSize: '11px'
             }}>
               Output:
@@ -329,9 +329,9 @@ const Overlay: React.FC<OverlayProps> = () => {
               onClick={copyToClipboard}
               style={{
                 padding: '2px 8px',
-                backgroundColor: copied ? '#808080' : '#c0c0c0',
-                color: copied ? '#ffffff' : '#000000',
-                border: '2px outset #c0c0c0',
+                backgroundColor: copied ? '#00d4ff' : '#16213e',
+                color: copied ? '#1a1a2e' : '#00d4ff',
+                border: '2px outset #16213e',
                 borderRadius: '0px',
                 cursor: 'pointer',
                 display: 'flex',
@@ -352,10 +352,10 @@ const Overlay: React.FC<OverlayProps> = () => {
               width: '100%',
               height: '60px',
               padding: '2px',
-              border: '2px inset #c0c0c0',
+              border: '2px inset #16213e',
               borderRadius: '0px',
-              backgroundColor: '#ffffff',
-              color: '#000000',
+              backgroundColor: '#16213e',
+              color: '#00d4ff',
               fontFamily: 'monospace',
               fontSize: '11px',
               boxSizing: 'border-box'
@@ -371,15 +371,16 @@ const Overlay: React.FC<OverlayProps> = () => {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '8px',
-          backgroundColor: '#c0c0c0',
-          border: '2px inset #c0c0c0',
+          backgroundColor: '#16213e',
+          border: '2px inset #16213e',
           marginTop: '8px'
         }}>
           <Loader2 size={16} style={{
             animation: 'spin 1s linear infinite',
-            marginRight: '8px'
+            marginRight: '8px',
+            color: '#00d4ff'
           }} />
-          <span style={{ fontSize: '11px', color: '#000000' }}>
+          <span style={{ fontSize: '11px', color: '#00d4ff' }}>
             Processing with AI...
           </span>
         </div>
