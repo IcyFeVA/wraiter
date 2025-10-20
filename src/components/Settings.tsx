@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Key, Loader2, Check, AlertCircle, Settings as SettingsIcon } from 'lucide-react';
+import { Key, Loader2, Check, AlertCircle } from 'lucide-react';
 
 interface SettingsProps {}
 
@@ -151,10 +151,6 @@ const Settings: React.FC<SettingsProps> = () => {
 
   return (
     <div className="settings-container">
-      {/* <div className="settings-header">
-        <SettingsIcon size={16} className="settings-icon" />
-        <h2 className="settings-title">Settings</h2>
-      </div> */}
 
       {/* Message Display */}
       {message && (
