@@ -349,6 +349,7 @@ const Settings: React.FC<SettingsProps> = () => {
             <option value="NSX">NSX</option>
             <option value="Aqua">Aqua</option>
             <option value="AquaDark">Aqua Dark</option>
+            <option value="Console">Console</option>
           </select>
         </div>
       </div>

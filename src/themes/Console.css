@@ -1,150 +1,153 @@
-.theme-aquadark {
-  /* Typography */
-  --font-family: 'Segoe UI', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
-  --font-size: 13px;
-  --line-height: 1.4;
+.theme-console {
+  /* Typography - Terminal Style */
+  --font-family: 'Courier New', 'Lucida Console', 'Monaco', monospace;
+  --font-size: 14px;
+  --line-height: 1.2;
   --font-weight: 400;
 
-  /* Base Colors - Awesome Dark Theme */
-  --color: #F0F8FF;
-  --background-color: #0a0b13;
+  /* Base Colors - Classic Terminal */
+  --color: #00FF00;
+  --background-color: #000000;
 
-  /* Vibrant Aqua Blue Palette */
-  --aqua-blue: #00D4FF;
-  --aqua-blue-dark: #00B4E6;
-  --aqua-blue-light: #40E0FF;
-  --aqua-blue-gradient: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
+  /* Terminal Green Palette */
+  --terminal-green: #00FF00;
+  --terminal-green-bright: #33FF33;
+  --terminal-green-dim: #00CC00;
+  --terminal-green-dark: #009900;
 
-  /* Modern Dark Theme Colors */
-  --apple-blue: #00D4FF;
-  --apple-blue-dark: #00B4E6;
-  --apple-blue-light: #40E0FF;
-  --apple-gray: #21262D;
-  --apple-gray-dark: #161B22;
-  --apple-gray-light: #0D1117;
-  --apple-white: #F0F6FC;
+  /* Terminal Amber Alternative */
+  --terminal-amber: #FFB000;
+  --terminal-amber-bright: #FFC533;
+  --terminal-amber-dim: #CC8C00;
 
-  /* Awesome Button Styling */
-  --button-border-radius: 8px;
-  --button-gradient: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
-  --button-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 8px rgba(0,0,0,0.4), 0 0 20px rgba(0,212,255,0.1);
-  --button-hover-gradient: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
-  --button-active-gradient: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
+  /* Classic Terminal Colors */
+  --terminal-black: #000000;
+  --terminal-white: #FFFFFF;
+  --terminal-gray: #808080;
+  --terminal-gray-light: #C0C0C0;
+  --terminal-gray-dark: #404040;
 
-  /* Vibrant Links */
-  --link-color: #00D4FF;
-  --link-hover-color: #40E0FF;
-  --link-gradient: linear-gradient(135deg, #40E0FF 0%, #00D4FF 100%);
+  /* Button Styling - Terminal Like */
+  --button-border-radius: 0px;
+  --button-gradient: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+  --button-shadow: inset 0 1px 0 rgba(0,255,0,0.2), 0 2px 4px rgba(0,0,0,0.8);
+  --button-hover-gradient: linear-gradient(180deg, #00FF00 0%, #00CC00 100%);
+  --button-active-gradient: linear-gradient(180deg, #00CC00 0%, #009900 100%);
 
-  /* Modern Borders & Strokes */
-  --border-color: #30363D;
-  --border-light: #444C56;
-  --border-dark: #21262D;
-  --stroke-light: rgba(0,212,255,0.3);
-  --stroke-dark: rgba(0,0,0,0.6);
+  /* Links - Terminal Style */
+  --link-color: #00FF00;
+  --link-hover-color: #33FF33;
+  --link-gradient: linear-gradient(180deg, #33FF33 0%, #00FF00 100%);
 
-  /* Awesome Window Elements */
-  --window-background: linear-gradient(135deg, #0D1117 0%, #161B22 50%, #21262D 100%);
-  --window-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 40px rgba(0,212,255,0.1);
-  --drag-region-background: linear-gradient(135deg, #21262D 0%, #30363D 100%);
-  --drag-region-border: #444C56;
+  /* Borders & Strokes - Sharp Terminal Look */
+  --border-color: #00FF00;
+  --border-light: #33FF33;
+  --border-dark: #009900;
+  --stroke-light: rgba(0,255,0,0.5);
+  --stroke-dark: rgba(0,0,0,0.8);
 
-  /* Awesome Tabs */
-  --active-tab-background: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
-  --active-tab-color: #FFFFFF;
-  --active-tab-border: #40E0FF;
-  --active-tab-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 0 20px rgba(0,212,255,0.4);
+  /* Window Elements - Terminal Window */
+  --window-background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+  --window-shadow: 0 8px 32px rgba(0,0,0,0.8), 0 0 20px rgba(0,255,0,0.1);
+  --drag-region-background: linear-gradient(180deg, #1a1a1a 0%, #333333 100%);
+  --drag-region-border: #00FF00;
 
-  --inactive-tab-background: linear-gradient(135deg, #161B22 0%, #21262D 100%);
-  --inactive-tab-color: #F0F8FF;
-  --inactive-tab-border: #30363D;
+  /* Tabs - Terminal Style Tabs */
+  --active-tab-background: linear-gradient(180deg, #00FF00 0%, #00CC00 100%);
+  --active-tab-color: #000000;
+  --active-tab-border: #009900;
+  --active-tab-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
 
-  --tab-hover-background: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);
-  --tab-hover-border: #00D4FF;
+  --inactive-tab-background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+  --inactive-tab-color: #00FF00;
+  --inactive-tab-border: #00FF00;
 
-  --tab-active-background: linear-gradient(135deg, #40E0FF 0%, #00D4FF 100%);
-  --tab-active-border: #00B4E6;
+  --tab-hover-background: linear-gradient(180deg, #333333 0%, #1a1a1a 100%);
+  --tab-hover-border: #33FF33;
 
-  /* Awesome Overlays & Containers */
-  --overlay-background: linear-gradient(135deg, rgba(13,17,23,0.95) 0%, rgba(22,27,34,0.95) 100%);
-  --overlay-border: #30363D;
-  --overlay-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 60px rgba(0,212,255,0.2);
+  --tab-active-background: linear-gradient(180deg, #00FF00 0%, #00CC00 100%);
+  --tab-active-border: #009900;
 
-  /* Awesome Buttons & Controls */
-  --action-button-background: linear-gradient(135deg, #161B22 0%, #21262D 50%, #30363D 100%);
-  --action-button-color: #F0F8FF;
-  --action-button-border: #30363D;
-  --action-button-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 8px rgba(0,0,0,0.4), 0 0 20px rgba(0,212,255,0.1);
+  /* Overlays & Containers - Terminal Windows */
+  --overlay-background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(26,26,26,0.95) 100%);
+  --overlay-border: #00FF00;
+  --overlay-shadow: 0 16px 48px rgba(0,0,0,0.9), 0 0 30px rgba(0,255,0,0.2);
 
-  --action-button-hover-background: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
-  --action-button-hover-color: #FFFFFF;
-  --action-button-hover-border: #40E0FF;
+  /* Buttons & Controls - Terminal Buttons */
+  --action-button-background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+  --action-button-color: #00FF00;
+  --action-button-border: #00FF00;
+  --action-button-shadow: inset 0 1px 0 rgba(0,255,0,0.2), 0 2px 4px rgba(0,0,0,0.8);
 
-  --action-button-active-background: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
-  --action-button-active-color: #FFFFFF;
-  --action-button-active-border: #00B4E6;
+  --action-button-hover-background: linear-gradient(180deg, #00FF00 0%, #00CC00 100%);
+  --action-button-hover-color: #000000;
+  --action-button-hover-border: #33FF33;
 
-  /* Awesome Form Elements */
-  --input-background: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
-  --input-color: #F0F8FF;
-  --input-border: #30363D;
-  --input-shadow: inset 0 1px 2px rgba(0,0,0,0.4), 0 0 10px rgba(0,212,255,0.1);
+  --action-button-active-background: linear-gradient(180deg, #00CC00 0%, #009900 100%);
+  --action-button-active-color: #000000;
+  --action-button-active-border: #009900;
 
-  --select-background: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
-  --select-color: #F0F8FF;
-  --select-border: #30363D;
+  /* Form Elements - Terminal Input Style */
+  --input-background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+  --input-color: #00FF00;
+  --input-border: #00FF00;
+  --input-shadow: inset 0 1px 2px rgba(0,0,0,0.8), 0 0 10px rgba(0,255,0,0.1);
 
-  /* Awesome Text Colors */
-  --text-primary: #F0F8FF;
-  --text-secondary: #C9D1D9;
-  --text-inverse: #0D1117;
+  --select-background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+  --select-color: #00FF00;
+  --select-border: #00FF00;
 
-  /* Awesome Status Colors */
-  --success-background: linear-gradient(135deg, #1A4F1A 0%, #0F3F0F 100%);
-  --success-color: #4ADE80;
-  --success-border: #166534;
+  /* Text Colors - Terminal Colors */
+  --text-primary: #00FF00;
+  --text-secondary: #33FF33;
+  --text-inverse: #000000;
 
-  --error-background: linear-gradient(135deg, #4F1A1A 0%, #3F0F0F 100%);
-  --error-color: #F87171;
-  --error-border: #7F1D1D;
+  /* Status Colors - Terminal Style */
+  --success-background: linear-gradient(180deg, #003300 0%, #001a00 100%);
+  --success-color: #00FF00;
+  --success-border: #009900;
 
-  --warning-background: linear-gradient(135deg, #4F4F1A 0%, #3F3F0F 100%);
-  --warning-color: #FBBF24;
-  --warning-border: #92400E;
+  --error-background: linear-gradient(180deg, #330000 0%, #1a0000 100%);
+  --error-color: #FF0000;
+  --error-border: #990000;
 
-  /* Awesome Scrollbars */
-  --scrollbar-track-background: linear-gradient(135deg, #0D1117 0%, #161B22 100%);
-  --scrollbar-track-border: #21262D;
-  --scrollbar-thumb-background: linear-gradient(135deg, #21262D 0%, #30363D 50%, #444C56 100%);
-  --scrollbar-thumb-border: #555C66;
-  --scrollbar-thumb-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 0 10px rgba(0,212,255,0.2);
+  --warning-background: linear-gradient(180deg, #333300 0%, #1a1a00 100%);
+  --warning-color: #FFFF00;
+  --warning-border: #999900;
 
-  --scrollbar-thumb-hover-background: linear-gradient(135deg, #00D4FF 0%, #00B4E6 50%, #0099CC 100%);
-  --scrollbar-thumb-hover-border: #40E0FF;
+  /* Scrollbars - Terminal Style */
+  --scrollbar-track-background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+  --scrollbar-track-border: #333333;
+  --scrollbar-thumb-background: linear-gradient(180deg, #333333 0%, #1a1a1a 50%, #000000 100%);
+  --scrollbar-thumb-border: #00FF00;
+  --scrollbar-thumb-shadow: inset 0 1px 0 rgba(0,255,0,0.2);
 
-  --scrollbar-thumb-active-background: linear-gradient(135deg, #0099CC 0%, #0080B3 50%, #006699 100%);
-  --scrollbar-thumb-active-border: #00B4E6;
+  --scrollbar-thumb-hover-background: linear-gradient(180deg, #00FF00 0%, #00CC00 100%);
+  --scrollbar-thumb-hover-border: #33FF33;
 
-  /* Awesome Loading & Progress */
-  --loading-background: linear-gradient(135deg, rgba(13,17,23,0.95) 0%, rgba(22,27,34,0.95) 100%);
-  --loading-border: #30363D;
-  --spinner-color: #00D4FF;
-  --progress-color: #00D4FF;
+  --scrollbar-thumb-active-background: linear-gradient(180deg, #00CC00 0%, #009900 100%);
+  --scrollbar-thumb-active-border: #009900;
 
-  /* Awesome Settings */
-  --settings-background: linear-gradient(135deg, rgba(13,17,23,0.95) 0%, rgba(22,27,34,0.95) 100%);
-  --settings-border: #30363D;
-  --settings-icon-color: #00D4FF;
-  --settings-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 60px rgba(0,212,255,0.2);
+  /* Loading & Progress - Terminal Style */
+  --loading-background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(26,26,26,0.95) 100%);
+  --loading-border: #00FF00;
+  --spinner-color: #00FF00;
+  --progress-color: #00FF00;
+
+  /* Settings - Terminal Settings Window */
+  --settings-background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(26,26,26,0.95) 100%);
+  --settings-border: #00FF00;
+  --settings-icon-color: #00FF00;
+  --settings-shadow: 0 16px 48px rgba(0,0,0,0.9), 0 0 30px rgba(0,255,0,0.2);
 
   /* Legacy variable mappings for compatibility */
-  --button-border-radius1: 6px;
-  --button-border-radius2: 6px;
-  --button-hover-border-color: #555555;
+  --button-border-radius1: 0px;
+  --button-border-radius2: 0px;
+  --button-hover-border-color: #00FF00;
   --button-hover-background-color: var(--button-hover-gradient);
-  --button-active-border-color: #333333;
+  --button-active-border-color: #009900;
   --button-active-background-color: var(--button-active-gradient);
-  --drag-region-border-bottom-color: #404040;
+  --drag-region-border-bottom-color: #00FF00;
   --drag-region-background-color: var(--drag-region-background);
   --active-tab-background-color: var(--active-tab-background);
   --active-tab-color: var(--active-tab-color);
@@ -215,8 +218,8 @@
   --load-models-button-color: var(--action-button-color);
   --load-models-button-border-color: var(--action-button-border);
   --load-models-button-hover-border-color: var(--action-button-hover-border);
-  --load-models-button-disabled-background-color: #1A1A1A;
-  --load-models-button-disabled-color: #555555;
+  --load-models-button-disabled-background-color: #1a1a1a;
+  --load-models-button-disabled-color: #666666;
   --load-models-button-disabled-border-color: #333333;
   --model-select-background-color: var(--select-background);
   --model-select-color: var(--select-color);
@@ -226,20 +229,20 @@
   --save-model-button-border-color: var(--action-button-border);
   --save-model-button-hover-background-color: var(--action-button-hover-background);
   --save-model-button-hover-border-color: var(--action-button-hover-border);
-  --save-model-button-disabled-background-color: #1A1A1A;
-  --save-model-button-disabled-color: #555555;
+  --save-model-button-disabled-background-color: #1a1a1a;
+  --save-model-button-disabled-color: #666666;
   --save-model-button-disabled-border-color: #333333;
   --current-settings-display-background-color: var(--input-background);
   --current-settings-display-border-color: var(--input-border);
   --current-settings-display-color: var(--text-primary);
-  --danger-zone-border-top-color: #D9534F;
-  --danger-title-color: #F0AD4E;
+  --danger-zone-border-top-color: #FF0000;
+  --danger-title-color: #FFFF00;
   --clear-settings-button-background-color: var(--error-background);
   --clear-settings-button-color: var(--error-color);
   --clear-settings-button-border-color: var(--error-border);
-  --clear-settings-button-hover-background-color: #4F2F2F;
-  --clear-settings-button-hover-border-color: #5F3F3F;
-  --select-option-background-color: var(--apple-gray-dark);
+  --clear-settings-button-hover-background-color: #331a1a;
+  --clear-settings-button-hover-border-color: #4f2f2f;
+  --select-option-background-color: var(--terminal-black);
   --select-option-color: var(--text-primary);
   --select-option-hover-background-color: var(--tab-hover-background);
   --select-option-hover-color: var(--text-primary);
