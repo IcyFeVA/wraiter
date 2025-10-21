@@ -248,7 +248,7 @@ const Overlay: React.FC<OverlayProps> = () => {
           <select
             value={selectedTone}
             onChange={(e) => setSelectedTone(e.target.value)}
-            className="tone-select"
+            className="model-select"
           >
             {toneOptions.map(tone => (
               <option key={tone} value={tone}>

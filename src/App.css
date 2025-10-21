@@ -5,15 +5,20 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafb);
 }
-:root {
+body {
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: var(--line-height);
   font-weight: var(--font-weight);
-
   color: var(--color);
   background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+}
 
+:root {
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: none;
@@ -374,6 +379,14 @@ button {
 
 .checkbox {
   margin: 0;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .section-title {
