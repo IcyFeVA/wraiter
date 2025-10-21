@@ -126,15 +126,15 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   };
 
-  const saveModelSelection = () => {
-    if (!selectedModel) {
-      setMessage({ type: 'error', text: 'Please select a model' });
-      return;
-    }
+  // const saveModelSelection = () => {
+  //   if (!selectedModel) {
+  //     setMessage({ type: 'error', text: 'Please select a model' });
+  //     return;
+  //   }
 
-    localStorage.setItem('selected_model', selectedModel);
-    setMessage({ type: 'success', text: 'Model selection saved!' });
-  };
+  //   localStorage.setItem('selected_model', selectedModel);
+  //   setMessage({ type: 'success', text: 'Model selection saved!' });
+  // };
 
   const clearSettings = () => {
     localStorage.removeItem('openrouter_api_key');
