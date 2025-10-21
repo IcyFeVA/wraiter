@@ -343,13 +343,14 @@ const Settings: React.FC<SettingsProps> = () => {
         <div className="select-container">
           <select
             value={theme}
-            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark')}
+            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton')}
             className="model-select"
           >
             <option value="NSX">NSX</option>
             <option value="Aqua">Aqua</option>
             <option value="AquaDark">Aqua Dark</option>
             <option value="Console">Console</option>
+            <option value="Abelton">Abelton</option>
           </select>
         </div>
       </div>

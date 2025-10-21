@@ -6,6 +6,7 @@ import "./themes/NSX.css";
 import "./themes/Aqua.css";
 import "./themes/AquaDark.css";
 import "./themes/Console.css";
+import "./themes/Abelton.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

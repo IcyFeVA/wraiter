@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { Store } from 'tauri-plugin-store-api';
 
-type Theme = 'NSX' | 'Aqua' | 'AquaDark';
+type Theme = 'NSX' | 'Aqua' | 'AquaDark' | 'Console' | 'Abelton';
 
 interface ThemeContextType {
   theme: Theme;
