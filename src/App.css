@@ -181,6 +181,7 @@ input, textarea {
   margin-bottom: 8px;
   flex-wrap: wrap;
   align-items: center;
+  padding-top: 8px;
 }
 
 .tone-selection-container {
@@ -287,7 +288,7 @@ input, textarea {
 }
 
 .settings-container {
-  padding: 8px 8px;
+  padding: 0 8px;
   margin: 0 auto;
   background: var(--settings-container-background-color);
   border: 1px solid var(--settings-container-border-color);
@@ -348,7 +349,6 @@ input, textarea {
 }
 
 .settings-section {
-  margin-bottom: 8px;
 }
 
 .spacer-16 {
@@ -356,7 +356,7 @@ input, textarea {
 }
 
 .setting-row {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .setting-label {
@@ -562,7 +562,7 @@ textarea {
 
 .danger-zone {
   border-top: 1px solid var(--danger-zone-border-top-color);
-  padding-top: 8px;
+  padding: 8px 0;
 }
 
 .danger-title {

@@ -212,112 +212,106 @@ const Overlay: React.FC<OverlayProps> = () => {
   ];
 
   return (
-    <div className="settings-container">
-      <div className="action-buttons-container">
-        <button
-          onClick={() => handleActionSelect('proofread')}
-          disabled={isLoading}
-          className={`action-button ${selectedAction === 'proofread' ? 'active' : ''}`}
-        >
-          <Edit3 size={12} />
-          Proofread
-        </button>
-
-        <button
-          onClick={() => handleActionSelect('tone')}
-          disabled={isLoading}
-          className={`action-button ${selectedAction === 'tone' ? 'active' : ''}`}
-        >
-          <MessageSquare size={12} />
-          Change Tone
-        </button>
-
-        <button
-          onClick={() => handleActionSelect('draft')}
-          disabled={isLoading}
-          className={`action-button ${selectedAction === 'draft' ? 'active' : ''}`}
-        >
-          <PenTool size={12} />
-          Draft
-        </button>
-      </div>
-
-      {selectedAction === 'tone' && (
-        <div className="tone-selection-container">
-          <label className="tone-label">Tone:</label>
-          <select
-            value={selectedTone}
-            onChange={(e) => setSelectedTone(e.target.value)}
-            className="model-select"
-          >
-            {toneOptions.map(tone => (
-              <option key={tone} value={tone}>
-                {tone.charAt(0).toUpperCase() + tone.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-
-      {selectedAction && (
-        <div className="send-button-container">
+    <div className="inner">
+      <div className="settings-container">
+        <div className="action-buttons-container">
           <button
-            onClick={handleSendToAI}
+            onClick={() => handleActionSelect('proofread')}
             disabled={isLoading}
-            className="send-button"
+            className={`action-button ${selectedAction === 'proofread' ? 'active' : ''}`}
+          >
+            <Edit3 size={12} />
+            Proofread
+          </button>
+          <button
+            onClick={() => handleActionSelect('tone')}
+            disabled={isLoading}
+            className={`action-button ${selectedAction === 'tone' ? 'active' : ''}`}
           >
             <MessageSquare size={12} />
-            Send to AI
+            Change Tone
+          </button>
+          <button
+            onClick={() => handleActionSelect('draft')}
+            disabled={isLoading}
+            className={`action-button ${selectedAction === 'draft' ? 'active' : ''}`}
+          >
+            <PenTool size={12} />
+            Draft
           </button>
         </div>
-      )}
-
-      <div className="input-container">
-        <label className="input-label">Input:</label>
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter text here or use selected text from clipboard..."
-          className="text-input"
-        />
-      </div>
-
-      {outputText && !(
-        selectedAction === 'proofread' ||
-        (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft'))
-      ) && (
-        <div className="output-container">
-          <div className="output-header">
-            <label className="output-label">Output:</label>
-            <button
-              onClick={copyToClipboard}
-              className={`copy-button ${copied ? 'copied' : ''}`}
+        {selectedAction === 'tone' && (
+          <div className="tone-selection-container">
+            <label className="tone-label">Tone:</label>
+            <select
+              value={selectedTone}
+              onChange={(e) => setSelectedTone(e.target.value)}
+              className="model-select"
             >
-              {copied ? <Check size={12} /> : <Copy size={12} />}
-              {copied ? 'Copied!' : 'Copy'}
+              {toneOptions.map(tone => (
+                <option key={tone} value={tone}>
+                  {tone.charAt(0).toUpperCase() + tone.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        {selectedAction && (
+          <div className="send-button-container">
+            <button
+              onClick={handleSendToAI}
+              disabled={isLoading}
+              className="send-button"
+            >
+              <MessageSquare size={12} />
+              Send to AI
             </button>
           </div>
+        )}
+        <div className="input-container">
+          <label className="input-label">Input:</label>
           <textarea
-            value={outputText}
-            readOnly
-            className="text-output"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder="Enter text here or use selected text from clipboard..."
+            className="text-input"
           />
         </div>
-      )}
-
-      {isLoading && (
-        <div className="loading-indicator">
-          <Loader2 size={16} className="spinner" />
-          <span className="loading-text">Processing with AI...</span>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
+        {outputText && !(
+          selectedAction === 'proofread' ||
+          (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft'))
+        ) && (
+          <div className="output-container">
+            <div className="output-header">
+              <label className="output-label">Output:</label>
+              <button
+                onClick={copyToClipboard}
+                className={`copy-button ${copied ? 'copied' : ''}`}
+              >
+                {copied ? <Check size={12} /> : <Copy size={12} />}
+                {copied ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
+            <textarea
+              value={outputText}
+              readOnly
+              className="text-output"
+            />
+          </div>
+        )}
+        {isLoading && (
+          <div className="loading-indicator">
+            <Loader2 size={16} className="spinner" />
+            <span className="loading-text">Processing with AI...</span>
+          </div>
+        )}
+        <style>{`
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        `}</style>
+      </div>
     </div>
   );
 };

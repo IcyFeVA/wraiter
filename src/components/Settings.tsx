@@ -217,6 +217,11 @@ const Settings: React.FC<SettingsProps> = () => {
           ) : null}
           {isLoadingModels ? "Loading Models..." : "Load Available Models"}
         </button>
+
+        {selectedModel && (<div style={{ marginTop: '4px' }}>
+          <strong>Current Model:</strong> {selectedModel}
+        </div>
+        )}
       </div>
 
       {/* Model Selection Section */}
@@ -226,7 +231,11 @@ const Settings: React.FC<SettingsProps> = () => {
           <div className="select-container">
             <select
               value={selectedModel}
-              onChange={(e) => setSelectedModel(e.target.value)}
+              onChange={(e) => {
+                setSelectedModel(e.target.value)
+                localStorage.setItem('selected_model', e.target.value);
+                setMessage({ type: 'success', text: 'Model selection saved!' });
+              }}
               className="model-select"
             >
               <option value="">Select a model...</option>
@@ -241,7 +250,7 @@ const Settings: React.FC<SettingsProps> = () => {
             </select>
           </div>
 
-          <button
+          {/* <button
             onClick={saveModelSelection}
             disabled={!selectedModel}
             className={
@@ -251,7 +260,7 @@ const Settings: React.FC<SettingsProps> = () => {
             }
           >
             Save Model Selection
-          </button>
+          </button> */}
         </div>
       )}
 
