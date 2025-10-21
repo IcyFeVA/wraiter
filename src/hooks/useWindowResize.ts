@@ -4,7 +4,7 @@ import { invoke } from '@tauri-apps/api/core';
 export const useWindowResize = (contentRef: React.RefObject<HTMLDivElement | null>) => {
   const updateWindowHeight = useCallback(async () => {
     if (contentRef.current) {
-      const height = Math.min((contentRef.current as HTMLDivElement).scrollHeight + 32, 700); // 32px for padding
+      const height = Math.min((contentRef.current as HTMLDivElement).scrollHeight, 700); // 32px for padding
       await invoke('resize_window', { height });
     }
   }, [contentRef]);
