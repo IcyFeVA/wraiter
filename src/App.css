@@ -80,7 +80,7 @@ textarea {
   color: var(--color);
   background: transparent;
   transition: all 0.3s ease;
-  min-height: 20px;
+  min-height: 24px;
 }
 
 button {
@@ -464,6 +464,7 @@ textarea {
   gap: 4px;
   font-size: var(--font-size);
   min-height: 20px;
+  border-radius: var(--button-border-radius1);
 }
 
 .save-key-button:hover {
@@ -491,6 +492,7 @@ textarea {
   gap: 4px;
   font-size: var(--font-size);
   min-height: 20px;
+  border-radius: var(--button-border-radius1);
 }
 
 .load-models-button:hover {
@@ -533,6 +535,7 @@ textarea {
   cursor: pointer;
   font-size: var(--font-size);
   min-height: 20px;
+  
 }
 
 .save-model-button:hover {
