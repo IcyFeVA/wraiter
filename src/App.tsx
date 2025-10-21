@@ -8,11 +8,11 @@ import { useTheme } from "./contexts/ThemeContext";
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings'>('main');
   const contentRef = useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
+  const { theme, isThemeLoaded } = useTheme();
   useWindowResize(contentRef);
 
   return (
-    <div id="app" ref={contentRef} className={`theme-${theme.toLowerCase()}`} style={{ overflow: 'auto'}}>
+    <div id="app" ref={contentRef} className={isThemeLoaded ? `theme-${theme.toLowerCase()}` : ''} style={{ overflow: 'auto'}}>
       <div className="inner">
         <div style={{ marginBottom: '8px' }}>
           <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>

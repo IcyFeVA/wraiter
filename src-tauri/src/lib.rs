@@ -3,6 +3,7 @@ use tauri::Manager;
 use serde::{Deserialize, Serialize};
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::{Code, Modifiers, ShortcutState};
+use tauri_plugin_store::{Store, StoreBuilder};
 
 #[derive(Serialize, Deserialize)]
 struct ProcessTextRequest {
@@ -197,6 +198,7 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
             greet,
             show_overlay,
