@@ -343,7 +343,7 @@ const Settings: React.FC<SettingsProps> = () => {
         <div className="select-container">
           <select
             value={theme}
-            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton')}
+            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass')}
             className="model-select"
           >
             <option value="NSX">NSX</option>
@@ -351,6 +351,7 @@ const Settings: React.FC<SettingsProps> = () => {
             <option value="AquaDark">Aqua Dark</option>
             <option value="Console">Console</option>
             <option value="Abelton">Abelton</option>
+            <option value="Lamasass">Lamasass</option>
           </select>
         </div>
       </div>
