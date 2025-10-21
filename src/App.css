@@ -26,11 +26,16 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+* {
+    transition: none !important;
+}
+
 #app {
   box-sizing: border-box;
-  padding: 0;
+  padding: 8px;
   margin: 0;
 }
+
 
 .logo {
   height: 6em;
@@ -79,7 +84,8 @@ textarea {
 }
 
 button {
-  cursor: pointer;
+  cursor: default;
+  border-radius: var(--button-border-radius1); 
 }
 
 button:hover {
@@ -97,6 +103,10 @@ button {
   outline: none;
 }
 
+input, textarea {
+  border-radius: var(--button-border-radius2);
+}
+
 #greet-input {
   margin-right: 5px;
 }
@@ -112,12 +122,14 @@ button {
   background: var(--active-tab-background-color);
   color: var(--active-tab-color);
   border: 1px solid var(--active-tab-border-color);
+  border-radius: var(--button-border-radius2);
 }
 
 .inactive-tab {
   background: var(--inactive-tab-background-color);
   color: var(--inactive-tab-color);
   border: 1px solid var(--inactive-tab-border-color);
+  border-radius: var(--button-border-radius2);  
 }
 
 .active-tab:hover,
@@ -133,26 +145,30 @@ button {
 }
 
 .overlay-container {
-  background: var(--overlay-container-background-color);
-  border: 1px solid var(--overlay-container-border-color);
+  /* background: var(--overlay-container-background-color); */
+  /* border: 1px solid var(--overlay-container-border-color); */
 }
 
 .action-button {
   background: var(--action-button-background-color);
   color: var(--action-button-color);
   border: 1px solid var(--action-button-border-color);
+  min-height: 24px;
+  gap: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .action-button.active {
   background: var(--action-button-active-background-color);
   color: var(--action-button-active-color);
-  border: 1px solid var(--action-button-active-border-color);
+  border: 1px solid var(--action-button-border-color);
 }
 
-.action-button:hover {
+/* .action-button:hover {
   background: var(--action-button-hover-background-color);
   border: 1px solid var(--action-button-hover-border-color);
-}
+} */
 
 .action-button:active {
   background: var(--action-button-active-background-color);
@@ -164,6 +180,7 @@ button {
   gap: 2px;
   margin-bottom: 8px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
 .tone-selection-container {
@@ -270,8 +287,7 @@ button {
 }
 
 .settings-container {
-  padding: 8px;
-  max-width: 800px;
+  padding: 8px 8px;
   margin: 0 auto;
   background: var(--settings-container-background-color);
   border: 1px solid var(--settings-container-border-color);
@@ -387,6 +403,11 @@ input[type="password"],
 input[type="number"] {
   width: 100%;
   box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 64px;
 }
 
 .section-title {

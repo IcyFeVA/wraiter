@@ -212,7 +212,7 @@ const Overlay: React.FC<OverlayProps> = () => {
   ];
 
   return (
-    <div className="overlay-container">
+    <div className="settings-container">
       <div className="action-buttons-container">
         <button
           onClick={() => handleActionSelect('proofread')}

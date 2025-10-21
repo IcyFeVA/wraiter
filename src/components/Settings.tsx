@@ -174,7 +174,7 @@ const Settings: React.FC<SettingsProps> = () => {
 
       {/* API Key Section */}
       <div className="settings-section">
-        <h3 className="section-title">OpenRouter API Key</h3>
+        <h3 className="section-title">OpenRouter API Key:</h3>
         <p className="api-key-description">
           Get your API key from{" "}
           <a
@@ -270,9 +270,9 @@ const Settings: React.FC<SettingsProps> = () => {
               value={maxTokens}
               onChange={(e) => setMaxTokens(e.target.value)}
               placeholder="2000"
-              min="1"
+              min="1000"
               max="10000"
-              className="settings-input"
+              className="model-select"
             />
           </div>
           <div className="setting-description">
@@ -289,7 +289,7 @@ const Settings: React.FC<SettingsProps> = () => {
             <select
               value={defaultTone}
               onChange={(e) => setDefaultTone(e.target.value)}
-              className="settings-select"
+              className="model-select"
             >
               <option value="professional">Professional</option>
               <option value="casual">Casual</option>
@@ -330,7 +330,7 @@ const Settings: React.FC<SettingsProps> = () => {
 
       {/* Theme Selection Section */}
       <div className="settings-section">
-        <h3 className="section-title">Theme</h3>
+        <h3 className="section-title">Theme:</h3>
         <div className="select-container">
           <select
             value={theme}

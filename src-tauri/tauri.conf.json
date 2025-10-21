@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "wraiter",
+  "productName": "NSX-T",
   "version": "1.0.0",
-  "identifier": "com.crushy.wraiter",
+  "identifier": "com.crushy.nsxt",
   "build": {
     "beforeDevCommand": "yarn dev",
     "devUrl": "http://localhost:1420",
@@ -13,15 +13,15 @@
     "windows": [
       {
         "label": "main",
-        "title": "wraiter",
+        "title": "NSX-T",
         "width": 500,
-        "height": 400,
+        "height": 200,
         "minWidth": 400,
-        "minHeight": 300,
+        "minHeight": 200,
         "decorations": false,
         "transparent": true,
         "alwaysOnTop": true,
-        "skipTaskbar": true,
+        "skipTaskbar": false,
         "center": true,
         "resizable": true,
         "focus": true

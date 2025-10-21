@@ -1,10 +1,12 @@
 .theme-nsx {
-  --font-family: 'monospace, Courier New', 'Consolas', 'Monaco', monospace;
+  --font-family: monospace, 'Courier New', 'Consolas', 'Monaco';
   --font-size: 11px;
   --line-height: 16px;
   --font-weight: 400;
   --color: #00ffff;
-  --background-color: #000000;
+  --background-color: #000d0d;
+  --button-border-radius1: 0;
+  --button-border-radius2: 0;
   --link-color: #007AFF;
   --link-hover-color: #0056CC;
   --border-color: #00ffff;
@@ -32,9 +34,9 @@
   --action-button-active-background-color: rgb(0, 255, 255);
   --action-button-active-color: #000505;
   --action-button-active-border-color: #00ffff;
-  --action-button-hover-background-color: rgba(0, 255, 255, 0.1);
+  --action-button-hover-background-color: inherit;
   --action-button-hover-border-color: #ff6600;
-  --action-button-active-background-color: rgba(255, 102, 0, 0.2);
+  --action-button-active-background-color: #00ffff;
   --action-button-active-border-color: #ff6600;
   --tone-select-background-color: transparent;
   --tone-select-color: #00ffff;

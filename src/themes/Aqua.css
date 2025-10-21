@@ -5,6 +5,8 @@
   --font-weight: 400;
   --color: #333;
   --background-color: #ECECEC;
+  --button-border-radius1: 4px;
+  --button-border-radius2: 0;  
   --link-color: #0066CC;
   --link-hover-color: #0052A3;
   --border-color: #A6A6A6;
@@ -13,7 +15,7 @@
   --button-active-border-color: #646464;
   --button-active-background-color: #E0E0E0;
   --drag-region-border-bottom-color: #C2C2C2;
-  --drag-region-background-color: #F0F0F0;
+  --drag-region-background-color: #ffffff;
   --active-tab-background-color: #D1E7FF;
   --active-tab-color: #000;
   --active-tab-border-color: #A6A6A6;
