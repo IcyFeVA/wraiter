@@ -1,6 +1,8 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use tauri::Manager;
 use serde::{Deserialize, Serialize};
+use tauri_plugin_autostart::ManagerExt;
+use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::{Code, Modifiers, ShortcutState};
 use tauri_plugin_store::{Store, StoreBuilder};
@@ -193,10 +195,22 @@ async fn resize_window(app: tauri::AppHandle, height: f64) -> Result<(), String>
     Ok(())
 }
 
+#[tauri::command]
+async fn set_autostart(app: tauri::AppHandle, enable: bool) -> Result<(), String> {
+    let autostart_manager = app.autostart();
+    if enable {
+        autostart_manager.enable().map_err(|e| e.to_string())?;
+    } else {
+        autostart_manager.disable().map_err(|e| e.to_string())?;
+    }
+    Ok(())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, Some(&["--flag-as-hidden"])))
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
@@ -206,9 +220,18 @@ pub fn run() {
             set_clipboard_text,
             fetch_openrouter_models,
             process_text_with_ai,
-            resize_window
+            resize_window,
+            set_autostart
         ])
         .setup(|app| {
+            let handle = app.handle().clone();
+            let mut _args = std::env::args();
+            if let Some(arg) = _args.find(|a| a == "--flag-as-hidden") {
+                if let Some(window) = handle.get_webview_window("main") {
+                    let _ = window.hide();
+                }
+            }
+
             // Register global shortcut for overlay (Ctrl+Shift+Alt+A)
             let app_handle = app.handle().clone();
             app.handle().plugin(
