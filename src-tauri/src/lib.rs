@@ -1,9 +1,12 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-use tauri::Manager;
 use serde::{Deserialize, Serialize};
+use tauri::Manager;
+use tauri::menu::{Menu, MenuItem};
+use tauri::tray::TrayIconBuilder;
+use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
-use tauri_plugin_global_shortcut::{Code, Modifiers, ShortcutState};
-use tauri_plugin_store::{Store, StoreBuilder};
+use tauri_plugin_global_shortcut::ShortcutState;
+use tauri_plugin_store::StoreBuilder;
 
 #[derive(Serialize, Deserialize)]
 struct ProcessTextRequest {
@@ -196,6 +199,10 @@ async fn resize_window(app: tauri::AppHandle, height: f64) -> Result<(), String>
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_autostart::init(
+            MacosLauncher::LaunchAgent,
+            Some(vec!["--flag1", "--flag2"]),
+        ))
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_store::Builder::default().build())
@@ -209,6 +216,47 @@ pub fn run() {
             resize_window
         ])
         .setup(|app| {
+            let show = MenuItem::with_id(app, "show", "Show UI", true, None::<&str>)?;
+            let startup = MenuItem::with_id(app, "startup", "Start on Boot", true, None::<&str>)?;
+            let exit = MenuItem::with_id(app, "exit", "Exit App", true, None::<&str>)?;
+            let menu = Menu::with_items(app, &[&show, &startup, &exit])?;
+            let autostart_manager = app.autolaunch();
+            if let Ok(is_enabled) = autostart_manager.is_enabled() {
+                if is_enabled {
+                    let _ = startup.set_text("Don't Start on Boot");
+                }
+            }
+            let startup_clone = startup.clone();
+            let _tray = TrayIconBuilder::new()
+                .menu(&menu)
+                .on_menu_event(move |app, event| {
+                    match event.id.as_ref() {
+                        "show" => {
+                            if let Some(window) = app.get_webview_window("main") {
+                                let _ = window.show();
+                                let _ = window.set_focus();
+                            }
+                        }
+                        "startup" => {
+                            let autostart_manager = app.autolaunch();
+                            if let Ok(is_enabled) = autostart_manager.is_enabled() {
+                                if is_enabled {
+                                    let _ = autostart_manager.disable();
+                                    let _ = startup_clone.set_text("Start on Boot");
+                                } else {
+                                    let _ = autostart_manager.enable();
+                                    let _ = startup_clone.set_text("Don't Start on Boot");
+                                }
+                            }
+                        }
+                        "exit" => {
+                            app.exit(0);
+                        }
+                        _ => {}
+                    }
+                })
+                .build(app)?;
+
             // Register global shortcut for overlay (Ctrl+Shift+Alt+A)
             let app_handle = app.handle().clone();
             app.handle().plugin(
@@ -224,6 +272,14 @@ pub fn run() {
                     })
                     .build(),
             )?;
+            let window = app.get_webview_window("main").unwrap();
+            let window_ = window.clone();
+            window.on_window_event(move |event| {
+                if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                    window_.hide().unwrap();
+                    api.prevent_close();
+                }
+            });
 
             Ok(())
         })
