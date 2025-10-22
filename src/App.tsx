@@ -4,6 +4,7 @@ import "./App.css";
 import Overlay from "./components/Overlay";
 import Settings from "./components/Settings";
 import { useTheme } from "./contexts/ThemeContext";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings'>('main');
@@ -72,7 +73,7 @@ function App() {
               </div>
             </div>
             <button
-              onClick={() => setCurrentView('settings')}
+              onClick={() => getCurrentWindow().hide()}
               style={{
                 fontSize: '11px',
                 padding: '2px 8px',
