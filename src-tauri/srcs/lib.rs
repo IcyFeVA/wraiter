@@ -4,17 +4,18 @@ use tauri::menu::{Menu, MenuItem};
 use tauri::tray::TrayIconBuilder;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
-use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent};
-use tauri_plugin_store::{StoreBuilder};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut};
+use tauri_plugin_store::{Store, StoreBuilder};
 use std::str::FromStr;
+use tauri::Wry;
 
 const SHORTCUT_KEY: &str = "shortcut";
 const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+Alt+A";
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
-    let mut store = StoreBuilder::new(app, "settings.json".into()).build().map_err(|e| e.to_string())?;
-    store.load().map_err(|e| e.to_string())?;
+    let mut store = StoreBuilder::new("settings.json").build(app.clone());
+    let _ = store.load();
     match store.get(SHORTCUT_KEY) {
         Some(shortcut) => Ok(shortcut.as_str().unwrap().to_string()),
         None => Ok(DEFAULT_SHORTCUT.to_string()),
@@ -33,9 +34,9 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
         .register(new_shortcut)
         .map_err(|e| e.to_string())?;
 
-    let mut store = StoreBuilder::new(app, "settings.json".into()).build().map_err(|e| e.to_string())?;
-    store.load().map_err(|e| e.to_string())?;
-    store.insert(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut)).map_err(|e| e.to_string())?;
+    let mut store = StoreBuilder::new("settings.json").build(app.clone());
+    let _ = store.load();
+    store.insert(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
     store.save().map_err(|e| e.to_string())?;
 
     Ok(())
@@ -237,8 +238,7 @@ pub fn run() {
             Some(vec!["--flag1", "--flag2"]),
         ))
         .plugin(tauri_plugin_opener::init())
-        .plugin(tauri_plugin_clipboard_manager::init())
-        .plugin(tauri_plugin_store::Builder::default().build())
+        .plugin(tauri_plugin_clipboard_.build())
         .invoke_handler(tauri::generate_handler![
             show_overlay,
             get_clipboard_text,
@@ -257,21 +257,19 @@ pub fn run() {
             let app_handle = app.handle().clone();
             tauri::async_runtime::spawn(async move {
                 let shortcut = get_shortcut(app_handle.clone()).unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
-                if let Err(e) = set_shortcut(app_handle.clone(), shortcut.clone()).await {
+                if let Err(e) = set_shortcut(app_handle.clone(), shortcut).await {
                     eprintln!("Failed to set initial shortcut: {}", e);
                 }
 
                 let app_handle_clone = app_handle.clone();
-                let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
-                    let app_handle_clone_clone = app.clone();
+                if let Err(e) = app_handle.global_shortcut().on_shortcut(move |_shortcut, _press_time| {
+                    let app_handle_clone_clone = app_handle_clone.clone();
                     tauri::async_runtime::spawn(async move {
                         if let Err(e) = show_overlay(app_handle_clone_clone).await {
                             eprintln!("Failed to show overlay: {}", e);
                         }
                     });
-                };
-
-                if let Err(e) = app_handle.global_shortcut().on_shortcut(Shortcut::from_str(&shortcut).unwrap(), show_overlay_callback) {
+                }) {
                      eprintln!("Failed to register shortcut handler: {}", e);
                 }
             });

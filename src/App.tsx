@@ -3,11 +3,12 @@ import { useWindowResize } from "./hooks/useWindowResize";
 import "./App.css";
 import Overlay from "./components/Overlay";
 import Settings from "./components/Settings";
+import AppSettings from "./components/AppSettings";
 import { useTheme } from "./contexts/ThemeContext";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 
 function App() {
-  const [currentView, setCurrentView] = useState<'main' | 'settings'>('main');
+  const [currentView, setCurrentView] = useState<'main' | 'settings' | 'appSettings'>('main');
   const contentRef = useRef<HTMLDivElement>(null);
   const { theme, isThemeLoaded } = useTheme();
   useWindowResize(contentRef);
@@ -38,6 +39,17 @@ function App() {
               }}
             >
               AI SETTINGS
+            </button>
+            <button
+              onClick={() => setCurrentView('appSettings')}
+              className={currentView === 'appSettings' ? 'active-tab' : 'inactive-tab'}
+              style={{
+                fontSize: '11px',
+                padding: '2px 8px',
+                minWidth: '50px',
+              }}
+            >
+              APP SETTINGS
             </button>
             {/* Draggable area to the right of AI settings button */}
             <div
@@ -88,6 +100,7 @@ function App() {
         </div>
         {currentView === 'main' && <Overlay />}
         {currentView === 'settings' && <Settings />}
+        {currentView === 'appSettings' && <AppSettings />}
       </div>
     </div>
   );
