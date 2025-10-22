@@ -69,9 +69,20 @@ function App() {
             >
               <div style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', display: 'flex', width: '100%', padding: '0 4px' }}>
                 <div style={{ fontSize: '12px', fontWeight: 'bold', fontFamily: 'monospace, Verdana' }}>NSX-T 1.0</div>
-                <div style={{ fontSize: '10px' }}>:::</div>
               </div>
             </div>
+            <button
+              onClick={() => setCurrentView('settings')}
+              style={{
+                fontSize: '11px',
+                padding: '2px 8px',
+              }}
+              title="Close"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
           </div>
         </div>
         {currentView === 'main' && <Overlay />}
