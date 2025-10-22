@@ -1,32 +1,11 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-use serde::{Deserialize, Serialize};
 use tauri::Manager;
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::TrayIconBuilder;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::ShortcutState;
-use tauri_plugin_store::StoreBuilder;
 
-#[derive(Serialize, Deserialize)]
-struct ProcessTextRequest {
-    text: String,
-    action: String,
-    model: String,
-    tone: Option<String>,
-    max_tokens: Option<u32>,
-}
-
-#[derive(Serialize, Deserialize)]
-struct ProcessTextResponse {
-    result: String,
-    success: bool,
-}
-
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
 
 #[tauri::command]
 async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
@@ -207,7 +186,6 @@ pub fn run() {
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
-            greet,
             show_overlay,
             get_clipboard_text,
             set_clipboard_text,
@@ -228,6 +206,7 @@ pub fn run() {
             }
             let startup_clone = startup.clone();
             let _tray = TrayIconBuilder::new()
+                .icon(app.default_window_icon().unwrap().clone())
                 .menu(&menu)
                 .on_menu_event(move |app, event| {
                     match event.id.as_ref() {
