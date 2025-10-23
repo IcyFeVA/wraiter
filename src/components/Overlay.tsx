@@ -27,15 +27,19 @@ const Overlay: React.FC<OverlayProps> = () => {
     setAutoCloseEnabled(savedAutoClose);
   }, []);
 
-  // Handle window focus to refresh clipboard content
+  // Handle window focus to refresh clipboard content (but only when not auto-closing)
   useEffect(() => {
     const handleFocus = () => {
-      loadClipboardText();
+      // Only reload clipboard if we're not in an auto-close scenario
+      // to prevent interference with the shortcut behavior
+      if (!autoCloseEnabled || selectedAction === 'proofread') {
+        loadClipboardText();
+      }
     };
 
     window.addEventListener('focus', handleFocus);
     return () => window.removeEventListener('focus', handleFocus);
-  }, []);
+  }, [autoCloseEnabled, selectedAction]);
 
   const loadClipboardText = async () => {
     try {
@@ -104,10 +108,16 @@ const Overlay: React.FC<OverlayProps> = () => {
         // Automatically copy result to clipboard to replace user's selection
         await invoke('set_clipboard_text', { text: result });
 
-        // Show result for 2 seconds, then hide window
+        // Show result for 2 seconds, then hide window using the new command
         setTimeout(async () => {
-          const appWindow = getCurrentWindow();
-          await appWindow.hide();
+          try {
+            await invoke('hide_overlay');
+          } catch (error) {
+            console.error('Failed to hide overlay:', error);
+            // Fallback to direct window hide
+            const appWindow = getCurrentWindow();
+            await appWindow.hide();
+          }
 
           // Show notification that text is ready to paste
           try {
@@ -134,10 +144,16 @@ const Overlay: React.FC<OverlayProps> = () => {
         // Automatically copy result to clipboard to replace user's selection
         await invoke('set_clipboard_text', { text: result });
 
-        // Show result for 2 seconds, then hide window
+        // Show result for 2 seconds, then hide window using the new command
         setTimeout(async () => {
-          const appWindow = getCurrentWindow();
-          await appWindow.hide();
+          try {
+            await invoke('hide_overlay');
+          } catch (error) {
+            console.error('Failed to hide overlay:', error);
+            // Fallback to direct window hide
+            const appWindow = getCurrentWindow();
+            await appWindow.hide();
+          }
 
           // Show notification that text is ready to paste
           try {

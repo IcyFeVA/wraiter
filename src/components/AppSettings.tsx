@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Key, Power, RotateCcw, Save } from 'lucide-react';
+import { Power, RotateCcw, Save } from 'lucide-react';
 
 const AppSettings: React.FC = () => {
   const [shortcut, setShortcut] = useState('');

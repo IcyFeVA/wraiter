@@ -7,9 +7,15 @@ use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent};
 use tauri_plugin_store::{StoreBuilder};
 use std::str::FromStr;
+use std::time::{Duration, Instant};
+use std::sync::Mutex;
+
 
 const SHORTCUT_KEY: &str = "shortcut";
 const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+Alt+A";
+
+// Global static for debouncing shortcut triggers
+static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
@@ -29,8 +35,27 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
 
     let new_shortcut = Shortcut::from_str(&shortcut).map_err(|e| e.to_string())?;
 
+    let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
+        // Debounce rapid shortcut triggers (ignore if triggered within 200ms)
+        if let Ok(mut last_trigger) = LAST_SHORTCUT_TRIGGER.lock() {
+            if let Some(last) = *last_trigger {
+                if last.elapsed() < Duration::from_millis(200) {
+                    return; // Ignore rapid successive triggers
+                }
+            }
+            *last_trigger = Some(Instant::now());
+        }
+
+        let app_handle_clone = app.clone();
+        tauri::async_runtime::spawn(async move {
+            if let Err(e) = show_overlay(app_handle_clone).await {
+                eprintln!("Failed to show overlay: {}", e);
+            }
+        });
+    };
+
     app.global_shortcut()
-        .register(new_shortcut)
+        .on_shortcut(new_shortcut, show_overlay_callback)
         .map_err(|e| e.to_string())?;
 
     let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
@@ -72,6 +97,16 @@ async fn show_overlay(app: tauri::AppHandle) -> Result<(), String> {
             window.center().map_err(|e| e.to_string())?;
             window.set_focus().map_err(|e| e.to_string())?;
         }
+    } else {
+        return Err("Main window not found".to_string());
+    }
+    Ok(())
+}
+
+#[tauri::command]
+async fn hide_overlay(app: tauri::AppHandle) -> Result<(), String> {
+    if let Some(window) = app.get_webview_window("main") {
+        window.hide().map_err(|e| e.to_string())?;
     } else {
         return Err("Main window not found".to_string());
     }
@@ -238,9 +273,11 @@ pub fn run() {
         ))
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_global_shortcut::Builder::new().build())
         .plugin(tauri_plugin_store::Builder::default().build())
         .invoke_handler(tauri::generate_handler![
             show_overlay,
+            hide_overlay,
             get_clipboard_text,
             set_clipboard_text,
             fetch_openrouter_models,
@@ -259,19 +296,6 @@ pub fn run() {
                 let shortcut = get_shortcut(app_handle.clone()).unwrap_or_else(|_| DEFAULT_SHORTCUT.to_string());
                 if let Err(e) = set_shortcut(app_handle.clone(), shortcut.clone()).await {
                     eprintln!("Failed to set initial shortcut: {}", e);
-                }
-
-                let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
-                    let app_handle_clone_clone = app.clone();
-                    tauri::async_runtime::spawn(async move {
-                        if let Err(e) = show_overlay(app_handle_clone_clone).await {
-                            eprintln!("Failed to show overlay: {}", e);
-                        }
-                    });
-                };
-
-                if let Err(e) = app_handle.global_shortcut().on_shortcut(Shortcut::from_str(&shortcut).unwrap(), show_overlay_callback) {
-                     eprintln!("Failed to register shortcut handler: {}", e);
                 }
             });
 
