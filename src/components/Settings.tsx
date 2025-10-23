@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Key, Loader2, Check, AlertCircle } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
 
 interface SettingsProps {}
 
@@ -12,7 +11,6 @@ interface Model {
 }
 
 const Settings: React.FC<SettingsProps> = () => {
-  const { theme, setTheme } = useTheme();
   const [apiKey, setApiKey] = useState('');
   const [models, setModels] = useState<Model[]>([]);
   const [selectedModel, setSelectedModel] = useState('');
@@ -20,7 +18,6 @@ const Settings: React.FC<SettingsProps> = () => {
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [maxTokens, setMaxTokens] = useState('2000');
   const [defaultTone, setDefaultTone] = useState('professional');
-  const [autoClose, setAutoClose] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -43,25 +40,18 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   }, [defaultTone, isLoaded]);
 
-  // Auto-save auto-close setting (only after initial load)
-  useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem('auto_close', autoClose.toString());
-    }
-  }, [autoClose, isLoaded]);
+
 
   const loadSettings = () => {
     const savedApiKey = localStorage.getItem('openrouter_api_key') || '';
     const savedModel = localStorage.getItem('selected_model') || '';
     const savedMaxTokens = localStorage.getItem('max_tokens') || '2000';
     const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
-    const savedAutoClose = localStorage.getItem('auto_close') !== 'false'; // Default to true
 
     setApiKey(savedApiKey);
     setSelectedModel(savedModel);
     setMaxTokens(savedMaxTokens);
     setDefaultTone(savedDefaultTone);
-    setAutoClose(savedAutoClose);
   };
 
   const saveApiKey = () => {
@@ -141,12 +131,10 @@ const Settings: React.FC<SettingsProps> = () => {
     localStorage.removeItem('selected_model');
     localStorage.removeItem('max_tokens');
     localStorage.removeItem('default_tone');
-    localStorage.removeItem('auto_close');
     setApiKey('');
     setSelectedModel('');
     setMaxTokens('2000');
     setDefaultTone('professional');
-    setAutoClose(true);
     setModels([]);
     setMessage({ type: 'success', text: 'Settings cleared!' });
   };
@@ -315,54 +303,18 @@ const Settings: React.FC<SettingsProps> = () => {
           </div>
         </div>
 
-        {/* Auto-close Setting */}
-        <div className="setting-row">
-          <label className="setting-label">
-            Auto-Close:
-          </label>
-          <div className="select-container">
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={autoClose}
-                onChange={(e) => setAutoClose(e.target.checked)}
-                className="checkbox"
-              />
-              <span>Close window after copying result (proofread always auto-closes)</span>
-            </label>
-          </div>
-          <div className="setting-description">
-            Automatically copy result to clipboard and hide window
-          </div>
-        </div>
+
       </div>
 
-      {/* Theme Selection Section */}
-      <div className="settings-section">
-        <h3 className="section-title">Theme:</h3>
-        <div className="select-container">
-          <select
-            value={theme}
-            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass')}
-            className="model-select"
-          >
-            <option value="NSX">NSX</option>
-            <option value="Aqua">Aqua</option>
-            <option value="AquaDark">Aqua Dark</option>
-            <option value="Console">Console</option>
-            <option value="Abelton">Abelton</option>
-            <option value="Lamasass">Lamasass</option>
-          </select>
-        </div>
-      </div>
+
 
       {/* Danger Zone */}
-      <div className="danger-zone">
+{/*       <div className="danger-zone">
         <h3 className="danger-title">Danger Zone</h3>
         <button onClick={clearSettings} className="clear-settings-button">
           Clear All Settings
         </button>
-      </div>
+      </div> */}
 
       <style>{`
         .spin {

@@ -1,23 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Power, RotateCcw, Save } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const AppSettings: React.FC = () => {
+  const { theme, setTheme } = useTheme();
   const [shortcut, setShortcut] = useState('');
   const [autostart, setAutostart] = useState(false);
+  const [autoClose, setAutoClose] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Load settings from backend when component mounts
   useEffect(() => {
     loadSettings();
+    setIsLoaded(true);
   }, []);
+
+
+
+
 
   const loadSettings = async () => {
     try {
       const savedShortcut = await invoke<string>('get_shortcut');
       const isAutostartEnabled = await invoke<boolean>('is_autostart_enabled');
+      const savedAutoClose = localStorage.getItem('auto_close') !== 'false'; // Default to true
       setShortcut(savedShortcut);
       setAutostart(isAutostartEnabled);
+      setAutoClose(savedAutoClose);
     } catch (error) {
       console.error('Failed to load app settings:', error);
       setMessage({ type: 'error', text: 'Failed to load settings' });
@@ -128,12 +139,12 @@ const AppSettings: React.FC = () => {
 
       {/* Autostart Section */}
       <div className="settings-section">
-        <h3 className="section-title">Application Startup</h3>
+        <h3 className="section-title">Autostart</h3>
         <div className="setting-row">
-          <label className="setting-label">
+          {/* <label className="setting-label">
             <Power size={14} style={{ marginRight: '8px' }} />
             Launch at login:
-          </label>
+          </label> */}
           <div className="select-container">
             <label className="checkbox-label">
               <input
@@ -148,6 +159,52 @@ const AppSettings: React.FC = () => {
           <div className="setting-description">
             Automatically start the application when you log in to your computer.
           </div>
+        </div>
+      </div>
+
+      {/* Auto-close Setting */}
+      <div className="settings-section">
+        <div className="setting-row">
+          <label className="setting-label">
+            Auto-Close:
+          </label>
+          <div className="select-container">
+            <label className="checkbox-label">
+              <input
+                type="checkbox"
+                checked={autoClose}
+                onChange={(e) => {
+                  const checked = e.target.checked;
+                  setAutoClose(checked);
+                  localStorage.setItem('auto_close', checked.toString());
+                }}
+                className="checkbox"
+              />
+              <span>Close window after copying result (proofread always auto-closes)</span>
+            </label>
+          </div>
+          <div className="setting-description">
+            Automatically copy result to clipboard and hide window
+          </div>
+        </div>
+      </div>
+
+      {/* Theme Selection Section */}
+      <div className="settings-section">
+        <h3 className="section-title">Theme:</h3>
+        <div className="select-container">
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass')}
+            className="model-select"
+          >
+            <option value="NSX">NSX</option>
+            <option value="Aqua">Aqua</option>
+            <option value="AquaDark">Aqua Dark</option>
+            <option value="Console">Console</option>
+            <option value="Abelton">Abelton</option>
+            <option value="Lamasass">Lamasass</option>
+          </select>
         </div>
       </div>
     </div>

@@ -41,6 +41,19 @@ const Overlay: React.FC<OverlayProps> = () => {
     return () => window.removeEventListener('focus', handleFocus);
   }, [autoCloseEnabled, selectedAction]);
 
+  // Reload auto-close setting on window focus
+  useEffect(() => {
+    const handleFocus = () => {
+      const savedAutoClose = localStorage.getItem('auto_close') !== 'false';
+      setAutoCloseEnabled(savedAutoClose);
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
+  }, []);
+
+
+
   const loadClipboardText = async () => {
     try {
       const clipboardText = await invoke<string>('get_clipboard_text');
