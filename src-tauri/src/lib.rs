@@ -13,8 +13,8 @@ const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+Alt+A";
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
-    let mut store = StoreBuilder::new(app, "settings.json".into()).build().map_err(|e| e.to_string())?;
-    store.load().map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
     match store.get(SHORTCUT_KEY) {
         Some(shortcut) => Ok(shortcut.as_str().unwrap().to_string()),
         None => Ok(DEFAULT_SHORTCUT.to_string()),
@@ -33,9 +33,9 @@ async fn set_shortcut(app: tauri::AppHandle, shortcut: String) -> Result<(), Str
         .register(new_shortcut)
         .map_err(|e| e.to_string())?;
 
-    let mut store = StoreBuilder::new(app, "settings.json".into()).build().map_err(|e| e.to_string())?;
-    store.load().map_err(|e| e.to_string())?;
-    store.insert(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut)).map_err(|e| e.to_string())?;
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    store.set(SHORTCUT_KEY.to_string(), serde_json::Value::String(shortcut));
     store.save().map_err(|e| e.to_string())?;
 
     Ok(())
@@ -261,7 +261,6 @@ pub fn run() {
                     eprintln!("Failed to set initial shortcut: {}", e);
                 }
 
-                let app_handle_clone = app_handle.clone();
                 let show_overlay_callback = move |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
                     let app_handle_clone_clone = app.clone();
                     tauri::async_runtime::spawn(async move {
