@@ -126,18 +126,18 @@ const Settings: React.FC<SettingsProps> = () => {
   //   setMessage({ type: 'success', text: 'Model selection saved!' });
   // };
 
-  const clearSettings = () => {
-    localStorage.removeItem('openrouter_api_key');
-    localStorage.removeItem('selected_model');
-    localStorage.removeItem('max_tokens');
-    localStorage.removeItem('default_tone');
-    setApiKey('');
-    setSelectedModel('');
-    setMaxTokens('2000');
-    setDefaultTone('professional');
-    setModels([]);
-    setMessage({ type: 'success', text: 'Settings cleared!' });
-  };
+  // const clearSettings = () => {
+  //   localStorage.removeItem('openrouter_api_key');
+  //   localStorage.removeItem('selected_model');
+  //   localStorage.removeItem('max_tokens');
+  //   localStorage.removeItem('default_tone');
+  //   setApiKey('');
+  //   setSelectedModel('');
+  //   setMaxTokens('2000');
+  //   setDefaultTone('professional');
+  //   setModels([]);
+  //   setMessage({ type: 'success', text: 'Settings cleared!' });
+  // };
 
   return (
     <div className="settings-container">

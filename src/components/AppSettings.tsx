@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { Power, RotateCcw, Save } from 'lucide-react';
+import { RotateCcw, Save } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const AppSettings: React.FC = () => {
@@ -13,8 +13,10 @@ const AppSettings: React.FC = () => {
 
   // Load settings from backend when component mounts
   useEffect(() => {
-    loadSettings();
-    setIsLoaded(true);
+    if(isLoaded) {
+      loadSettings();
+      setIsLoaded(true);
+    }
   }, []);
 
 
