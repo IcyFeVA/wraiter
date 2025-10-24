@@ -8,15 +8,11 @@ const AppSettings: React.FC = () => {
   const [shortcut, setShortcut] = useState('');
   const [autostart, setAutostart] = useState(false);
   const [autoClose, setAutoClose] = useState(true);
-  const [isLoaded, setIsLoaded] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Load settings from backend when component mounts
   useEffect(() => {
-    if(isLoaded) {
-      loadSettings();
-      setIsLoaded(true);
-    }
+    loadSettings();
   }, []);
 
 
@@ -27,7 +23,7 @@ const AppSettings: React.FC = () => {
     try {
       const savedShortcut = await invoke<string>('get_shortcut');
       const isAutostartEnabled = await invoke<boolean>('is_autostart_enabled');
-      const savedAutoClose = localStorage.getItem('auto_close') !== 'false'; // Default to true
+      const savedAutoClose = await invoke<boolean>('get_auto_close');
       setShortcut(savedShortcut);
       setAutostart(isAutostartEnabled);
       setAutoClose(savedAutoClose);
@@ -175,10 +171,16 @@ const AppSettings: React.FC = () => {
               <input
                 type="checkbox"
                 checked={autoClose}
-                onChange={(e) => {
+                onChange={async (e) => {
                   const checked = e.target.checked;
                   setAutoClose(checked);
-                  localStorage.setItem('auto_close', checked.toString());
+                  try {
+                    await invoke('set_auto_close', { autoClose: checked });
+                    setMessage({ type: 'success', text: 'Auto-close setting saved' });
+                  } catch (error) {
+                    console.error('Failed to save auto-close setting:', error);
+                    setMessage({ type: 'error', text: 'Failed to save auto-close setting' });
+                  }
                 }}
                 className="checkbox"
               />

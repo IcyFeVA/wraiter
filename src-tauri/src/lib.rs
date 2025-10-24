@@ -12,6 +12,7 @@ use std::sync::Mutex;
 
 
 const SHORTCUT_KEY: &str = "shortcut";
+const AUTO_CLOSE_KEY: &str = "auto_close";
 const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+Alt+A";
 
 // Global static for debouncing shortcut triggers
@@ -84,6 +85,25 @@ async fn disable_autostart(app: tauri::AppHandle) -> Result<(), String> {
 #[tauri::command]
 async fn is_autostart_enabled(app: tauri::AppHandle) -> Result<bool, String> {
     app.autolaunch().is_enabled().map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn get_auto_close(app: tauri::AppHandle) -> Result<bool, String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    match store.get(AUTO_CLOSE_KEY) {
+        Some(auto_close) => Ok(auto_close.as_bool().unwrap_or(true)),
+        None => Ok(true), // Default to true
+    }
+}
+
+#[tauri::command]
+async fn set_auto_close(app: tauri::AppHandle, auto_close: bool) -> Result<(), String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    store.set(AUTO_CLOSE_KEY.to_string(), serde_json::Value::Bool(auto_close));
+    store.save().map_err(|e| e.to_string())?;
+    Ok(())
 }
 
 #[tauri::command]
@@ -288,7 +308,9 @@ pub fn run() {
             reset_shortcut,
             enable_autostart,
             disable_autostart,
-            is_autostart_enabled
+            is_autostart_enabled,
+            get_auto_close,
+            set_auto_close
         ])
         .setup(|app| {
             let app_handle = app.handle().clone();
