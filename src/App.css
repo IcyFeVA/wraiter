@@ -773,11 +773,12 @@ input, textarea {
 .settings__current-model {
   margin-top: 4px;
   padding: 4px 8px;
-  background: var(--current-settings-display-background-color);
-  border: 1px solid var(--current-settings-display-border-color);
+  /* background: var(--current-settings-display-background-color); */
+  border: 1px dashed var(--current-settings-display-border-color);
   font-size: var(--font-size);
   color: var(--current-settings-display-color);
   border-radius: var(--button-border-radius1);
+  opacity: 0.7;
 }
 
 .settings__select-container {

@@ -10,6 +10,7 @@ import "./themes/Abelton.css";
 import "./themes/Lamasass.css";
 import "./themes/ICQ.css";
 import "./themes/Ampwin.css";
+import "./themes/Maverick.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

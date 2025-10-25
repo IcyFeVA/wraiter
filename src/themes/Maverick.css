@@ -1,0 +1,245 @@
+/* ========================================
+   Maverick Theme - Formula 1 Premium Dark UI
+   Sporty, Masculine, Premium Racing Aesthetic
+   ======================================== */
+
+/* Base Typography & Layout */
+.theme-maverick {
+  /* Typography */
+  --font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size: 12px;
+  --line-height: 16px;
+  --font-weight: 500;
+
+  /* Base Colors - F1 Premium Palette */
+  --color: #ffffff;                    /* Clean white primary text */
+  --background-color: #0a0a0a;         /* Premium black background */
+  --border-color: #e30613;             /* Ferrari red borders */
+
+  /* Border Radius - Modern sporty curves */
+  --button-border-radius1: 4px;        /* Subtle curves for buttons */
+  --button-border-radius2: 4px;        /* Subtle curves for inputs */
+
+  /* Links */
+  --link-color: #e30613;               /* F1 red links */
+  --link-hover-color: #ff1a2a;         /* Brighter red on hover */
+}
+
+/* ========================================
+   Navigation & App Structure
+   ======================================== */
+
+.theme-maverick {
+  /* Drag Region - Premium dark */
+  --drag-region-border-bottom-color: #e3061333;  /* Semi-transparent F1 red */
+  --drag-region-background-color: #0a0a0a;       /* Premium black background */
+
+  /* Navigation Tabs - Sporty precision */
+  --active-tab-background-color: #1a1a1a;        /* Dark gray active tab */
+  --active-tab-color: #ffffff;                   /* Clean white text */
+  --active-tab-border-color: #e30613;            /* F1 red border */
+
+  --inactive-tab-background-color: rgba(227, 6, 19, 0.08);  /* Very subtle red */
+  --inactive-tab-color: #ffffff;                            /* White text */
+  --inactive-tab-border-color: #333333;                     /* Dark gray border */
+
+  /* Tab Interactions */
+  --tab-hover-background-color: rgba(227, 6, 19, 0.15);     /* Subtle red hover */
+  --tab-hover-border-color: #e30613;                        /* F1 red hover border */
+  --tab-active-background-color: rgba(227, 6, 19, 0.1);     /* Red active state */
+  --tab-active-border-color: #e30613;                       /* F1 red border */
+}
+
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
+
+.theme-maverick {
+  /* Button Base */
+  --button-hover-border-color: #ff1a2a;               /* Bright F1 red hover border */
+  --button-hover-background-color: rgba(227, 6, 19, 0.08);  /* Subtle red hover */
+  --button-active-border-color: #e30613;                     /* F1 red active border */
+  --button-active-background-color: rgba(227, 6, 19, 0.15); /* Red active background */
+
+  /* Action Buttons (Proofread, Tone, Draft) */
+  --action-button-background-color: #0a0a0a;                 /* Dark background */
+  --action-button-color: #ffffff;                            /* Clean white text */
+  --action-button-border-color: #e30613;                     /* F1 red border */
+  --action-button-active-background-color: #e30613;          /* Full F1 red when active */
+  --action-button-active-color: #ffffff;                     /* White text when active */
+  --action-button-active-border-color: #e30613;              /* F1 red border when active */
+  --action-button-hover-background-color: rgba(227, 6, 19, 0.08); /* Subtle red hover */
+  --action-button-hover-border-color: #ff1a2a;               /* Bright red hover border */
+
+  /* Send Button */
+  --send-button-background-color: #0a0a0a;                   /* Dark background */
+  --send-button-color: #ffffff;                              /* Clean white text */
+  --send-button-border-color: #e30613;                       /* F1 red border */
+  --send-button-hover-background-color: rgba(227, 6, 19, 0.08);  /* Subtle red hover */
+  --send-button-hover-border-color: #ff1a2a;                     /* Bright red hover border */
+  --send-button-active-background-color: rgba(227, 6, 19, 0.15); /* Red active */
+  --send-button-active-border-color: #e30613;                    /* F1 red active border */
+
+  /* Copy Button */
+  --copy-button-background-color: transparent;                   /* Transparent background */
+  --copy-button-color: #ffffff;                                  /* Clean white text */
+  --copy-button-border-color: #e30613;                           /* F1 red border */
+  --copy-button-copied-background-color: rgba(227, 6, 19, 0.15); /* Red when copied */
+  --copy-button-copied-color: #ffffff;                           /* White text when copied */
+  --copy-button-copied-border-color: #e30613;                    /* F1 red border when copied */
+  --copy-button-hover-background-color: rgba(227, 6, 19, 0.08);  /* Subtle red hover */
+  --copy-button-hover-border-color: #ff1a2a;                     /* Bright red hover border */
+  --copy-button-active-background-color: rgba(227, 6, 19, 0.15); /* Red active */
+  --copy-button-active-border-color: #e30613;                    /* F1 red active border */
+
+  /* Settings Buttons */
+  --save-key-button-background-color: #0a0a0a;                   /* Dark background */
+  --save-key-button-color: #ffffff;                              /* Clean white text */
+  --save-key-button-border-color: #e30613;                       /* F1 red border */
+  --save-key-button-hover-border-color: #ff1a2a;                 /* Bright red hover border */
+  --save-key-button-active-background-color: rgba(227, 6, 19, 0.15); /* Red active */
+  --save-key-button-active-border-color: #e30613;                /* F1 red active border */
+
+  --load-models-button-background-color: transparent;                /* Transparent background */
+  --load-models-button-color: #ffffff;                               /* Clean white text */
+  --load-models-button-border-color: #e30613;                        /* F1 red border */
+  --load-models-button-hover-background-color: rgba(227, 6, 19, 0.08); /* Subtle red hover */
+  --load-models-button-hover-border-color: #ff1a2a;                  /* Bright red hover border */
+  --load-models-button-active-background-color: rgba(227, 6, 19, 0.15); /* Red active */
+  --load-models-button-active-border-color: #e30613;                 /* F1 red active border */
+  --load-models-button-disabled-background-color: rgba(51, 51, 51, 0.3); /* Dark gray disabled */
+  --load-models-button-disabled-color: #666666;                          /* Gray disabled text */
+  --load-models-button-disabled-border-color: #666666;                   /* Gray disabled border */
+
+  /* Icons */
+  --button-icon-color: #ffffff;  /* Clean white icons */
+}
+
+/* ========================================
+   Form Elements & Inputs
+   ======================================== */
+
+.theme-maverick {
+  /* Tone Selection */
+  --tone-select-background-color: rgba(227, 6, 19, 0.05);  /* Very subtle F1 red background */
+  --tone-select-color: #ffffff;                            /* Clean white text */
+  --tone-select-border-color: #e30613;                     /* F1 red border */
+
+  /* Text Inputs & Textareas */
+  --text-input-background-color: rgba(227, 6, 19, 0.03);   /* Very subtle red background */
+  --text-input-color: #ffffff;                             /* Clean white text */
+  --text-input-border-color: #e30613;                      /* F1 red border */
+  --text-output-background-color: rgba(227, 6, 19, 0.03);  /* Very subtle red background */
+  --text-output-color: #ffffff;                            /* Clean white text */
+  --text-output-border-color: #e30613;                     /* F1 red border */
+
+  /* API Key Input */
+  --api-key-input-background-color: rgba(227, 6, 19, 0.03); /* Very subtle red background */
+  --api-key-input-color: #ffffff;                            /* Clean white text */
+  --api-key-input-border-color: #e30613;                     /* F1 red border */
+
+  /* Model Selection */
+  --model-select-background-color: rgba(227, 6, 19, 0.03);  /* Very subtle red background */
+  --model-select-color: #ffffff;                             /* Clean white text */
+  --model-select-border-color: #e30613;                      /* F1 red border */
+}
+
+/* ========================================
+   Labels & Text Elements
+   ======================================== */
+
+.theme-maverick {
+  /* Labels */
+  --input-label-color: #ffffff;   /* Clean white labels */
+  --output-label-color: #ffffff;  /* Clean white labels */
+  --section-title-color: #ffffff; /* Clean white section titles */
+
+  /* Descriptions */
+  --api-key-description-color: #cccccc;  /* Light gray description text */
+  --api-key-link-color: #e30613;         /* F1 red links */
+  --api-key-link-hover-color: #ff1a2a;   /* Bright F1 red hover links */
+}
+
+/* ========================================
+   Containers & Layout
+   ======================================== */
+
+.theme-maverick {
+  /* Overlay Container */
+  --overlay-container-background-color: rgba(227, 6, 19, 0.03); /* Very subtle F1 red background */
+  --overlay-container-border-color: #e30613;                     /* F1 red border */
+
+  /* Settings Container */
+  --settings-container-background-color: rgba(227, 6, 19, 0.03); /* Very subtle F1 red background */
+  --settings-container-border-color: #e30613;                     /* F1 red border */
+
+  /* Current Settings Display */
+  --current-settings-display-background-color: rgba(227, 6, 19, 0.03); /* Very subtle F1 red background */
+  --current-settings-display-border-color: #e30613;                     /* F1 red border */
+  --current-settings-display-color: #ffffff;                            /* Clean white text */
+}
+
+/* ========================================
+   Loading & Status Elements
+   ======================================== */
+
+.theme-maverick {
+  /* Loading Indicator */
+  --loading-indicator-background-color: rgba(227, 6, 19, 0.03); /* Very subtle F1 red background */
+  --loading-indicator-border-color: #e30613;                     /* F1 red border */
+  --spinner-color: #e30613;                                      /* F1 red spinner */
+  --loading-text-color: #ffffff;                                 /* Clean white loading text */
+
+  /* Message Displays */
+  --message-display-success-background-color: rgba(227, 6, 19, 0.08);  /* F1 red success background */
+  --message-display-success-color: #ffffff;                          /* Clean white success text */
+  --message-display-success-border-color: #e30613;                   /* F1 red success border */
+  --message-display-error-background-color: rgba(227, 6, 19, 0.08);   /* F1 red error background */
+  --message-display-error-color: #ffffff;                             /* Clean white error text */
+  --message-display-error-border-color: #e30613;                      /* F1 red error border */
+
+  /* Message Icons */
+  --message-icon-success-color: #e30613;  /* F1 red success icon */
+  --message-icon-error-color: #e30613;    /* F1 red error icon */
+}
+
+/* ========================================
+   Scrollbars
+   ======================================== */
+
+.theme-maverick {
+  /* Scrollbar Track */
+  --scrollbar-track-background-color: #0a0a0a;                       /* Dark track background */
+  --scrollbar-track-border-color: #e30613;                           /* F1 red track border */
+
+  /* Scrollbar Thumb */
+  --scrollbar-thumb-background-color: rgba(227, 6, 19, 0.2);        /* Semi-transparent F1 red thumb */
+  --scrollbar-thumb-border-color: #e30613;                           /* F1 red thumb border */
+  --scrollbar-thumb-hover-background-color: rgba(227, 6, 19, 0.3);  /* More opaque red on hover */
+  --scrollbar-thumb-hover-border-color: #ff1a2a;                     /* Bright red hover border */
+  --scrollbar-thumb-active-background-color: rgba(227, 6, 19, 0.4); /* Red active background */
+  --scrollbar-thumb-active-border-color: #e30613;                    /* F1 red active border */
+
+  /* Scrollbar Corner & Buttons */
+  --scrollbar-corner-background-color: #0a0a0a;                      /* Dark corner background */
+  --scrollbar-corner-border-color: #e30613;                          /* F1 red corner border */
+  --scrollbar-button-background-color: rgba(227, 6, 19, 0.05);       /* Subtle red button background */
+  --scrollbar-button-border-color: #e30613;                          /* F1 red button border */
+
+  /* Firefox Scrollbar */
+  --scrollbar-color: rgba(227, 6, 19, 0.2) #0a0a0a;  /* F1 red thumb, dark track */
+}
+
+/* ========================================
+   Select Options
+   ======================================== */
+
+.theme-maverick {
+  /* Select Dropdown Options */
+  --select-option-background-color: #0a0a0a;                         /* Dark option background */
+  --select-option-color: #ffffff;                                    /* Clean white option text */
+  --select-option-hover-background-color: rgba(227, 6, 19, 0.08);    /* Subtle F1 red hover background */
+  --select-option-hover-color: #ffffff;                              /* Clean white hover text */
+  --select-option-checked-background-color: rgba(227, 6, 19, 0.15);  /* F1 red checked background */
+  --select-option-checked-color: #ffffff;                            /* Clean white checked text */
+}
