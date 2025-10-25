@@ -1,3 +1,8 @@
+*[data-tauri-drag-region] {
+  app-region: drag;
+  -webkit-app-region: drag;
+}
+
 .logo.vite:hover {
   filter: drop-shadow(0 0 2em #747bff);
 }
@@ -188,9 +193,10 @@ input, textarea {
 }
 
 .drag-region {
+  /* Use the webkit prefixed property for macOS draggable regions. Remove the
+     non-standard `app-region` that caused the linter warning. */
   -webkit-app-region: drag;
-  app-region: drag;
-  height: 20px;
+  height: 20px; /* slightly larger hit area for easier dragging on macOS */
   flex: 1;
   cursor: grab;
   display: flex;
@@ -201,15 +207,20 @@ input, textarea {
   background-color: var(--drag-region-background-color);
   user-select: none;
   -webkit-user-select: none;
+  z-index: 1; /* keep it above background overlays */
+  pointer-events: auto; /* ensure it receives pointer events */
 }
 
+/* Keep the inner content draggable too so the full area works when
+   the user clicks the title/version text. */
 .drag-region__content {
+  -webkit-app-region: drag;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
   width: 100%;
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
 .drag-region__version {
@@ -220,6 +231,19 @@ input, textarea {
 .drag-region__title {
   font-size: 12px;
   opacity: 0.7;
+}
+
+/* Any interactive controls that sit inside (or overlap) the drag region
+   must be explicitly opt-out from drag so they remain clickable on macOS. */
+.drag-region button,
+.drag-region a,
+.drag-region input,
+.drag-region textarea,
+.drag-region .nav-tab,
+.drag-region .nav-tab--close,
+.drag-region svg,
+.drag-region .nav-tab__icon {
+  -webkit-app-region: no-drag;
 }
 
 .app-content {

@@ -47,8 +47,19 @@ function App() {
             className="drag-region"
             data-tauri-drag-region="true"
             onMouseDown={(e) => {
+              // Try to use the native startDragging API as a fallback for macOS
+              // if CSS-based drag regions aren't working. We keep the cursor
+              // styling for UX and swallow errors if the API isn't available.
               if (e.button === 0) {
                 e.currentTarget.style.cursor = 'grabbing';
+                try {
+                  // getCurrentWindow().startDragging() returns a Promise
+                  // and requires the `core:window:allow-start-dragging` permission
+                  // which is enabled in `src-tauri/capabilities/default.json`.
+                  getCurrentWindow().startDragging().catch(() => {});
+                } catch (err) {
+                  // ignore if not available in some environments
+                }
               }
             }}
             onMouseUp={(e) => {
