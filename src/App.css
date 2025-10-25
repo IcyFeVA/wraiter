@@ -36,6 +36,10 @@ body {
   margin: 0;
 }
 
+p, span, h1, h2, h3, h4, h5, h6, strong, label {
+  user-select: none;
+  -webkit-user-select: none;
+}
 
 .logo {
   height: 6em;
@@ -84,6 +88,9 @@ textarea {
 }
 
 button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   cursor: default;
   border-radius: var(--button-border-radius1); 
 }
@@ -407,7 +414,7 @@ input[type="number"] {
 
 textarea {
   resize: vertical;
-  min-height: 64px;
+  min-height: 128px;
 }
 
 .section-title {

@@ -10,7 +10,7 @@ use std::str::FromStr;
 use tauri::Wry;
 
 const SHORTCUT_KEY: &str = "shortcut";
-const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+Alt+A";
+const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+A";
 
 #[tauri::command]
 fn get_shortcut(app: tauri::AppHandle) -> Result<String, String> {
@@ -278,13 +278,6 @@ pub fn run() {
             let startup = MenuItem::with_id(app, "startup", "Start on Boot", true, None::<&str>)?;
             let exit = MenuItem::with_id(app, "exit", "Exit App", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&show, &startup, &exit])?;
-            let autostart_manager = app.autolaunch();
-            if let Ok(is_enabled) = autostart_manager.is_enabled() {
-                if is_enabled {
-                    let _ = startup.set_text("Don't Start on Boot");
-                }
-            }
-            let startup_clone = startup.clone();
             let _tray = TrayIconBuilder::new()
                 .icon(app.default_window_icon().unwrap().clone())
                 .menu(&menu)
@@ -301,10 +294,8 @@ pub fn run() {
                             if let Ok(is_enabled) = autostart_manager.is_enabled() {
                                 if is_enabled {
                                     let _ = autostart_manager.disable();
-                                    let _ = startup_clone.set_text("Start on Boot");
                                 } else {
                                     let _ = autostart_manager.enable();
-                                    let _ = startup_clone.set_text("Don't Start on Boot");
                                 }
                             }
                         }

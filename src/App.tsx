@@ -6,6 +6,7 @@ import Settings from "./components/Settings";
 import AppSettings from "./components/AppSettings";
 import { useTheme } from "./contexts/ThemeContext";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { AirVent, AppWindow, BotMessageSquare, Cpu, Home } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings' | 'appSettings'>('main');
@@ -24,9 +25,10 @@ function App() {
               style={{
                 fontSize: '11px',
                 padding: '2px 8px',
-                minWidth: '50px',
               }}
             >
+            <Home size={12} className="button-icon" />
+
               MAIN
             </button>
             <button
@@ -35,10 +37,11 @@ function App() {
               style={{
                 fontSize: '11px',
                 padding: '2px 8px',
-                minWidth: '50px',
               }}
             >
-              AI SETTINGS
+              <Cpu size={12} className="button-icon" />
+
+              AI
             </button>
             <button
               onClick={() => setCurrentView('appSettings')}
@@ -46,10 +49,11 @@ function App() {
               style={{
                 fontSize: '11px',
                 padding: '2px 8px',
-                minWidth: '50px',
               }}
             >
-              APP SETTINGS
+            <AppWindow size={12} className="button-icon" />
+
+              APP
             </button>
             {/* Draggable area to the right of AI settings button */}
             <div
@@ -61,7 +65,7 @@ function App() {
                 flex: 1,
                 WebkitUserSelect: 'none',
                 userSelect: 'none',
-                border: '1px solid #00ffff3b',
+                // border: '1px solid #00ffff3b',
                 marginLeft: '4px',
                 alignItems: 'center',
                 display: 'flex',
@@ -81,11 +85,13 @@ function App() {
               }}
             >
               <div style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', display: 'flex', width: '100%', padding: '0 4px' }}>
-                <div style={{ fontSize: '12px', fontWeight: 'bold', fontFamily: 'monospace, Verdana' }}>NSX-T 1.0</div>
+                <div style={{ fontSize: '12px', opacity: 0.0 }}>1.0</div>
+                <div style={{ fontSize: '12px', opacity: 0.7 }}>Starstrike 1.0</div>
               </div>
             </div>
             <button
               onClick={() => getCurrentWindow().hide()}
+              className="inactive-tab"
               style={{
                 fontSize: '11px',
                 padding: '2px 8px',

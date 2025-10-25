@@ -31,9 +31,7 @@ const Overlay: React.FC<OverlayProps> = () => {
     const handleFocus = () => {
       // Only reload clipboard if we're not in an auto-close scenario
       // to prevent interference with the shortcut behavior
-      if (!autoCloseEnabled || selectedAction === 'proofread') {
-        loadClipboardText();
-      }
+      loadClipboardText();
     };
 
     window.addEventListener('focus', handleFocus);

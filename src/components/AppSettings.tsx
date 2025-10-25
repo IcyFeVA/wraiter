@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { RotateCcw, Save } from 'lucide-react';
+import { AppWindowMac, BotMessageSquare } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const AppSettings: React.FC = () => {
@@ -110,9 +110,10 @@ const AppSettings: React.FC = () => {
       {/* Keyboard Shortcut Section */}
       <div className="settings-section">
         <h3 className="section-title">Global Keyboard Shortcut</h3>
-        <p className="setting-description">
-          Set the key combination to show the application overlay.
-        </p>
+        {/* <p className="setting-description">
+            <code>Ctrl + Shift + Alt + A</code> (default Window/Linux)<br/><code>Command + Shift + Option + A</code> (default Mac)
+
+        </p> */}
         <div className="input-row">
           <div className="input-container">
             <input
@@ -125,14 +126,14 @@ const AppSettings: React.FC = () => {
             />
           </div>
           <button onClick={saveShortcut} className="save-key-button">
-            <Save size={12} className="button-icon" />
+            {/* <BotMessageSquare size={12} className="button-icon" /> */}
             Save
           </button>
-          <button onClick={resetShortcut} className="clear-settings-button" style={{ marginLeft: '8px' }}>
-            <RotateCcw size={12} className="button-icon" />
+          <button onClick={resetShortcut} className="save-key-button" style={{ marginLeft: '2px' }}>
             Reset
           </button>
         </div>
+
       </div>
 
       {/* Autostart Section */}

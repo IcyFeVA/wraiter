@@ -1,6 +1,6 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 use tauri::Manager;
-use tauri::menu::{Menu, MenuItem};
+use tauri::menu::{Menu, MenuItem, CheckMenuItem};
 use tauri::tray::TrayIconBuilder;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
@@ -13,7 +13,7 @@ use std::sync::Mutex;
 
 const SHORTCUT_KEY: &str = "shortcut";
 const AUTO_CLOSE_KEY: &str = "auto_close";
-const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+Alt+A";
+const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+A";
 
 // Global static for debouncing shortcut triggers
 static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
@@ -321,17 +321,12 @@ pub fn run() {
                 }
             });
 
+            let autostart_manager = app.autolaunch();
+            let is_enabled = autostart_manager.is_enabled().unwrap_or(false);
             let show = MenuItem::with_id(app, "show", "Show UI", true, None::<&str>)?;
-            let startup = MenuItem::with_id(app, "startup", "Start on Boot", true, None::<&str>)?;
+            let startup = CheckMenuItem::with_id(app, "startup", "Start on Boot", true, is_enabled, None::<&str>)?;
             let exit = MenuItem::with_id(app, "exit", "Exit App", true, None::<&str>)?;
             let menu = Menu::with_items(app, &[&show, &startup, &exit])?;
-            let autostart_manager = app.autolaunch();
-            if let Ok(is_enabled) = autostart_manager.is_enabled() {
-                if is_enabled {
-                    let _ = startup.set_text("Don't Start on Boot");
-                }
-            }
-            let startup_clone = startup.clone();
             let _tray = TrayIconBuilder::new()
                 .icon(app.default_window_icon().unwrap().clone())
                 .menu(&menu)
@@ -348,10 +343,8 @@ pub fn run() {
                             if let Ok(is_enabled) = autostart_manager.is_enabled() {
                                 if is_enabled {
                                     let _ = autostart_manager.disable();
-                                    let _ = startup_clone.set_text("Start on Boot");
                                 } else {
                                     let _ = autostart_manager.enable();
-                                    let _ = startup_clone.set_text("Don't Start on Boot");
                                 }
                             }
                         }
