@@ -12,7 +12,7 @@ const Overlay: React.FC<OverlayProps> = () => {
   const [selectedAction, setSelectedAction] = useState<'proofread' | 'tone' | 'draft'>('proofread');
   const [selectedTone, setSelectedTone] = useState('professional');
   const [copied, setCopied] = useState(false);
-  const [autoCloseEnabled, setAutoCloseEnabled] = useState(true);
+  const [autoCloseEnabled, setAutoCloseEnabled] = useState(false);
 
   useEffect(() => {
     // Load clipboard text when component mounts
@@ -22,9 +22,8 @@ const Overlay: React.FC<OverlayProps> = () => {
     const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
     setSelectedTone(savedDefaultTone);
 
-    // Load auto-close setting
-    const savedAutoClose = localStorage.getItem('auto_close') !== 'false';
-    setAutoCloseEnabled(savedAutoClose);
+    // Load auto_close setting
+    invoke<boolean>('get_auto_close').then(setAutoCloseEnabled);
   }, []);
 
   // Handle window focus to refresh clipboard content (but only when not auto-closing)
@@ -39,18 +38,7 @@ const Overlay: React.FC<OverlayProps> = () => {
 
     window.addEventListener('focus', handleFocus);
     return () => window.removeEventListener('focus', handleFocus);
-  }, [autoCloseEnabled, selectedAction]);
-
-  // Reload auto-close setting on window focus
-  useEffect(() => {
-    const handleFocus = () => {
-      const savedAutoClose = localStorage.getItem('auto_close') !== 'false';
-      setAutoCloseEnabled(savedAutoClose);
-    };
-
-    window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
-  }, []);
+  }, [selectedAction, autoCloseEnabled]);
 
 
 
@@ -103,7 +91,6 @@ const Overlay: React.FC<OverlayProps> = () => {
 
       // Get max tokens setting
       const maxTokens = localStorage.getItem('max_tokens') || '2000';
-      const autoCloseEnabled = localStorage.getItem('auto_close') !== 'false';
 
       const result = await invoke<string>('process_text_with_ai', {
         text: inputText,
@@ -114,76 +101,12 @@ const Overlay: React.FC<OverlayProps> = () => {
         maxTokens: parseInt(maxTokens)
       });
 
-      // For proofread action, show result briefly then hide window
-      if (selectedAction === 'proofread') {
-        setOutputText(result);
-
-        // Automatically copy result to clipboard to replace user's selection
-        await invoke('set_clipboard_text', { text: result });
-
-        // Show result for 2 seconds, then hide window using the new command
-        setTimeout(async () => {
-          try {
-            await invoke('hide_overlay');
-          } catch (error) {
-            console.error('Failed to hide overlay:', error);
-            // Fallback to direct window hide
-            const appWindow = getCurrentWindow();
-            await appWindow.hide();
-          }
-
-          // Show notification that text is ready to paste
-          try {
-            if ('Notification' in window) {
-              new Notification('Text Proofread Complete', {
-                body: 'Proofread text copied to clipboard. Use Ctrl+V to paste.',
-                icon: '/tauri.svg',
-                silent: true
-              });
-            }
-          } catch (e) {
-            console.log('Notification not available');
-          }
-        }, 100);
-
-        setIsLoading(false);
-        return;
-      }
-
       setOutputText(result);
 
-      // Handle auto-close behavior for tone and draft actions
-      if (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft')) {
-        // Automatically copy result to clipboard to replace user's selection
+      if (autoCloseEnabled || selectedAction === 'proofread') {
+        // Automatically copy result to clipboard
         await invoke('set_clipboard_text', { text: result });
-
-        // Show result for 2 seconds, then hide window using the new command
-        setTimeout(async () => {
-          try {
-            await invoke('hide_overlay');
-          } catch (error) {
-            console.error('Failed to hide overlay:', error);
-            // Fallback to direct window hide
-            const appWindow = getCurrentWindow();
-            await appWindow.hide();
-          }
-
-          // Show notification that text is ready to paste
-          try {
-            if ('Notification' in window) {
-              const actionName = selectedAction === 'tone' ? 'Tone Changed' : 'Draft Complete';
-              new Notification(`Text ${actionName}`, {
-                body: `${actionName} text copied to clipboard. Use Ctrl+V to paste.`,
-                icon: '/tauri.svg',
-                silent: true
-              });
-            }
-          } catch (e) {
-            console.log('Notification not available');
-          }
-        }, 100);
-
-        setIsLoading(false);
+        await getCurrentWindow().hide();
         return;
       }
 
@@ -307,8 +230,7 @@ const Overlay: React.FC<OverlayProps> = () => {
           />
         </div>
         {outputText && !(
-          selectedAction === 'proofread' ||
-          (autoCloseEnabled && (selectedAction === 'tone' || selectedAction === 'draft'))
+          autoCloseEnabled || selectedAction === 'proofread'
         ) && (
           <div className="output-container">
             <div className="output-header">
