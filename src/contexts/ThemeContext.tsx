@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-type Theme = 'NSX' | 'Aqua' | 'AquaDark' | 'Console' | 'Abelton' | 'Lamasass';
+type Theme = 'NSX' | 'Aqua' | 'AquaDark' | 'Console' | 'Abelton' | 'Lamasass' | 'ICQ';
 
 interface ThemeContextType {
   theme: Theme;
@@ -14,7 +14,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const getStoredTheme = (): Theme | null => {
   try {
     const stored = localStorage.getItem('app_theme');
-    if (stored && ['NSX', 'Aqua', 'AquaDark', 'Console', 'Abelton', 'Lamasass'].includes(stored)) {
+    if (stored && ['NSX', 'Aqua', 'AquaDark', 'Console', 'Abelton', 'Lamasass', 'ICQ'].includes(stored)) {
       return stored as Theme;
     }
   } catch (error) {

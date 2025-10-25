@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { AppWindowMac, BotMessageSquare } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 const AppSettings: React.FC = () => {
@@ -126,7 +125,6 @@ const AppSettings: React.FC = () => {
             />
           </div>
           <button onClick={saveShortcut} className="save-key-button">
-            {/* <BotMessageSquare size={12} className="button-icon" /> */}
             Save
           </button>
           <button onClick={resetShortcut} className="save-key-button" style={{ marginLeft: '2px' }}>
@@ -200,7 +198,7 @@ const AppSettings: React.FC = () => {
         <div className="select-container">
           <select
             value={theme}
-            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass')}
+            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ')}
             className="model-select"
           >
             <option value="NSX">NSX</option>
@@ -209,6 +207,7 @@ const AppSettings: React.FC = () => {
             <option value="Console">Console</option>
             <option value="Abelton">Abelton</option>
             <option value="Lamasass">Lamasass</option>
+            <option value="ICQ">ICQ</option>
           </select>
         </div>
       </div>

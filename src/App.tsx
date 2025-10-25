@@ -6,7 +6,7 @@ import Settings from "./components/Settings";
 import AppSettings from "./components/AppSettings";
 import { useTheme } from "./contexts/ThemeContext";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { AirVent, AppWindow, BotMessageSquare, Cpu, Home } from 'lucide-react';
+import { AppWindow, Cpu, Home } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings' | 'appSettings'>('main');

@@ -386,7 +386,8 @@ input, textarea {
 
 .setting-description {
   font-size: var(--font-size);
-  color: #666;
+  color: var(--color);
+  opacity: 0.8;
   margin-top: 2px;
 }
 

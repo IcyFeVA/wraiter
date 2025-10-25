@@ -8,6 +8,7 @@ import "./themes/AquaDark.css";
 import "./themes/Console.css";
 import "./themes/Abelton.css";
 import "./themes/Lamasass.css";
+import "./themes/ICQ.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
