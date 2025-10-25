@@ -14,6 +14,7 @@ use std::sync::Mutex;
 const SHORTCUT_KEY: &str = "shortcut";
 const AUTO_CLOSE_KEY: &str = "auto_close";
 const DEFAULT_SHORTCUT: &str = "CommandOrControl+Shift+A";
+const API_KEY: &str = "openrouter_api_key";
 
 // Global static for debouncing shortcut triggers
 static LAST_SHORTCUT_TRIGGER: Mutex<Option<Instant>> = Mutex::new(None);
@@ -102,6 +103,27 @@ async fn set_auto_close(app: tauri::AppHandle, auto_close: bool) -> Result<(), S
     let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
     store.reload().map_err(|e| e.to_string())?;
     store.set(AUTO_CLOSE_KEY.to_string(), serde_json::Value::Bool(auto_close));
+    store.save().map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+// Get the saved OpenRouter API key from the persistent store
+#[tauri::command]
+fn get_api_key(app: tauri::AppHandle) -> Result<String, String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    match store.get(API_KEY) {
+        Some(val) => Ok(val.as_str().unwrap_or_default().to_string()),
+        None => Ok(String::new()),
+    }
+}
+
+// Save the OpenRouter API key into the persistent store
+#[tauri::command]
+async fn set_api_key(app: tauri::AppHandle, api_key: String) -> Result<(), String> {
+    let store = StoreBuilder::new(&app, "settings.json").build().map_err(|e| e.to_string())?;
+    store.reload().map_err(|e| e.to_string())?;
+    store.set(API_KEY.to_string(), serde_json::Value::String(api_key));
     store.save().map_err(|e| e.to_string())?;
     Ok(())
 }
@@ -310,7 +332,10 @@ pub fn run() {
             disable_autostart,
             is_autostart_enabled,
             get_auto_close,
+            get_api_key,
             set_auto_close
+            ,
+            set_api_key
         ])
         .setup(|app| {
             let app_handle = app.handle().clone();

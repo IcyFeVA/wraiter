@@ -22,8 +22,10 @@ const Settings: React.FC<SettingsProps> = () => {
 
   useEffect(() => {
     // Load saved settings
-    loadSettings();
-    setIsLoaded(true);
+    (async () => {
+      await loadSettings();
+      setIsLoaded(true);
+    })();
   }, []);
 
   // Auto-save max tokens setting (only after initial load)
@@ -40,16 +42,23 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   }, [defaultTone, isLoaded]);
 
-  const loadSettings = () => {
-    const savedApiKey = localStorage.getItem('openrouter_api_key') || '';
-    const savedModel = localStorage.getItem('selected_model') || '';
-    const savedMaxTokens = localStorage.getItem('max_tokens') || '2000';
-    const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
+  const loadSettings = async () => {
+    try {
+      // Prefer the Tauri store for sensitive data (get_api_key). Fall back to localStorage for non-sensitive values.
+      const savedApiKey = await invoke<string>('get_api_key').catch(() => '');
+      const savedModel = localStorage.getItem('selected_model') || '';
+      const savedMaxTokens = localStorage.getItem('max_tokens') || '2000';
+      const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
 
-    setApiKey(savedApiKey);
-    setSelectedModel(savedModel);
-    setMaxTokens(savedMaxTokens);
-    setDefaultTone(savedDefaultTone);
+      setApiKey(savedApiKey);
+      setSelectedModel(savedModel);
+      setMaxTokens(savedMaxTokens);
+      setDefaultTone(savedDefaultTone);
+    } catch (e) {
+      console.error('Failed to load settings via Tauri store, falling back to localStorage', e);
+      const savedApiKey = localStorage.getItem('openrouter_api_key') || '';
+      setApiKey(savedApiKey);
+    }
   };
 
   const saveApiKey = () => {
@@ -64,11 +73,19 @@ const Settings: React.FC<SettingsProps> = () => {
       return;
     }
 
-    localStorage.setItem('openrouter_api_key', apiKey);
-    setMessage({ type: 'success', text: 'API key saved successfully!' });
-
-    // Automatically fetch models after saving API key
-    fetchModels();
+    // Save via Tauri store so the backend can access it and to avoid frontend storage permission issues
+    invoke('set_api_key', { apiKey })
+      .then(() => {
+        setMessage({ type: 'success', text: 'API key saved successfully!' });
+        // Also keep a local copy as a fallback
+        try { localStorage.setItem('openrouter_api_key', apiKey); } catch {}
+        // Automatically fetch models after saving API key
+        fetchModels();
+      })
+      .catch((err) => {
+        console.error('Failed to save API key via Tauri store:', err);
+        setMessage({ type: 'error', text: `Failed to save API key: ${err}` });
+      });
   };
 
   const fetchModels = async () => {
