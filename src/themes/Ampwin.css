@@ -1,0 +1,244 @@
+/* ========================================
+   Ampwin Theme - Dark Winamp Style
+   ======================================== */
+
+/* Base Typography & Layout */
+.theme-ampwin {
+  /* Typography */
+  --font-family: 'MS Sans Serif', 'Microsoft Sans Serif', 'Arial', sans-serif;
+  --font-size: 11px;
+  --line-height: 16px;
+  --font-weight: 400;
+
+  /* Base Colors */
+  --color: #ffaa00;                    /* Classic Winamp orange text */
+  --background-color: #2a2a2a;         /* Dark gray background like Winamp */
+  --border-color: #ffaa00;             /* Orange borders */
+
+  /* Border Radius */
+  --button-border-radius1: 0;          /* Sharp corners like classic Winamp */
+  --button-border-radius2: 0;          /* Sharp corners for inputs */
+
+  /* Links */
+  --link-color: #ffaa00;               /* Orange links */
+  --link-hover-color: #ffffff;         /* White on hover */
+}
+
+/* ========================================
+   Navigation & App Structure
+   ======================================== */
+
+.theme-ampwin {
+  /* Drag Region */
+  --drag-region-border-bottom-color: #ffaa0040;  /* Semi-transparent orange border */
+  --drag-region-background-color: #1a1a1a;       /* Darker gray background */
+
+  /* Navigation Tabs */
+  --active-tab-background-color: #404040;        /* Medium gray active tab */
+  --active-tab-color: #ffaa00;                   /* Orange text */
+  --active-tab-border-color: #ffaa00;            /* Orange border */
+
+  --inactive-tab-background-color: #2a2a2a;      /* Dark gray inactive tab */
+  --inactive-tab-color: #cc8800;                 /* Darker orange text */
+  --inactive-tab-border-color: #cc8800;          /* Darker orange border */
+
+  /* Tab Interactions */
+  --tab-hover-background-color: rgba(255, 170, 0, 0.1);  /* Orange hover background */
+  --tab-hover-border-color: #ffffff;                     /* White hover border */
+  --tab-active-background-color: rgba(255, 255, 255, 0.15); /* White active state */
+  --tab-active-border-color: #ffffff;                    /* White border */
+}
+
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
+
+.theme-ampwin {
+  /* Button Base */
+  --button-hover-border-color: #ffffff;                              /* White hover border */
+  --button-hover-background-color: rgba(255, 170, 0, 0.1);          /* Orange hover background */
+  --button-active-border-color: #ffffff;                             /* White active border */
+  --button-active-background-color: rgba(255, 255, 255, 0.15);      /* White active background */
+
+  /* Action Buttons (Proofread, Tone, Draft) */
+  --action-button-background-color: #404040;                        /* Medium gray background */
+  --action-button-color: #ffaa00;                                   /* Orange text */
+  --action-button-border-color: #ffaa00;                            /* Orange border */
+  --action-button-active-background-color: #ffaa00;                 /* Orange when active */
+  --action-button-active-color: #2a2a2a;                            /* Dark text when active */
+  --action-button-active-border-color: #ffaa00;                     /* Orange border when active */
+  --action-button-hover-background-color: rgba(255, 170, 0, 0.1);   /* Orange hover background */
+  --action-button-hover-border-color: #ffffff;                      /* White hover border */
+
+  /* Send Button */
+  --send-button-background-color: #404040;                          /* Medium gray background */
+  --send-button-color: #ffaa00;                                     /* Orange text */
+  --send-button-border-color: #ffaa00;                              /* Orange border */
+  --send-button-hover-background-color: rgba(255, 170, 0, 0.1);     /* Orange hover background */
+  --send-button-hover-border-color: #ffffff;                        /* White hover border */
+  --send-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --send-button-active-border-color: #ffffff;                       /* White active border */
+
+  /* Copy Button */
+  --copy-button-background-color: #404040;                          /* Medium gray background */
+  --copy-button-color: #ffaa00;                                     /* Orange text */
+  --copy-button-border-color: #ffaa00;                              /* Orange border */
+  --copy-button-copied-background-color: rgba(255, 170, 0, 0.15);   /* Orange when copied */
+  --copy-button-copied-color: #ffaa00;                              /* Orange text when copied */
+  --copy-button-copied-border-color: #ffaa00;                       /* Orange border when copied */
+  --copy-button-hover-background-color: rgba(255, 170, 0, 0.1);     /* Orange hover background */
+  --copy-button-hover-border-color: #ffffff;                        /* White hover border */
+  --copy-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --copy-button-active-border-color: #ffffff;                       /* White active border */
+
+  /* Settings Buttons */
+  --save-key-button-background-color: #404040;                      /* Medium gray background */
+  --save-key-button-color: #ffaa00;                                 /* Orange text */
+  --save-key-button-border-color: #ffaa00;                          /* Orange border */
+  --save-key-button-hover-border-color: #ffffff;                    /* White hover border */
+  --save-key-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --save-key-button-active-border-color: #ffffff;                   /* White active border */
+
+  --load-models-button-background-color: #404040;                   /* Medium gray background */
+  --load-models-button-color: #ffaa00;                              /* Orange text */
+  --load-models-button-border-color: #ffaa00;                       /* Orange border */
+  --load-models-button-hover-background-color: rgba(255, 170, 0, 0.1); /* Orange hover background */
+  --load-models-button-hover-border-color: #ffffff;                 /* White hover border */
+  --load-models-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --load-models-button-active-border-color: #ffffff;                /* White active border */
+  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.2); /* Gray disabled */
+  --load-models-button-disabled-color: #888888;                     /* Gray disabled text */
+  --load-models-button-disabled-border-color: #888888;              /* Gray disabled border */
+
+  /* Icons */
+  --button-icon-color: #ffaa00;  /* Orange icons */
+}
+
+/* ========================================
+   Form Elements & Inputs
+   ======================================== */
+
+.theme-ampwin {
+  /* Tone Selection */
+  --tone-select-background-color: #404040;                          /* Medium gray background */
+  --tone-select-color: #ffaa00;                                     /* Orange text */
+  --tone-select-border-color: #ffaa00;                              /* Orange border */
+
+  /* Text Inputs & Textareas */
+  --text-input-background-color: rgba(255, 170, 0, 0.05);           /* Very subtle orange background */
+  --text-input-color: #ffaa00;                                      /* Orange text */
+  --text-input-border-color: #ffaa00;                               /* Orange border */
+  --text-output-background-color: rgba(255, 170, 0, 0.05);          /* Very subtle orange background */
+  --text-output-color: #ffaa00;                                     /* Orange text */
+  --text-output-border-color: #ffaa00;                              /* Orange border */
+
+  /* API Key Input */
+  --api-key-input-background-color: rgba(255, 170, 0, 0.05);        /* Very subtle orange background */
+  --api-key-input-color: #ffaa00;                                   /* Orange text */
+  --api-key-input-border-color: #ffaa00;                            /* Orange border */
+
+  /* Model Selection */
+  --model-select-background-color: rgba(255, 170, 0, 0.05);         /* Very subtle orange background */
+  --model-select-color: #ffaa00;                                    /* Orange text */
+  --model-select-border-color: #ffaa00;                             /* Orange border */
+}
+
+/* ========================================
+   Labels & Text Elements
+   ======================================== */
+
+.theme-ampwin {
+  /* Labels */
+  --input-label-color: #ffaa00;   /* Orange labels */
+  --output-label-color: #ffaa00;  /* Orange labels */
+  --section-title-color: #ffaa00; /* Orange section titles */
+
+  /* Descriptions */
+  --api-key-description-color: #cccccc;  /* Light gray description text */
+  --api-key-link-color: #ffaa00;         /* Orange links */
+  --api-key-link-hover-color: #ffffff;   /* White hover links */
+}
+
+/* ========================================
+   Containers & Layout
+   ======================================== */
+
+.theme-ampwin {
+  /* Overlay Container */
+  --overlay-container-background-color: rgba(255, 170, 0, 0.05);    /* Very subtle orange background */
+  --overlay-container-border-color: #ffaa00;                        /* Orange border */
+
+  /* Settings Container */
+  --settings-container-background-color: rgba(255, 170, 0, 0.05);   /* Very subtle orange background */
+  --settings-container-border-color: #ffaa00;                       /* Orange border */
+
+  /* Current Settings Display */
+  --current-settings-display-background-color: rgba(255, 170, 0, 0.05); /* Very subtle orange background */
+  --current-settings-display-border-color: #ffaa00;                 /* Orange border */
+  --current-settings-display-color: #ffaa00;                        /* Orange text */
+}
+
+/* ========================================
+   Loading & Status Elements
+   ======================================== */
+
+.theme-ampwin {
+  /* Loading Indicator */
+  --loading-indicator-background-color: rgba(255, 170, 0, 0.05);    /* Very subtle orange background */
+  --loading-indicator-border-color: #ffaa00;                        /* Orange border */
+  --spinner-color: #ffaa00;                                         /* Orange spinner */
+  --loading-text-color: #ffaa00;                                    /* Orange loading text */
+
+  /* Message Displays */
+  --message-display-success-background-color: rgba(255, 170, 0, 0.1); /* Orange success background */
+  --message-display-success-color: #ffaa00;                         /* Orange success text */
+  --message-display-success-border-color: #ffaa00;                  /* Orange success border */
+  --message-display-error-background-color: rgba(255, 255, 255, 0.1); /* White error background */
+  --message-display-error-color: #ffffff;                           /* White error text */
+  --message-display-error-border-color: #ffffff;                    /* White error border */
+
+  /* Message Icons */
+  --message-icon-success-color: #ffaa00;  /* Orange success icon */
+  --message-icon-error-color: #ffffff;    /* White error icon */
+}
+
+/* ========================================
+   Scrollbars
+   ======================================== */
+
+.theme-ampwin {
+  /* Scrollbar Track */
+  --scrollbar-track-background-color: #1a1a1a;                      /* Dark gray track */
+  --scrollbar-track-border-color: #ffaa00;                          /* Orange track border */
+
+  /* Scrollbar Thumb */
+  --scrollbar-thumb-background-color: rgba(255, 170, 0, 0.25);      /* Semi-transparent orange thumb */
+  --scrollbar-thumb-border-color: #ffaa00;                          /* Orange thumb border */
+  --scrollbar-thumb-hover-background-color: rgba(255, 170, 0, 0.35); /* More opaque orange on hover */
+  --scrollbar-thumb-hover-border-color: #ffffff;                    /* White hover border */
+  --scrollbar-thumb-active-background-color: rgba(255, 255, 255, 0.25); /* White active background */
+  --scrollbar-thumb-active-border-color: #ffffff;                   /* White active border */
+
+  /* Scrollbar Corner & Buttons */
+  --scrollbar-corner-background-color: #1a1a1a;                      /* Dark gray corner */
+  --scrollbar-corner-border-color: #ffaa00;                         /* Orange corner border */
+  --scrollbar-button-background-color: rgba(255, 170, 0, 0.1);      /* Orange button background */
+  --scrollbar-button-border-color: #ffaa00;                         /* Orange button border */
+
+  /* Firefox Scrollbar */
+  --scrollbar-color: rgba(255, 170, 0, 0.25) #1a1a1a;  /* Orange thumb, dark gray track */
+}
+
+/* ========================================
+   Select Options
+   ======================================== */
+
+.theme-ampwin {
+  /* Select Dropdown Options */
+  --select-option-background-color: #404040;                        /* Medium gray option background */
+  --select-option-color: #ffaa00;                                   /* Orange option text */
+  --select-option-hover-background-color: rgba(255, 170, 0, 0.1);   /* Orange hover background */
+  --select-option-hover-color: #ffaa00;                             /* Orange hover text */
+  --select-option-checked-background-color: rgba(255, 170, 0, 0.15); /* Orange checked background */
+  --select-option-checked-color: #ffaa00;                           /* Orange checked text */
+}

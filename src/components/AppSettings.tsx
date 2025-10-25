@@ -190,7 +190,7 @@ const AppSettings: React.FC = () => {
           <div className="app-settings__select-container">
             <select
               value={theme}
-              onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ')}
+              onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ' | 'Ampwin')}
               className="app-settings__theme-select"
             >
               <option value="NSX">NSX</option>
@@ -200,6 +200,7 @@ const AppSettings: React.FC = () => {
               <option value="Abelton">Abelton</option>
               <option value="Lamasass">Lamasass</option>
               <option value="ICQ">ICQ</option>
+              <option value="Ampwin">Ampwin</option>
             </select>
           </div>
         </section>
