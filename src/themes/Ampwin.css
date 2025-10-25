@@ -11,17 +11,17 @@
   --font-weight: 400;
 
   /* Base Colors */
-  --color: #ffaa00;                    /* Classic Winamp orange text */
+  --color: #ffffff;                    /* White text like Winamp */
   --background-color: #2a2a2a;         /* Dark gray background like Winamp */
-  --border-color: #ffaa00;             /* Orange borders */
+  --border-color: #666666;             /* Gray borders like Winamp */
 
   /* Border Radius */
   --button-border-radius1: 0;          /* Sharp corners like classic Winamp */
   --button-border-radius2: 0;          /* Sharp corners for inputs */
 
   /* Links */
-  --link-color: #ffaa00;               /* Orange links */
-  --link-hover-color: #ffffff;         /* White on hover */
+  --link-color: #ffffff;               /* White links */
+  --link-hover-color: #ffaa00;         /* Orange on hover */
 }
 
 /* ========================================
@@ -30,23 +30,23 @@
 
 .theme-ampwin {
   /* Drag Region */
-  --drag-region-border-bottom-color: #ffaa0040;  /* Semi-transparent orange border */
+  --drag-region-border-bottom-color: #666666;    /* Gray border */
   --drag-region-background-color: #1a1a1a;       /* Darker gray background */
 
   /* Navigation Tabs */
-  --active-tab-background-color: #404040;        /* Medium gray active tab */
-  --active-tab-color: #ffaa00;                   /* Orange text */
-  --active-tab-border-color: #ffaa00;            /* Orange border */
+  --active-tab-background-color: #505050;        /* Medium gray active tab */
+  --active-tab-color: #ffffff;                   /* White text */
+  --active-tab-border-color: #666666;            /* Gray border */
 
-  --inactive-tab-background-color: #2a2a2a;      /* Dark gray inactive tab */
-  --inactive-tab-color: #cc8800;                 /* Darker orange text */
-  --inactive-tab-border-color: #cc8800;          /* Darker orange border */
+  --inactive-tab-background-color: #404040;      /* Dark gray inactive tab */
+  --inactive-tab-color: #ffffff;                 /* White text */
+  --inactive-tab-border-color: #666666;          /* Gray border */
 
   /* Tab Interactions */
-  --tab-hover-background-color: rgba(255, 170, 0, 0.1);  /* Orange hover background */
-  --tab-hover-border-color: #ffffff;                     /* White hover border */
-  --tab-active-background-color: rgba(255, 255, 255, 0.15); /* White active state */
-  --tab-active-border-color: #ffffff;                    /* White border */
+  --tab-hover-background-color: #555555;         /* Gray hover background */
+  --tab-hover-border-color: #777777;             /* Light gray hover border */
+  --tab-active-background-color: #606060;        /* Gray active state */
+  --tab-active-border-color: #777777;            /* Light gray border */
 }
 
 /* ========================================
@@ -55,63 +55,63 @@
 
 .theme-ampwin {
   /* Button Base */
-  --button-hover-border-color: #ffffff;                              /* White hover border */
-  --button-hover-background-color: rgba(255, 170, 0, 0.1);          /* Orange hover background */
-  --button-active-border-color: #ffffff;                             /* White active border */
-  --button-active-background-color: rgba(255, 255, 255, 0.15);      /* White active background */
+  --button-hover-border-color: #777777;                              /* Light gray hover border */
+  --button-hover-background-color: #555555;                          /* Gray hover background */
+  --button-active-border-color: #777777;                             /* Light gray active border */
+  --button-active-background-color: #606060;                         /* Gray active background */
 
   /* Action Buttons (Proofread, Tone, Draft) */
-  --action-button-background-color: #404040;                        /* Medium gray background */
-  --action-button-color: #ffaa00;                                   /* Orange text */
-  --action-button-border-color: #ffaa00;                            /* Orange border */
+  --action-button-background-color: #505050;                        /* Medium gray background */
+  --action-button-color: #ffffff;                                   /* White text */
+  --action-button-border-color: #666666;                            /* Gray border */
   --action-button-active-background-color: #ffaa00;                 /* Orange when active */
   --action-button-active-color: #2a2a2a;                            /* Dark text when active */
   --action-button-active-border-color: #ffaa00;                     /* Orange border when active */
-  --action-button-hover-background-color: rgba(255, 170, 0, 0.1);   /* Orange hover background */
-  --action-button-hover-border-color: #ffffff;                      /* White hover border */
+  --action-button-hover-background-color: #555555;                   /* Gray hover background */
+  --action-button-hover-border-color: #777777;                      /* Light gray hover border */
 
   /* Send Button */
-  --send-button-background-color: #404040;                          /* Medium gray background */
-  --send-button-color: #ffaa00;                                     /* Orange text */
-  --send-button-border-color: #ffaa00;                              /* Orange border */
-  --send-button-hover-background-color: rgba(255, 170, 0, 0.1);     /* Orange hover background */
-  --send-button-hover-border-color: #ffffff;                        /* White hover border */
-  --send-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
-  --send-button-active-border-color: #ffffff;                       /* White active border */
+  --send-button-background-color: #505050;                          /* Medium gray background */
+  --send-button-color: #ffffff;                                     /* White text */
+  --send-button-border-color: #666666;                              /* Gray border */
+  --send-button-hover-background-color: #555555;                     /* Gray hover background */
+  --send-button-hover-border-color: #777777;                        /* Light gray hover border */
+  --send-button-active-background-color: #606060;                    /* Gray active background */
+  --send-button-active-border-color: #777777;                       /* Light gray active border */
 
   /* Copy Button */
-  --copy-button-background-color: #404040;                          /* Medium gray background */
-  --copy-button-color: #ffaa00;                                     /* Orange text */
-  --copy-button-border-color: #ffaa00;                              /* Orange border */
-  --copy-button-copied-background-color: rgba(255, 170, 0, 0.15);   /* Orange when copied */
-  --copy-button-copied-color: #ffaa00;                              /* Orange text when copied */
+  --copy-button-background-color: #505050;                          /* Medium gray background */
+  --copy-button-color: #ffffff;                                     /* White text */
+  --copy-button-border-color: #666666;                              /* Gray border */
+  --copy-button-copied-background-color: #ffaa00;                   /* Orange when copied */
+  --copy-button-copied-color: #2a2a2a;                              /* Dark text when copied */
   --copy-button-copied-border-color: #ffaa00;                       /* Orange border when copied */
-  --copy-button-hover-background-color: rgba(255, 170, 0, 0.1);     /* Orange hover background */
-  --copy-button-hover-border-color: #ffffff;                        /* White hover border */
-  --copy-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
-  --copy-button-active-border-color: #ffffff;                       /* White active border */
+  --copy-button-hover-background-color: #555555;                     /* Gray hover background */
+  --copy-button-hover-border-color: #777777;                        /* Light gray hover border */
+  --copy-button-active-background-color: #606060;                    /* Gray active background */
+  --copy-button-active-border-color: #777777;                       /* Light gray active border */
 
   /* Settings Buttons */
-  --save-key-button-background-color: #404040;                      /* Medium gray background */
-  --save-key-button-color: #ffaa00;                                 /* Orange text */
-  --save-key-button-border-color: #ffaa00;                          /* Orange border */
-  --save-key-button-hover-border-color: #ffffff;                    /* White hover border */
-  --save-key-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
-  --save-key-button-active-border-color: #ffffff;                   /* White active border */
+  --save-key-button-background-color: #505050;                      /* Medium gray background */
+  --save-key-button-color: #ffffff;                                 /* White text */
+  --save-key-button-border-color: #666666;                          /* Gray border */
+  --save-key-button-hover-border-color: #777777;                    /* Light gray hover border */
+  --save-key-button-active-background-color: #606060;               /* Gray active background */
+  --save-key-button-active-border-color: #777777;                   /* Light gray active border */
 
-  --load-models-button-background-color: #404040;                   /* Medium gray background */
-  --load-models-button-color: #ffaa00;                              /* Orange text */
-  --load-models-button-border-color: #ffaa00;                       /* Orange border */
-  --load-models-button-hover-background-color: rgba(255, 170, 0, 0.1); /* Orange hover background */
-  --load-models-button-hover-border-color: #ffffff;                 /* White hover border */
-  --load-models-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
-  --load-models-button-active-border-color: #ffffff;                /* White active border */
-  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.2); /* Gray disabled */
+  --load-models-button-background-color: #505050;                   /* Medium gray background */
+  --load-models-button-color: #ffffff;                              /* White text */
+  --load-models-button-border-color: #666666;                       /* Gray border */
+  --load-models-button-hover-background-color: #555555;              /* Gray hover background */
+  --load-models-button-hover-border-color: #777777;                 /* Light gray hover border */
+  --load-models-button-active-background-color: #606060;             /* Gray active background */
+  --load-models-button-active-border-color: #777777;                /* Light gray active border */
+  --load-models-button-disabled-background-color: #404040;           /* Dark gray disabled */
   --load-models-button-disabled-color: #888888;                     /* Gray disabled text */
-  --load-models-button-disabled-border-color: #888888;              /* Gray disabled border */
+  --load-models-button-disabled-border-color: #555555;              /* Gray disabled border */
 
   /* Icons */
-  --button-icon-color: #ffaa00;  /* Orange icons */
+  --button-icon-color: #ffffff;  /* White icons */
 }
 
 /* ========================================
@@ -120,27 +120,27 @@
 
 .theme-ampwin {
   /* Tone Selection */
-  --tone-select-background-color: #404040;                          /* Medium gray background */
-  --tone-select-color: #ffaa00;                                     /* Orange text */
-  --tone-select-border-color: #ffaa00;                              /* Orange border */
+  --tone-select-background-color: #505050;                          /* Medium gray background */
+  --tone-select-color: #ffffff;                                     /* White text */
+  --tone-select-border-color: #666666;                              /* Gray border */
 
   /* Text Inputs & Textareas */
-  --text-input-background-color: rgba(255, 170, 0, 0.05);           /* Very subtle orange background */
-  --text-input-color: #ffaa00;                                      /* Orange text */
-  --text-input-border-color: #ffaa00;                               /* Orange border */
-  --text-output-background-color: rgba(255, 170, 0, 0.05);          /* Very subtle orange background */
-  --text-output-color: #ffaa00;                                     /* Orange text */
-  --text-output-border-color: #ffaa00;                              /* Orange border */
+  --text-input-background-color: #404040;                           /* Dark gray background */
+  --text-input-color: #ffffff;                                      /* White text */
+  --text-input-border-color: #666666;                               /* Gray border */
+  --text-output-background-color: #404040;                          /* Dark gray background */
+  --text-output-color: #ffffff;                                     /* White text */
+  --text-output-border-color: #666666;                              /* Gray border */
 
   /* API Key Input */
-  --api-key-input-background-color: rgba(255, 170, 0, 0.05);        /* Very subtle orange background */
-  --api-key-input-color: #ffaa00;                                   /* Orange text */
-  --api-key-input-border-color: #ffaa00;                            /* Orange border */
+  --api-key-input-background-color: #404040;                        /* Dark gray background */
+  --api-key-input-color: #ffffff;                                   /* White text */
+  --api-key-input-border-color: #666666;                            /* Gray border */
 
   /* Model Selection */
-  --model-select-background-color: rgba(255, 170, 0, 0.05);         /* Very subtle orange background */
-  --model-select-color: #ffaa00;                                    /* Orange text */
-  --model-select-border-color: #ffaa00;                             /* Orange border */
+  --model-select-background-color: #404040;                         /* Dark gray background */
+  --model-select-color: #ffffff;                                    /* White text */
+  --model-select-border-color: #666666;                             /* Gray border */
 }
 
 /* ========================================
@@ -149,14 +149,14 @@
 
 .theme-ampwin {
   /* Labels */
-  --input-label-color: #ffaa00;   /* Orange labels */
-  --output-label-color: #ffaa00;  /* Orange labels */
-  --section-title-color: #ffaa00; /* Orange section titles */
+  --input-label-color: #ffffff;   /* White labels */
+  --output-label-color: #ffffff;  /* White labels */
+  --section-title-color: #ffffff; /* White section titles */
 
   /* Descriptions */
   --api-key-description-color: #cccccc;  /* Light gray description text */
-  --api-key-link-color: #ffaa00;         /* Orange links */
-  --api-key-link-hover-color: #ffffff;   /* White hover links */
+  --api-key-link-color: #ffffff;         /* White links */
+  --api-key-link-hover-color: #ffaa00;   /* Orange hover links */
 }
 
 /* ========================================
@@ -165,17 +165,17 @@
 
 .theme-ampwin {
   /* Overlay Container */
-  --overlay-container-background-color: rgba(255, 170, 0, 0.05);    /* Very subtle orange background */
-  --overlay-container-border-color: #ffaa00;                        /* Orange border */
+  --overlay-container-background-color: #404040;                    /* Dark gray background */
+  --overlay-container-border-color: #666666;                        /* Gray border */
 
   /* Settings Container */
-  --settings-container-background-color: rgba(255, 170, 0, 0.05);   /* Very subtle orange background */
-  --settings-container-border-color: #ffaa00;                       /* Orange border */
+  --settings-container-background-color: #404040;                   /* Dark gray background */
+  --settings-container-border-color: #666666;                       /* Gray border */
 
   /* Current Settings Display */
-  --current-settings-display-background-color: rgba(255, 170, 0, 0.05); /* Very subtle orange background */
-  --current-settings-display-border-color: #ffaa00;                 /* Orange border */
-  --current-settings-display-color: #ffaa00;                        /* Orange text */
+  --current-settings-display-background-color: #505050;             /* Medium gray background */
+  --current-settings-display-border-color: #666666;                 /* Gray border */
+  --current-settings-display-color: #ffffff;                        /* White text */
 }
 
 /* ========================================
@@ -209,24 +209,24 @@
 .theme-ampwin {
   /* Scrollbar Track */
   --scrollbar-track-background-color: #1a1a1a;                      /* Dark gray track */
-  --scrollbar-track-border-color: #ffaa00;                          /* Orange track border */
+  --scrollbar-track-border-color: #666666;                          /* Gray track border */
 
   /* Scrollbar Thumb */
-  --scrollbar-thumb-background-color: rgba(255, 170, 0, 0.25);      /* Semi-transparent orange thumb */
-  --scrollbar-thumb-border-color: #ffaa00;                          /* Orange thumb border */
-  --scrollbar-thumb-hover-background-color: rgba(255, 170, 0, 0.35); /* More opaque orange on hover */
-  --scrollbar-thumb-hover-border-color: #ffffff;                    /* White hover border */
-  --scrollbar-thumb-active-background-color: rgba(255, 255, 255, 0.25); /* White active background */
-  --scrollbar-thumb-active-border-color: #ffffff;                   /* White active border */
+  --scrollbar-thumb-background-color: #888888;                      /* Gray thumb */
+  --scrollbar-thumb-border-color: #666666;                          /* Gray thumb border */
+  --scrollbar-thumb-hover-background-color: #999999;                 /* Lighter gray on hover */
+  --scrollbar-thumb-hover-border-color: #777777;                    /* Light gray hover border */
+  --scrollbar-thumb-active-background-color: #aaaaaa;               /* Even lighter gray when active */
+  --scrollbar-thumb-active-border-color: #777777;                   /* Light gray active border */
 
   /* Scrollbar Corner & Buttons */
   --scrollbar-corner-background-color: #1a1a1a;                      /* Dark gray corner */
-  --scrollbar-corner-border-color: #ffaa00;                         /* Orange corner border */
-  --scrollbar-button-background-color: rgba(255, 170, 0, 0.1);      /* Orange button background */
-  --scrollbar-button-border-color: #ffaa00;                         /* Orange button border */
+  --scrollbar-corner-border-color: #666666;                         /* Gray corner border */
+  --scrollbar-button-background-color: #404040;                     /* Gray button background */
+  --scrollbar-button-border-color: #666666;                         /* Gray button border */
 
   /* Firefox Scrollbar */
-  --scrollbar-color: rgba(255, 170, 0, 0.25) #1a1a1a;  /* Orange thumb, dark gray track */
+  --scrollbar-color: #888888 #1a1a1a;  /* Gray thumb, dark gray track */
 }
 
 /* ========================================
@@ -235,10 +235,10 @@
 
 .theme-ampwin {
   /* Select Dropdown Options */
-  --select-option-background-color: #404040;                        /* Medium gray option background */
-  --select-option-color: #ffaa00;                                   /* Orange option text */
-  --select-option-hover-background-color: rgba(255, 170, 0, 0.1);   /* Orange hover background */
-  --select-option-hover-color: #ffaa00;                             /* Orange hover text */
-  --select-option-checked-background-color: rgba(255, 170, 0, 0.15); /* Orange checked background */
-  --select-option-checked-color: #ffaa00;                           /* Orange checked text */
+  --select-option-background-color: #505050;                        /* Medium gray option background */
+  --select-option-color: #ffffff;                                   /* White option text */
+  --select-option-hover-background-color: #555555;                  /* Gray hover background */
+  --select-option-hover-color: #ffffff;                             /* White hover text */
+  --select-option-checked-background-color: #ffaa00;                /* Orange checked background */
+  --select-option-checked-color: #2a2a2a;                           /* Dark checked text */
 }
