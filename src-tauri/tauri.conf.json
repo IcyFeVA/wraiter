@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "NSX-T",
+  "productName": "Starstrike",
   "version": "1.0.0",
   "identifier": "com.crushy.nsxt",
   "build": {
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "NSX-T",
+        "title": "Starstrike",
         "width": 500,
         "height": 200,
         "minWidth": 400,
