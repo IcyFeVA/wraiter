@@ -1,272 +1,244 @@
+/* ========================================
+   Ableton Theme - Professional DAW Style
+   ======================================== */
+
+/* Base Typography & Layout */
 .theme-abelton {
-  /* Typography - Modern DAW Style */
+  /* Typography */
   --font-family: 'Helvetica Neue', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-size: 13px;
   --line-height: 1.4;
   --font-weight: 400;
 
-  /* Base Colors - Dark Professional DAW */
-  --color: #E6E6E6;
-  --background-color: #2A2A2A;
+  /* Base Colors */
+  --color: #E6E6E6;                    /* Light gray text */
+  --background-color: #2A2A2A;         /* Dark gray background */
+  --border-color: #4A4A4A;             /* Medium gray borders */
 
-  /* Ableton Orange Palette */
-  --ableton-orange: #FF6B35;
-  --ableton-orange-bright: #FF8555;
-  --ableton-orange-dim: #E85A2F;
-  --ableton-orange-dark: #CC4400;
-  --ableton-orange-light: #FFE5D9;
-
-  /* DaVinci Purple Palette */
-  --davinci-purple: #8B5A9C;
-  --davinci-purple-bright: #A070B5;
-  --davinci-purple-dim: #754A85;
-  --davinci-purple-dark: #5A3A6B;
-  --davinci-purple-light: #E8D4F1;
-
-  /* Neutral Colors */
-  --neutral-dark: #1A1A1A;
-  --neutral-medium: #3A3A3A;
-  --neutral-light: #4A4A4A;
-  --neutral-lighter: #5A5A5A;
-  --neutral-lightest: #6A6A6A;
-
-  /* Accent Colors */
-  --accent-blue: #4A90E2;
-  --accent-green: #7ED321;
-  --accent-red: #D0021B;
-  --accent-yellow: #F5A623;
-
-  /* Button Styling - Modern DAW */
-  --button-border-radius: 4px;
-  --button-gradient: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);
-  --button-shadow: 0 2px 8px rgba(255, 107, 53, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  --button-hover-gradient: linear-gradient(135deg, #FF8555 0%, #FF6B35 100%);
-  --button-active-gradient: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);
+  /* Border Radius */
+  --button-border-radius1: 4px;        /* Slightly rounded corners */
+  --button-border-radius2: 4px;        /* Slightly rounded corners */
 
   /* Links */
-  --link-color: #FF6B35;
-  --link-hover-color: #FF8555;
-  --link-gradient: linear-gradient(135deg, #FF8555 0%, #FF6B35 100%);
+  --link-color: #FF6B35;               /* Orange links */
+  --link-hover-color: #FF8555;         /* Lighter orange on hover */
+}
 
-  /* Borders & Strokes */
-  --border-color: #4A4A4A;
-  --border-light: #5A5A5A;
-  --border-dark: #3A3A3A;
-  --stroke-light: rgba(255, 255, 255, 0.1);
-  --stroke-dark: rgba(0, 0, 0, 0.3);
+/* ========================================
+   Navigation & App Structure
+   ======================================== */
 
-  /* Window Elements */
-  --window-background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%);
-  --window-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --drag-region-background: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);
-  --drag-region-border: #FF6B35;
+.theme-abelton {
+  /* Drag Region */
+  --drag-region-border-bottom-color: #FF6B35;                    /* Orange border */
+  --drag-region-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
 
-  /* Tabs - DAW Style */
-  --active-tab-background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);
-  --active-tab-color: #FFFFFF;
-  --active-tab-border: #CC4400;
-  --active-tab-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  /* Navigation Tabs */
+  --active-tab-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange gradient */
+  --active-tab-color: #FFFFFF;                                      /* White text */
+  --active-tab-border-color: #CC4400;                               /* Dark orange border */
 
-  --inactive-tab-background: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);
-  --inactive-tab-color: #CCCCCC;
-  --inactive-tab-border: #4A4A4A;
+  --inactive-tab-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --inactive-tab-color: #CCCCCC;                                    /* Light gray text */
+  --inactive-tab-border-color: #4A4A4A;                             /* Medium gray border */
 
-  --tab-hover-background: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 100%);
-  --tab-hover-border: #5A5A5A;
+  /* Tab Interactions */
+  --tab-hover-background-color: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 100%);  /* Lighter dark gray */
+  --tab-hover-border-color: #5A5A5A;                                /* Light gray border */
+  --tab-active-background-color: linear-gradient(135deg, #8B5A9C 0%, #754A85 100%);  /* Purple gradient */
+  --tab-active-border-color: #5A3A6B;                               /* Dark purple border */
+}
 
-  --tab-active-background: linear-gradient(135deg, #8B5A9C 0%, #754A85 100%);
-  --tab-active-border: #5A3A6B;
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
 
-  /* Overlays & Containers */
-  --overlay-background: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
-  --overlay-border: #4A4A4A;
-  --overlay-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+.theme-abelton {
+  /* Button Base */
+  --button-hover-border-color: #FF6B35;                              /* Orange hover border */
+  --button-hover-background-color: linear-gradient(135deg, #FF8555 0%, #FF6B35 100%);  /* Orange hover gradient */
+  --button-active-border-color: #CC4400;                             /* Dark orange active border */
+  --button-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%); /* Darker orange active */
 
-  /* Buttons & Controls */
-  --action-button-background: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);
-  --action-button-color: #E6E6E6;
-  --action-button-border: #4A4A4A;
-  --action-button-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 8px rgba(0, 0, 0, 0.3);
+  /* Action Buttons (Proofread, Tone, Draft) */
+  --action-button-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --action-button-color: #E6E6E6;                                       /* Light gray text */
+  --action-button-border-color: #4A4A4A;                                /* Medium gray border */
+  --action-button-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);  /* Dark orange active */
+  --action-button-active-color: #FFFFFF;                               /* White text when active */
+  --action-button-active-border-color: #CC4400;                        /* Dark orange border when active */
+  --action-button-hover-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange hover */
+  --action-button-hover-border-color: #FF6B35;                          /* Orange hover border */
 
-  --action-button-hover-background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);
-  --action-button-hover-color: #FFFFFF;
-  --action-button-hover-border: #FF6B35;
+  /* Send Button */
+  --send-button-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --send-button-color: #E6E6E6;                                         /* Light gray text */
+  --send-button-border-color: #4A4A4A;                                  /* Medium gray border */
+  --send-button-hover-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange hover */
+  --send-button-hover-border-color: #FF6B35;                            /* Orange hover border */
+  --send-button-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);  /* Dark orange active */
+  --send-button-active-border-color: #CC4400;                           /* Dark orange active border */
 
-  --action-button-active-background: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);
-  --action-button-active-color: #FFFFFF;
-  --action-button-active-border: #CC4400;
+  /* Copy Button */
+  --copy-button-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --copy-button-color: #E6E6E6;                                         /* Light gray text */
+  --copy-button-border-color: #4A4A4A;                                  /* Medium gray border */
+  --copy-button-copied-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange when copied */
+  --copy-button-copied-color: #FFFFFF;                                  /* White text when copied */
+  --copy-button-copied-border-color: #CC4400;                           /* Dark orange border when copied */
+  --copy-button-hover-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange hover */
+  --copy-button-hover-border-color: #FF6B35;                            /* Orange hover border */
+  --copy-button-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);  /* Dark orange active */
+  --copy-button-active-border-color: #CC4400;                           /* Dark orange active border */
 
-  /* Form Elements */
-  --input-background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
-  --input-color: #E6E6E6;
-  --input-border: #4A4A4A;
-  --input-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  /* Settings Buttons */
+  --save-key-button-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --save-key-button-color: #E6E6E6;                                     /* Light gray text */
+  --save-key-button-border-color: #4A4A4A;                              /* Medium gray border */
+  --save-key-button-hover-border-color: #FF6B35;                        /* Orange hover border */
+  --save-key-button-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);  /* Dark orange active */
+  --save-key-button-active-border-color: #CC4400;                       /* Dark orange active border */
 
-  --select-background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
-  --select-color: #E6E6E6;
-  --select-border: #4A4A4A;
+  --load-models-button-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --load-models-button-color: #E6E6E6;                                  /* Light gray text */
+  --load-models-button-border-color: #4A4A4A;                           /* Medium gray border */
+  --load-models-button-hover-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange hover */
+  --load-models-button-hover-border-color: #FF6B35;                     /* Orange hover border */
+  --load-models-button-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);  /* Dark orange active */
+  --load-models-button-active-border-color: #CC4400;                    /* Dark orange active border */
+  --load-models-button-disabled-background-color: #2A2A2A;              /* Dark disabled */
+  --load-models-button-disabled-color: #666666;                         /* Gray disabled text */
+  --load-models-button-disabled-border-color: #4A4A4A;                  /* Medium gray disabled border */
 
-  /* Text Colors */
-  --text-primary: #E6E6E6;
-  --text-secondary: #B3B3B3;
-  --text-inverse: #1A1A1A;
+  /* Icons */
+  --button-icon-color: #E6E6E6;  /* Light gray icons */
+}
 
-  /* Status Colors */
-  --success-background: linear-gradient(135deg, #4A6B4A 0%, #3A5A3A 100%);
-  --success-color: #7ED321;
-  --success-border: #5A7A5A;
+/* ========================================
+   Form Elements & Inputs
+   ======================================== */
 
-  --error-background: linear-gradient(135deg, #6B4A4A 0%, #5A3A3A 100%);
-  --error-color: #FF6B35;
-  --error-border: #7A5A5A;
+.theme-abelton {
+  /* Tone Selection */
+  --tone-select-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --tone-select-color: #E6E6E6;                         /* Light gray text */
+  --tone-select-border-color: #4A4A4A;                  /* Medium gray border */
 
-  --warning-background: linear-gradient(135deg, #6B6B4A 0%, #5A5A3A 100%);
-  --warning-color: #F5A623;
-  --warning-border: #7A7A5A;
+  /* Text Inputs & Textareas */
+  --text-input-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --text-input-color: #E6E6E6;                              /* Light gray text */
+  --text-input-border-color: #4A4A4A;                       /* Medium gray border */
+  --text-output-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%); /* Dark gradient */
+  --text-output-color: #E6E6E6;                             /* Light gray text */
+  --text-output-border-color: #4A4A4A;                      /* Medium gray border */
 
-  /* Scrollbars */
-  --scrollbar-track-background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
-  --scrollbar-track-border: #3A3A3A;
-  --scrollbar-thumb-background: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 50%, #2A2A2A 100%);
-  --scrollbar-thumb-border: #5A5A5A;
-  --scrollbar-thumb-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  /* API Key Input */
+  --api-key-input-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --api-key-input-color: #E6E6E6;                               /* Light gray text */
+  --api-key-input-border-color: #4A4A4A;                        /* Medium gray border */
 
-  --scrollbar-thumb-hover-background: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);
-  --scrollbar-thumb-hover-border: #FF6B35;
+  /* Model Selection */
+  --model-select-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --model-select-color: #E6E6E6;                                /* Light gray text */
+  --model-select-border-color: #4A4A4A;                         /* Medium gray border */
+}
 
-  --scrollbar-thumb-active-background: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);
-  --scrollbar-thumb-active-border: #CC4400;
+/* ========================================
+   Labels & Text Elements
+   ======================================== */
 
-  /* Loading & Progress */
-  --loading-background: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
-  --loading-border: #4A4A4A;
-  --spinner-color: #FF6B35;
-  --progress-color: #FF6B35;
+.theme-abelton {
+  /* Labels */
+  --input-label-color: #E6E6E6;   /* Light gray labels */
+  --output-label-color: #E6E6E6;  /* Light gray labels */
+  --section-title-color: #E6E6E6; /* Light gray section titles */
 
-  /* Settings */
-  --settings-background: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
-  --settings-border: #4A4A4A;
-  --settings-icon-color: #FF6B35;
-  --settings-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  /* Descriptions */
+  --api-key-description-color: #B3B3B3;  /* Medium gray description text */
+  --api-key-link-color: #FF6B35;         /* Orange links */
+  --api-key-link-hover-color: #FF8555;   /* Lighter orange hover links */
+}
 
-  /* Legacy variable mappings for compatibility */
-  --button-border-radius1: 4px;
-  --button-border-radius2: 4px;
-  --button-hover-border-color: #FF6B35;
-  --button-hover-background-color: var(--button-hover-gradient);
-  --button-active-border-color: #CC4400;
-  --button-active-background-color: var(--button-active-gradient);
-  --drag-region-border-bottom-color: #FF6B35;
-  --drag-region-background-color: var(--drag-region-background);
-  --active-tab-background-color: var(--active-tab-background);
-  --active-tab-color: var(--active-tab-color);
-  --active-tab-border-color: var(--active-tab-border);
-  --inactive-tab-background-color: var(--inactive-tab-background);
-  --inactive-tab-color: var(--inactive-tab-color);
-  --inactive-tab-border-color: var(--inactive-tab-border);
-  --tab-hover-background-color: var(--tab-hover-background);
-  --tab-hover-border-color: var(--tab-hover-border);
-  --tab-active-background-color: var(--tab-active-background);
-  --tab-active-border-color: var(--tab-active-border);
-  --overlay-container-background-color: var(--overlay-background);
-  --overlay-container-border-color: var(--overlay-border);
-  --action-button-background-color: var(--action-button-background);
-  --action-button-color: var(--action-button-color);
-  --action-button-border-color: var(--action-button-border);
-  --action-button-active-background-color: var(--action-button-active-background);
-  --action-button-active-color: var(--action-button-active-color);
-  --action-button-active-border-color: var(--action-button-active-border);
-  --action-button-hover-background-color: var(--action-button-hover-background);
-  --action-button-hover-border-color: var(--action-button-hover-border);
-  --tone-select-background-color: var(--select-background);
-  --tone-select-color: var(--select-color);
-  --tone-select-border-color: var(--select-border);
-  --input-label-color: var(--text-primary);
-  --output-label-color: var(--text-primary);
-  --text-input-background-color: var(--input-background);
-  --text-input-color: var(--input-color);
-  --text-input-border-color: var(--input-border);
-  --text-output-background-color: var(--input-background);
-  --text-output-color: var(--input-color);
-  --text-output-border-color: var(--input-border);
-  --copy-button-background-color: var(--action-button-background);
-  --copy-button-color: var(--action-button-color);
-  --copy-button-border-color: var(--action-button-border);
-  --copy-button-copied-background-color: var(--active-tab-background);
-  --copy-button-copied-color: var(--text-inverse);
-  --copy-button-copied-border-color: var(--active-tab-border);
-  --copy-button-hover-background-color: var(--action-button-hover-background);
-  --copy-button-hover-border-color: var(--action-button-hover-border);
-  --loading-indicator-background-color: var(--loading-background);
-  --loading-indicator-border-color: var(--loading-border);
-  --loading-text-color: var(--text-primary);
-  --settings-container-background-color: var(--settings-background);
-  --settings-container-border-color: var(--settings-border);
-  --settings-title-color: var(--text-primary);
-  --message-display-success-background-color: var(--success-background);
-  --message-display-success-color: var(--success-color);
-  --message-display-success-border-color: var(--success-border);
-  --message-display-error-background-color: var(--error-background);
-  --message-display-error-color: var(--error-color);
-  --message-display-error-border-color: var(--error-border);
-  --message-icon-success-color: var(--success-color);
-  --message-icon-error-color: var(--error-color);
-  --section-title-color: var(--text-primary);
-  --api-key-description-color: var(--text-secondary);
-  --api-key-link-color: var(--link-color);
-  --api-key-link-hover-color: var(--link-hover-color);
-  --api-key-input-background-color: var(--input-background);
-  --api-key-input-color: var(--input-color);
-  --api-key-input-border-color: var(--input-border);
-  --save-key-button-background-color: var(--action-button-background);
-  --save-key-button-color: var(--action-button-color);
-  --save-key-button-border-color: var(--action-button-border);
-  --save-key-button-hover-border-color: var(--action-button-hover-border);
-  --button-icon-color: var(--text-primary);
-  --load-models-button-background-color: var(--action-button-background);
-  --load-models-button-color: var(--action-button-color);
-  --load-models-button-border-color: var(--action-button-border);
-  --load-models-button-hover-border-color: var(--action-button-hover-border);
-  --load-models-button-disabled-background-color: #2A2A2A;
-  --load-models-button-disabled-color: #666666;
-  --load-models-button-disabled-border-color: #4A4A4A;
-  --model-select-background-color: var(--select-background);
-  --model-select-color: var(--select-color);
-  --model-select-border-color: var(--select-border);
-  --save-model-button-background-color: var(--action-button-background);
-  --save-model-button-color: var(--action-button-color);
-  --save-model-button-border-color: var(--action-button-border);
-  --save-model-button-hover-background-color: var(--action-button-hover-background);
-  --save-model-button-hover-border-color: var(--action-button-hover-border);
-  --save-model-button-disabled-background-color: #2A2A2A;
-  --save-model-button-disabled-color: #666666;
-  --save-model-button-disabled-border-color: #4A4A4A;
-  --current-settings-display-background-color: var(--input-background);
-  --current-settings-display-border-color: var(--input-border);
-  --current-settings-display-color: var(--text-primary);
-  --danger-zone-border-top-color: #FF6B35;
-  --danger-title-color: #FF6B35;
-  --clear-settings-button-background-color: var(--error-background);
-  --clear-settings-button-color: var(--error-color);
-  --clear-settings-button-border-color: var(--error-border);
-  --clear-settings-button-hover-background-color: #8B5A9C;
-  --clear-settings-button-hover-border-color: #A070B5;
-  --select-option-background-color: var(--neutral-dark);
-  --select-option-color: var(--text-primary);
-  --select-option-hover-background-color: var(--tab-hover-background);
-  --select-option-hover-color: var(--text-primary);
-  --select-option-checked-background-color: var(--active-tab-background);
-  --select-option-checked-color: var(--text-inverse);
-  --scrollbar-track-background-color: var(--scrollbar-track-background);
-  --scrollbar-track-border-color: var(--scrollbar-track-border);
-  --scrollbar-thumb-background-color: var(--scrollbar-thumb-background);
-  --scrollbar-thumb-border-color: var(--scrollbar-thumb-border);
-  --scrollbar-thumb-hover-background-color: var(--scrollbar-thumb-hover-background);
-  --scrollbar-thumb-hover-border-color: var(--scrollbar-thumb-hover-border);
-  --scrollbar-thumb-active-background-color: var(--scrollbar-thumb-active-background);
-  --scrollbar-thumb-active-border-color: var(--scrollbar-thumb-active-border);
-  --scrollbar-corner-background-color: var(--scrollbar-track-background);
-  --scrollbar-corner-border-color: var(--scrollbar-track-border);
-  --scrollbar-button-background-color: var(--action-button-background);
-  --scrollbar-button-border-color: var(--action-button-border);
+/* ========================================
+   Containers & Layout
+   ======================================== */
+
+.theme-abelton {
+  /* Overlay Container */
+  --overlay-container-background-color: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);  /* Semi-transparent dark gradient */
+  --overlay-container-border-color: #4A4A4A;  /* Medium gray border */
+
+  /* Settings Container */
+  --settings-container-background-color: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);  /* Semi-transparent dark gradient */
+  --settings-container-border-color: #4A4A4A;  /* Medium gray border */
+
+  /* Current Settings Display */
+  --current-settings-display-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark gradient */
+  --current-settings-display-border-color: #4A4A4A;  /* Medium gray border */
+  --current-settings-display-color: #E6E6E6;          /* Light gray text */
+}
+
+/* ========================================
+   Loading & Status Elements
+   ======================================== */
+
+.theme-abelton {
+  /* Loading Indicator */
+  --loading-indicator-background-color: linear-gradient(135deg, rgba(42, 42, 42, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);  /* Semi-transparent dark gradient */
+  --loading-indicator-border-color: #4A4A4A;  /* Medium gray border */
+  --spinner-color: #FF6B35;                    /* Orange spinner */
+  --loading-text-color: #E6E6E6;               /* Light gray loading text */
+
+  /* Message Displays */
+  --message-display-success-background-color: linear-gradient(135deg, #4A6B4A 0%, #3A5A3A 100%);  /* Dark green success background */
+  --message-display-success-color: #7ED321;                         /* Light green success text */
+  --message-display-success-border-color: #5A7A5A;                  /* Medium green success border */
+  --message-display-error-background-color: linear-gradient(135deg, #6B4A4A 0%, #5A3A3A 100%);  /* Dark red error background */
+  --message-display-error-color: #FF6B35;                           /* Orange error text */
+  --message-display-error-border-color: #7A5A5A;                    /* Medium red error border */
+
+  /* Message Icons */
+  --message-icon-success-color: #7ED321;  /* Light green success icon */
+  --message-icon-error-color: #FF6B35;    /* Orange error icon */
+}
+
+/* ========================================
+   Scrollbars
+   ======================================== */
+
+.theme-abelton {
+  /* Scrollbar Track */
+  --scrollbar-track-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark track gradient */
+  --scrollbar-track-border-color: #3A3A3A;  /* Dark gray track border */
+
+  /* Scrollbar Thumb */
+  --scrollbar-thumb-background-color: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 50%, #2A2A2A 100%);  /* Gray thumb gradient */
+  --scrollbar-thumb-border-color: #5A5A5A;  /* Light gray thumb border */
+  --scrollbar-thumb-hover-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange hover */
+  --scrollbar-thumb-hover-border-color: #FF6B35;  /* Orange hover border */
+  --scrollbar-thumb-active-background-color: linear-gradient(135deg, #E85A2F 0%, #CC4400 100%);  /* Dark orange active */
+  --scrollbar-thumb-active-border-color: #CC4400;  /* Dark orange active border */
+
+  /* Scrollbar Corner & Buttons */
+  --scrollbar-corner-background-color: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Dark corner */
+  --scrollbar-corner-border-color: #3A3A3A;  /* Dark gray corner border */
+  --scrollbar-button-background-color: linear-gradient(135deg, #3A3A3A 0%, #2A2A2A 100%);  /* Dark button */
+  --scrollbar-button-border-color: #4A4A4A;  /* Medium gray button border */
+
+  /* Firefox Scrollbar */
+  --scrollbar-color: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 50%, #2A2A2A 100%) linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);  /* Gray thumb, dark track */
+}
+
+/* ========================================
+   Select Options
+   ======================================== */
+
+.theme-abelton {
+  /* Select Dropdown Options */
+  --select-option-background-color: #1A1A1A;                         /* Dark option background */
+  --select-option-color: #E6E6E6;                                    /* Light gray option text */
+  --select-option-hover-background-color: linear-gradient(135deg, #4A4A4A 0%, #3A3A3A 100%);  /* Medium gray hover */
+  --select-option-hover-color: #E6E6E6;                              /* Light gray hover text */
+  --select-option-checked-background-color: linear-gradient(135deg, #FF6B35 0%, #E85A2F 100%);  /* Orange checked */
+  --select-option-checked-color: #FFFFFF;                            /* White checked text */
 }

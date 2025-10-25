@@ -1,144 +1,244 @@
+/* ========================================
+   Lamasass Theme - Modern Blue Professional
+   ======================================== */
+
+/* Base Typography & Layout */
 .theme-lamasass {
+  /* Typography */
   --font-family: 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
   --font-size: 11px;
   --line-height: 16px;
   --font-weight: 400;
-  --color: #00ccff;
-  --background-color: #1a2332;
-  --button-border-radius1: 3px;
-  --button-border-radius2: 3px;
-  --link-color: #00ccff;
-  --link-hover-color: #ffffff;
-  --border-color: #00ccff;
-  --button-hover-border-color: #ffffff;
-  --button-hover-background-color: rgba(0, 204, 255, 0.1);
-  --button-active-border-color: #ffffff;
-  --button-active-background-color: rgba(255, 255, 255, 0.15);
-  --drag-region-border-bottom-color: #00ccff40;
-  --drag-region-background-color: #0f1419;
-  --active-tab-background-color: #2a3f5f;
-  --active-tab-color: #00ccff;
-  --active-tab-border-color: #00ccff;
-  --inactive-tab-background-color: #1a2332;
-  --inactive-tab-color: #7fb8d8;
-  --inactive-tab-border-color: #4a6b8a;
-  --tab-hover-background-color: rgba(0, 204, 255, 0.1);
-  --tab-hover-border-color: #ffffff;
-  --tab-active-background-color: rgba(255, 255, 255, 0.15);
-  --tab-active-border-color: #ffffff;
-  --overlay-container-background-color: rgba(0, 204, 255, 0.05);
-  --overlay-container-border-color: #00ccff;
-  --action-button-background-color: #2a3f5f;
-  --action-button-color: #00ccff;
-  --action-button-border-color: #00ccff;
-  --action-button-active-background-color: #00ccff;
-  --action-button-active-color: #1a2332;
-  --action-button-active-border-color: #00ccff;
-  --action-button-hover-background-color: rgba(0, 204, 255, 0.1);
-  --action-button-hover-border-color: #ffffff;
-  --tone-select-background-color: #2a3f5f;
-  --tone-select-color: #00ccff;
-  --tone-select-border-color: #00ccff;
-  --input-label-color: #00ccff;
-  --output-label-color: #00ccff;
-  --text-input-background-color: rgba(0, 204, 255, 0.05);
-  --text-input-color: #00ccff;
-  --text-input-border-color: #00ccff;
-  --text-output-background-color: rgba(0, 204, 255, 0.05);
-  --text-output-color: #00ccff;
-  --text-output-border-color: #00ccff;
-  --copy-button-background-color: #2a3f5f;
-  --copy-button-color: #00ccff;
-  --copy-button-border-color: #00ccff;
-  --copy-button-copied-background-color: rgba(0, 204, 255, 0.15);
-  --copy-button-copied-color: #00ccff;
-  --copy-button-copied-border-color: #00ccff;
-  --copy-button-hover-background-color: rgba(0, 204, 255, 0.1);
-  --copy-button-hover-border-color: #ffffff;
-  --copy-button-active-background-color: rgba(255, 255, 255, 0.15);
-  --copy-button-active-border-color: #ffffff;
-  --loading-indicator-background-color: rgba(0, 204, 255, 0.05);
-  --loading-indicator-border-color: #00ccff;
-  --spinner-color: #00ccff;
-  --loading-text-color: #00ccff;
-  --settings-container-background-color: rgba(0, 204, 255, 0.05);
-  --settings-container-border-color: #00ccff;
-  --settings-icon-color: #00ccff;
-  --settings-title-color: #00ccff;
-  --message-display-success-background-color: rgba(0, 204, 255, 0.1);
-  --message-display-success-color: #00ffaa;
-  --message-display-success-border-color: #00ffaa;
-  --message-display-error-background-color: rgba(255, 255, 255, 0.1);
-  --message-display-error-color: #ffffff;
-  --message-display-error-border-color: #ffffff;
-  --message-icon-success-color: #00ffaa;
-  --message-icon-error-color: #ffffff;
-  --section-title-color: #00ccff;
-  --api-key-description-color: #b8c5d1;
-  --api-key-link-color: #00ccff;
-  --api-key-link-hover-color: #ffffff;
-  --api-key-input-background-color: rgba(0, 204, 255, 0.05);
-  --api-key-input-color: #00ccff;
-  --api-key-input-border-color: #00ccff;
-  --save-key-button-background-color: #2a3f5f;
-  --save-key-button-color: #00ccff;
-  --save-key-button-border-color: #00ccff;
-  --save-key-button-hover-border-color: #ffffff;
-  --save-key-button-active-background-color: rgba(255, 255, 255, 0.15);
-  --save-key-button-active-border-color: #ffffff;
-  --button-icon-color: #00ccff;
-  --load-models-button-background-color: #2a3f5f;
-  --load-models-button-color: #00ccff;
-  --load-models-button-border-color: #00ccff;
-  --load-models-button-hover-background-color: rgba(0, 204, 255, 0.1);
-  --load-models-button-hover-border-color: #ffffff;
-  --load-models-button-active-background-color: rgba(255, 255, 255, 0.15);
-  --load-models-button-active-border-color: #ffffff;
-  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.2);
-  --load-models-button-disabled-color: #7a8a9a;
-  --load-models-button-disabled-border-color: #4a5a6a;
-  --model-select-background-color: rgba(0, 204, 255, 0.05);
-  --model-select-color: #00ccff;
-  --model-select-border-color: #00ccff;
-  --save-model-button-background-color: #2a3f5f;
-  --save-model-button-color: #00ccff;
-  --save-model-button-border-color: #00ccff;
-  --save-model-button-hover-background-color: rgba(0, 204, 255, 0.1);
-  --save-model-button-hover-border-color: #ffffff;
-  --save-model-button-active-background-color: rgba(255, 255, 255, 0.15);
-  --save-model-button-active-border-color: #ffffff;
-  --save-model-button-disabled-background-color: rgba(128, 128, 128, 0.2);
-  --save-model-button-disabled-color: #7a8a9a;
-  --save-model-button-disabled-border-color: #4a5a6a;
-  --current-settings-display-background-color: rgba(0, 204, 255, 0.05);
-  --current-settings-display-border-color: #00ccff;
-  --current-settings-display-color: #00ccff;
-  --danger-zone-border-top-color: #ffffff;
-  --danger-title-color: #ffffff;
-  --clear-settings-button-background-color: #2a3f5f;
-  --clear-settings-button-color: #ffffff;
-  --clear-settings-button-border-color: #ffffff;
-  --clear-settings-button-hover-background-color: rgba(255, 255, 255, 0.1);
-  --clear-settings-button-hover-border-color: #00ccff;
-  --clear-settings-button-active-background-color: rgba(255, 255, 255, 0.15);
-  --clear-settings-button-active-border-color: #00ccff;
-  --select-option-background-color: #2a3f5f;
-  --select-option-color: #00ccff;
-  --select-option-hover-background-color: rgba(0, 204, 255, 0.1);
-  --select-option-hover-color: #00ccff;
-  --select-option-checked-background-color: rgba(0, 204, 255, 0.15);
-  --select-option-checked-color: #00ccff;
-  --scrollbar-track-background-color: #1a2332;
-  --scrollbar-track-border-color: #00ccff;
-  --scrollbar-thumb-background-color: rgba(0, 204, 255, 0.25);
-  --scrollbar-thumb-border-color: #00ccff;
-  --scrollbar-thumb-hover-background-color: rgba(0, 204, 255, 0.35);
-  --scrollbar-thumb-hover-border-color: #ffffff;
-  --scrollbar-thumb-active-background-color: rgba(255, 255, 255, 0.25);
-  --scrollbar-thumb-active-border-color: #ffffff;
-  --scrollbar-corner-background-color: #1a2332;
-  --scrollbar-corner-border-color: #00ccff;
-  --scrollbar-button-background-color: rgba(0, 204, 255, 0.1);
-  --scrollbar-button-border-color: #00ccff;
-  --scrollbar-color: rgba(0, 204, 255, 0.25) #1a2332;
+
+  /* Base Colors */
+  --color: #00ccff;                    /* Cyan text */
+  --background-color: #1a2332;         /* Dark blue-gray background */
+  --border-color: #00ccff;             /* Cyan borders */
+
+  /* Border Radius */
+  --button-border-radius1: 3px;        /* Slightly rounded corners */
+  --button-border-radius2: 3px;        /* Slightly rounded corners */
+
+  /* Links */
+  --link-color: #00ccff;               /* Cyan links */
+  --link-hover-color: #ffffff;         /* White on hover */
+}
+
+/* ========================================
+   Navigation & App Structure
+   ======================================== */
+
+.theme-lamasass {
+  /* Drag Region */
+  --drag-region-border-bottom-color: #00ccff40;  /* Semi-transparent cyan border */
+  --drag-region-background-color: #0f1419;       /* Darker blue-gray background */
+
+  /* Navigation Tabs */
+  --active-tab-background-color: #2a3f5f;        /* Medium blue-gray active tab */
+  --active-tab-color: #00ccff;                   /* Cyan text */
+  --active-tab-border-color: #00ccff;            /* Cyan border */
+
+  --inactive-tab-background-color: #1a2332;      /* Dark blue-gray inactive tab */
+  --inactive-tab-color: #7fb8d8;                 /* Light blue-gray text */
+  --inactive-tab-border-color: #4a6b8a;          /* Medium blue-gray border */
+
+  /* Tab Interactions */
+  --tab-hover-background-color: rgba(0, 204, 255, 0.1);  /* Cyan hover background */
+  --tab-hover-border-color: #ffffff;                     /* White hover border */
+  --tab-active-background-color: rgba(255, 255, 255, 0.15); /* White active state */
+  --tab-active-border-color: #ffffff;                    /* White border */
+}
+
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
+
+.theme-lamasass {
+  /* Button Base */
+  --button-hover-border-color: #ffffff;                              /* White hover border */
+  --button-hover-background-color: rgba(0, 204, 255, 0.1);          /* Cyan hover background */
+  --button-active-border-color: #ffffff;                             /* White active border */
+  --button-active-background-color: rgba(255, 255, 255, 0.15);      /* White active background */
+
+  /* Action Buttons (Proofread, Tone, Draft) */
+  --action-button-background-color: #2a3f5f;                        /* Medium blue-gray background */
+  --action-button-color: #00ccff;                                   /* Cyan text */
+  --action-button-border-color: #00ccff;                            /* Cyan border */
+  --action-button-active-background-color: #00ccff;                 /* Cyan when active */
+  --action-button-active-color: #1a2332;                            /* Dark text when active */
+  --action-button-active-border-color: #00ccff;                     /* Cyan border when active */
+  --action-button-hover-background-color: rgba(0, 204, 255, 0.1);   /* Cyan hover background */
+  --action-button-hover-border-color: #ffffff;                      /* White hover border */
+
+  /* Send Button */
+  --send-button-background-color: #2a3f5f;                          /* Medium blue-gray background */
+  --send-button-color: #00ccff;                                     /* Cyan text */
+  --send-button-border-color: #00ccff;                              /* Cyan border */
+  --send-button-hover-background-color: rgba(0, 204, 255, 0.1);     /* Cyan hover background */
+  --send-button-hover-border-color: #ffffff;                        /* White hover border */
+  --send-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --send-button-active-border-color: #ffffff;                       /* White active border */
+
+  /* Copy Button */
+  --copy-button-background-color: #2a3f5f;                          /* Medium blue-gray background */
+  --copy-button-color: #00ccff;                                     /* Cyan text */
+  --copy-button-border-color: #00ccff;                              /* Cyan border */
+  --copy-button-copied-background-color: rgba(0, 204, 255, 0.15);   /* Cyan when copied */
+  --copy-button-copied-color: #00ccff;                              /* Cyan text when copied */
+  --copy-button-copied-border-color: #00ccff;                       /* Cyan border when copied */
+  --copy-button-hover-background-color: rgba(0, 204, 255, 0.1);     /* Cyan hover background */
+  --copy-button-hover-border-color: #ffffff;                        /* White hover border */
+  --copy-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --copy-button-active-border-color: #ffffff;                       /* White active border */
+
+  /* Settings Buttons */
+  --save-key-button-background-color: #2a3f5f;                      /* Medium blue-gray background */
+  --save-key-button-color: #00ccff;                                 /* Cyan text */
+  --save-key-button-border-color: #00ccff;                          /* Cyan border */
+  --save-key-button-hover-border-color: #ffffff;                    /* White hover border */
+  --save-key-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --save-key-button-active-border-color: #ffffff;                   /* White active border */
+
+  --load-models-button-background-color: #2a3f5f;                   /* Medium blue-gray background */
+  --load-models-button-color: #00ccff;                              /* Cyan text */
+  --load-models-button-border-color: #00ccff;                       /* Cyan border */
+  --load-models-button-hover-background-color: rgba(0, 204, 255, 0.1); /* Cyan hover background */
+  --load-models-button-hover-border-color: #ffffff;                 /* White hover border */
+  --load-models-button-active-background-color: rgba(255, 255, 255, 0.15); /* White active background */
+  --load-models-button-active-border-color: #ffffff;                /* White active border */
+  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.2); /* Gray disabled */
+  --load-models-button-disabled-color: #7a8a9a;                     /* Gray disabled text */
+  --load-models-button-disabled-border-color: #4a5a6a;              /* Dark gray disabled border */
+
+  /* Icons */
+  --button-icon-color: #00ccff;  /* Cyan icons */
+}
+
+/* ========================================
+   Form Elements & Inputs
+   ======================================== */
+
+.theme-lamasass {
+  /* Tone Selection */
+  --tone-select-background-color: #2a3f5f;                          /* Medium blue-gray background */
+  --tone-select-color: #00ccff;                                     /* Cyan text */
+  --tone-select-border-color: #00ccff;                              /* Cyan border */
+
+  /* Text Inputs & Textareas */
+  --text-input-background-color: rgba(0, 204, 255, 0.05);           /* Very subtle cyan background */
+  --text-input-color: #00ccff;                                      /* Cyan text */
+  --text-input-border-color: #00ccff;                               /* Cyan border */
+  --text-output-background-color: rgba(0, 204, 255, 0.05);          /* Very subtle cyan background */
+  --text-output-color: #00ccff;                                     /* Cyan text */
+  --text-output-border-color: #00ccff;                              /* Cyan border */
+
+  /* API Key Input */
+  --api-key-input-background-color: rgba(0, 204, 255, 0.05);        /* Very subtle cyan background */
+  --api-key-input-color: #00ccff;                                   /* Cyan text */
+  --api-key-input-border-color: #00ccff;                            /* Cyan border */
+
+  /* Model Selection */
+  --model-select-background-color: rgba(0, 204, 255, 0.05);         /* Very subtle cyan background */
+  --model-select-color: #00ccff;                                    /* Cyan text */
+  --model-select-border-color: #00ccff;                             /* Cyan border */
+}
+
+/* ========================================
+   Labels & Text Elements
+   ======================================== */
+
+.theme-lamasass {
+  /* Labels */
+  --input-label-color: #00ccff;   /* Cyan labels */
+  --output-label-color: #00ccff;  /* Cyan labels */
+  --section-title-color: #00ccff; /* Cyan section titles */
+
+  /* Descriptions */
+  --api-key-description-color: #b8c5d1;  /* Light blue-gray description text */
+  --api-key-link-color: #00ccff;         /* Cyan links */
+  --api-key-link-hover-color: #ffffff;   /* White hover links */
+}
+
+/* ========================================
+   Containers & Layout
+   ======================================== */
+
+.theme-lamasass {
+  /* Overlay Container */
+  --overlay-container-background-color: rgba(0, 204, 255, 0.05);    /* Very subtle cyan background */
+  --overlay-container-border-color: #00ccff;                        /* Cyan border */
+
+  /* Settings Container */
+  --settings-container-background-color: rgba(0, 204, 255, 0.05);   /* Very subtle cyan background */
+  --settings-container-border-color: #00ccff;                       /* Cyan border */
+
+  /* Current Settings Display */
+  --current-settings-display-background-color: rgba(0, 204, 255, 0.05); /* Very subtle cyan background */
+  --current-settings-display-border-color: #00ccff;                 /* Cyan border */
+  --current-settings-display-color: #00ccff;                        /* Cyan text */
+}
+
+/* ========================================
+   Loading & Status Elements
+   ======================================== */
+
+.theme-lamasass {
+  /* Loading Indicator */
+  --loading-indicator-background-color: rgba(0, 204, 255, 0.05);    /* Very subtle cyan background */
+  --loading-indicator-border-color: #00ccff;                        /* Cyan border */
+  --spinner-color: #00ccff;                                         /* Cyan spinner */
+  --loading-text-color: #00ccff;                                    /* Cyan loading text */
+
+  /* Message Displays */
+  --message-display-success-background-color: rgba(0, 204, 255, 0.1); /* Cyan success background */
+  --message-display-success-color: #00ffaa;                         /* Light green success text */
+  --message-display-success-border-color: #00ffaa;                  /* Light green success border */
+  --message-display-error-background-color: rgba(255, 255, 255, 0.1); /* White error background */
+  --message-display-error-color: #ffffff;                           /* White error text */
+  --message-display-error-border-color: #ffffff;                    /* White error border */
+
+  /* Message Icons */
+  --message-icon-success-color: #00ffaa;  /* Light green success icon */
+  --message-icon-error-color: #ffffff;    /* White error icon */
+}
+
+/* ========================================
+   Scrollbars
+   ======================================== */
+
+.theme-lamasass {
+  /* Scrollbar Track */
+  --scrollbar-track-background-color: #1a2332;                      /* Dark blue-gray track */
+  --scrollbar-track-border-color: #00ccff;                          /* Cyan track border */
+
+  /* Scrollbar Thumb */
+  --scrollbar-thumb-background-color: rgba(0, 204, 255, 0.25);      /* Semi-transparent cyan thumb */
+  --scrollbar-thumb-border-color: #00ccff;                          /* Cyan thumb border */
+  --scrollbar-thumb-hover-background-color: rgba(0, 204, 255, 0.35); /* More opaque cyan on hover */
+  --scrollbar-thumb-hover-border-color: #ffffff;                    /* White hover border */
+  --scrollbar-thumb-active-background-color: rgba(255, 255, 255, 0.25); /* White active background */
+  --scrollbar-thumb-active-border-color: #ffffff;                   /* White active border */
+
+  /* Scrollbar Corner & Buttons */
+  --scrollbar-corner-background-color: #1a2332;                      /* Dark blue-gray corner */
+  --scrollbar-corner-border-color: #00ccff;                         /* Cyan corner border */
+  --scrollbar-button-background-color: rgba(0, 204, 255, 0.1);      /* Cyan button background */
+  --scrollbar-button-border-color: #00ccff;                         /* Cyan button border */
+
+  /* Firefox Scrollbar */
+  --scrollbar-color: rgba(0, 204, 255, 0.25) #1a2332;  /* Cyan thumb, dark blue-gray track */
+}
+
+/* ========================================
+   Select Options
+   ======================================== */
+
+.theme-lamasass {
+  /* Select Dropdown Options */
+  --select-option-background-color: #2a3f5f;                        /* Medium blue-gray option background */
+  --select-option-color: #00ccff;                                   /* Cyan option text */
+  --select-option-hover-background-color: rgba(0, 204, 255, 0.1);   /* Cyan hover background */
+  --select-option-hover-color: #00ccff;                             /* Cyan hover text */
+  --select-option-checked-background-color: rgba(0, 204, 255, 0.15); /* Cyan checked background */
+  --select-option-checked-color: #00ccff;                           /* Cyan checked text */
 }

@@ -1,146 +1,244 @@
+/* ========================================
+   ICQ Theme - Classic 90s Messenger Style
+   ======================================== */
+
+/* Base Typography & Layout */
 .theme-icq {
+  /* Typography */
   --font-family: 'MS Sans Serif', 'Tahoma', 'Arial', sans-serif;
   --font-size: 11px;
   --line-height: 16px;
   --font-weight: 400;
-  --color: #ffffff;
-  --background-color: #4a90e2;
-  --button-border-radius1: 8px;
-  --button-border-radius2: 8px;
-  --link-color: #ffff00;
-  --link-hover-color: #ffffff;
-  --border-color: #ffffff;
-  --button-hover-border-color: #00ff00;
-  --button-hover-background-color: rgba(255, 255, 255, 0.1);
-  --button-active-border-color: #ff6600;
-  --button-active-background-color: rgba(255, 102, 0, 0.2);
-  --drag-region-border-bottom-color: #ffffff3b;
-  --drag-region-background-color: #4a90e2;
-  --active-tab-background-color: #00aaff;
-  --active-tab-color: #ffffff;
-  --active-tab-border-color: #ffffff;
-  --inactive-tab-background-color: rgba(255, 255, 255, 0.158);
-  --inactive-tab-color: #ffffff;
-  --inactive-tab-border-color: #ffffff;
-  --tab-hover-background-color: rgba(255, 255, 255, 0.301);
-  --tab-hover-border-color: #00ff00;
-  --tab-active-background-color: rgba(255, 102, 0, 0.2);
-  --tab-active-border-color: #ff6600;
-  --overlay-container-background-color: rgba(74, 144, 226, 0.95);
-  --overlay-container-border-color: #ffffff;
-  --action-button-background-color: #0066cc;
-  --action-button-color: #ffffff;
-  --action-button-border-color: #ffffff;
-  --action-button-active-background-color: #00aaff;
-  --action-button-active-color: #ffffff;
-  --action-button-active-border-color: #00ff00;
-  --action-button-hover-background-color: #0088ff;
-  --action-button-hover-border-color: #00ff00;
-  --action-button-active-background-color: #00aaff;
-  --action-button-active-border-color: #ff6600;
-  --tone-select-background-color: rgba(0, 102, 204, 0.8);
-  --tone-select-color: #ffffff;
-  --tone-select-border-color: #ffffff;
-  --input-label-color: #ffffff;
-  --output-label-color: #ffffff;
-  --text-input-background-color: rgba(255, 255, 255, 0.9);
-  --text-input-color: #000000;
-  --text-input-border-color: #ffffff;
-  --text-output-background-color: rgba(255, 255, 255, 0.9);
-  --text-output-color: #000000;
-  --text-output-border-color: #ffffff;
-  --copy-button-background-color: #0066cc;
-  --copy-button-color: #ffffff;
-  --copy-button-border-color: #ffffff;
-  --copy-button-copied-background-color: rgba(0, 255, 0, 0.8);
-  --copy-button-copied-color: #ffffff;
-  --copy-button-copied-border-color: #00ff00;
-  --copy-button-hover-background-color: rgba(0, 136, 255, 0.8);
-  --copy-button-hover-border-color: #00ff00;
-  --copy-button-active-background-color: rgba(255, 102, 0, 0.2);
-  --copy-button-active-border-color: #ff6600;
-  --loading-indicator-background-color: rgba(74, 144, 226, 0.9);
-  --loading-indicator-border-color: #ffffff;
-  --spinner-color: #00ff00;
-  --loading-text-color: #ffffff;
-  --settings-container-background-color: rgba(74, 144, 226, 0.95);
-  --settings-container-border-color: #ffffff;
-  --settings-icon-color: #00ff00;
-  --settings-title-color: #ffffff;
-  --message-display-success-background-color: rgba(0, 255, 0, 0.8);
-  --message-display-success-color: #ffffff;
-  --message-display-success-border-color: #00ff00;
-  --message-display-error-background-color: rgba(255, 102, 0, 0.8);
-  --message-display-error-color: #ffffff;
-  --message-display-error-border-color: #ff6600;
-  --message-icon-success-color: #00ff00;
-  --message-icon-error-color: #ff6600;
-  --section-title-color: #ffffff;
-  --api-key-description-color: #ffffff;
-  --api-key-link-color: #ffff00;
-  --api-key-link-hover-color: #ffffff;
-  --api-key-input-background-color: rgba(255, 255, 255, 0.9);
-  --api-key-input-color: #000000;
-  --api-key-input-border-color: #ffffff;
-  --save-key-button-background-color: #0066cc;
-  --save-key-button-color: #ffffff;
-  --save-key-button-border-color: #ffffff;
-  --save-key-button-hover-border-color: #00ff00;
-  --save-key-button-active-background-color: rgba(255, 102, 0, 0.2);
-  --save-key-button-active-border-color: #ff6600;
-  --button-icon-color: #ffffff;
-  --load-models-button-background-color: #0066cc;
-  --load-models-button-color: #ffffff;
-  --load-models-button-border-color: #ffffff;
-  --load-models-button-hover-background-color: rgba(0, 136, 255, 0.8);
-  --load-models-button-hover-border-color: #00ff00;
-  --load-models-button-active-background-color: rgba(255, 102, 0, 0.2);
-  --load-models-button-active-border-color: #ff6600;
-  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.5);
-  --load-models-button-disabled-color: #cccccc;
-  --load-models-button-disabled-border-color: #999999;
-  --model-select-background-color: rgba(0, 102, 204, 0.8);
-  --model-select-color: #ffffff;
-  --model-select-border-color: #ffffff;
-  --save-model-button-background-color: #0066cc;
-  --save-model-button-color: #ffffff;
-  --save-model-button-border-color: #ffffff;
-  --save-model-button-hover-background-color: rgba(0, 136, 255, 0.8);
-  --save-model-button-hover-border-color: #00ff00;
-  --save-model-button-active-background-color: rgba(255, 102, 0, 0.2);
-  --save-model-button-active-border-color: #ff6600;
-  --save-model-button-disabled-background-color: rgba(128, 128, 128, 0.5);
-  --save-model-button-disabled-color: #cccccc;
-  --save-model-button-disabled-border-color: #999999;
-  --current-settings-display-background-color: rgba(255, 255, 255, 0.9);
-  --current-settings-display-border-color: #ffffff;
-  --current-settings-display-color: #000000;
-  --danger-zone-border-top-color: #ff6600;
-  --danger-title-color: #ff6600;
-  --clear-settings-button-background-color: #cc0000;
-  --clear-settings-button-color: #ffffff;
-  --clear-settings-button-border-color: #ff6600;
-  --clear-settings-button-hover-background-color: rgba(255, 102, 0, 0.8);
-  --clear-settings-button-hover-border-color: #00ff00;
-  --clear-settings-button-active-background-color: rgba(255, 102, 0, 0.2);
-  --clear-settings-button-active-border-color: #00ff00;
-  --select-option-background-color: #0066cc;
-  --select-option-color: #ffffff;
-  --select-option-hover-background-color: rgba(0, 136, 255, 0.8);
-  --select-option-hover-color: #ffffff;
-  --select-option-checked-background-color: rgba(0, 255, 0, 0.8);
-  --select-option-checked-color: #ffffff;
-  --scrollbar-track-background-color: #4a90e2;
-  --scrollbar-track-border-color: #ffffff;
-  --scrollbar-thumb-background-color: rgba(255, 255, 255, 0.3);
-  --scrollbar-thumb-border-color: #ffffff;
-  --scrollbar-thumb-hover-background-color: rgba(255, 255, 255, 0.5);
-  --scrollbar-thumb-hover-border-color: #00ff00;
-  --scrollbar-thumb-active-background-color: rgba(255, 102, 0, 0.4);
-  --scrollbar-thumb-active-border-color: #ff6600;
-  --scrollbar-corner-background-color: #4a90e2;
-  --scrollbar-corner-border-color: #ffffff;
-  --scrollbar-button-background-color: rgba(255, 255, 255, 0.1);
-  --scrollbar-button-border-color: #ffffff;
-  --scrollbar-color: rgba(255, 255, 255, 0.3) #4a90e2;
+
+  /* Base Colors */
+  --color: #ffffff;                    /* White text */
+  --background-color: #4a90e2;         /* ICQ blue background */
+  --border-color: #ffffff;             /* White borders */
+
+  /* Border Radius */
+  --button-border-radius1: 8px;        /* Rounded corners for 90s feel */
+  --button-border-radius2: 8px;        /* Rounded corners for inputs */
+
+  /* Links */
+  --link-color: #ffff00;               /* Yellow links */
+  --link-hover-color: #ffffff;         /* White on hover */
+}
+
+/* ========================================
+   Navigation & App Structure
+   ======================================== */
+
+.theme-icq {
+  /* Drag Region */
+  --drag-region-border-bottom-color: #ffffff3b;  /* Semi-transparent white border */
+  --drag-region-background-color: #4a90e2;       /* ICQ blue background */
+
+  /* Navigation Tabs */
+  --active-tab-background-color: #00aaff;        /* Bright blue active tab */
+  --active-tab-color: #ffffff;                   /* White text */
+  --active-tab-border-color: #ffffff;            /* White border */
+
+  --inactive-tab-background-color: rgba(255, 255, 255, 0.158);  /* Semi-transparent white */
+  --inactive-tab-color: #ffffff;                                /* White text */
+  --inactive-tab-border-color: #ffffff;                         /* White border */
+
+  /* Tab Interactions */
+  --tab-hover-background-color: rgba(255, 255, 255, 0.301);     /* More opaque white */
+  --tab-hover-border-color: #00ff00;                            /* Green hover border */
+  --tab-active-background-color: rgba(255, 102, 0, 0.2);       /* Orange active state */
+  --tab-active-border-color: #ff6600;                           /* Orange border */
+}
+
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
+
+.theme-icq {
+  /* Button Base */
+  --button-hover-border-color: #00ff00;                              /* Green hover border */
+  --button-hover-background-color: rgba(255, 255, 255, 0.1);        /* White hover background */
+  --button-active-border-color: #ff6600;                             /* Orange active border */
+  --button-active-background-color: rgba(255, 102, 0, 0.2);         /* Orange active background */
+
+  /* Action Buttons (Proofread, Tone, Draft) */
+  --action-button-background-color: #0066cc;                        /* Dark blue background */
+  --action-button-color: #ffffff;                                   /* White text */
+  --action-button-border-color: #ffffff;                            /* White border */
+  --action-button-active-background-color: #00aaff;                 /* Bright blue when active */
+  --action-button-active-color: #ffffff;                            /* White text when active */
+  --action-button-active-border-color: #00ff00;                     /* Green border when active */
+  --action-button-hover-background-color: #0088ff;                  /* Lighter blue hover */
+  --action-button-hover-border-color: #00ff00;                      /* Green hover border */
+
+  /* Send Button */
+  --send-button-background-color: #0066cc;                          /* Dark blue background */
+  --send-button-color: #ffffff;                                     /* White text */
+  --send-button-border-color: #ffffff;                              /* White border */
+  --send-button-hover-background-color: #0088ff;                     /* Lighter blue hover */
+  --send-button-hover-border-color: #00ff00;                        /* Green hover border */
+  --send-button-active-background-color: #00aaff;                    /* Bright blue active */
+  --send-button-active-border-color: #ff6600;                       /* Orange active border */
+
+  /* Copy Button */
+  --copy-button-background-color: #0066cc;                          /* Dark blue background */
+  --copy-button-color: #ffffff;                                     /* White text */
+  --copy-button-border-color: #ffffff;                              /* White border */
+  --copy-button-copied-background-color: rgba(0, 255, 0, 0.8);      /* Green when copied */
+  --copy-button-copied-color: #ffffff;                              /* White text when copied */
+  --copy-button-copied-border-color: #00ff00;                       /* Green border when copied */
+  --copy-button-hover-background-color: rgba(0, 136, 255, 0.8);     /* Lighter blue hover */
+  --copy-button-hover-border-color: #00ff00;                        /* Green hover border */
+  --copy-button-active-background-color: rgba(255, 102, 0, 0.2);    /* Orange active */
+  --copy-button-active-border-color: #ff6600;                       /* Orange active border */
+
+  /* Settings Buttons */
+  --save-key-button-background-color: #0066cc;                      /* Dark blue background */
+  --save-key-button-color: #ffffff;                                 /* White text */
+  --save-key-button-border-color: #ffffff;                          /* White border */
+  --save-key-button-hover-border-color: #00ff00;                    /* Green hover border */
+  --save-key-button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active */
+  --save-key-button-active-border-color: #ff6600;                   /* Orange active border */
+
+  --load-models-button-background-color: #0066cc;                   /* Dark blue background */
+  --load-models-button-color: #ffffff;                              /* White text */
+  --load-models-button-border-color: #ffffff;                       /* White border */
+  --load-models-button-hover-background-color: rgba(0, 136, 255, 0.8); /* Lighter blue hover */
+  --load-models-button-hover-border-color: #00ff00;                 /* Green hover border */
+  --load-models-button-active-background-color: rgba(255, 102, 0, 0.2); /* Orange active */
+  --load-models-button-active-border-color: #ff6600;                /* Orange active border */
+  --load-models-button-disabled-background-color: rgba(128, 128, 128, 0.5); /* Gray disabled */
+  --load-models-button-disabled-color: #cccccc;                     /* Light gray disabled text */
+  --load-models-button-disabled-border-color: #999999;              /* Medium gray disabled border */
+
+  /* Icons */
+  --button-icon-color: #ffffff;  /* White icons */
+}
+
+/* ========================================
+   Form Elements & Inputs
+   ======================================== */
+
+.theme-icq {
+  /* Tone Selection */
+  --tone-select-background-color: rgba(0, 102, 204, 0.8);           /* Semi-transparent dark blue */
+  --tone-select-color: #ffffff;                                     /* White text */
+  --tone-select-border-color: #ffffff;                              /* White border */
+
+  /* Text Inputs & Textareas */
+  --text-input-background-color: rgba(255, 255, 255, 0.9);          /* Semi-transparent white */
+  --text-input-color: #000000;                                      /* Black text */
+  --text-input-border-color: #ffffff;                               /* White border */
+  --text-output-background-color: rgba(255, 255, 255, 0.9);         /* Semi-transparent white */
+  --text-output-color: #000000;                                     /* Black text */
+  --text-output-border-color: #ffffff;                              /* White border */
+
+  /* API Key Input */
+  --api-key-input-background-color: rgba(255, 255, 255, 0.9);       /* Semi-transparent white */
+  --api-key-input-color: #000000;                                   /* Black text */
+  --api-key-input-border-color: #ffffff;                            /* White border */
+
+  /* Model Selection */
+  --model-select-background-color: rgba(0, 102, 204, 0.8);          /* Semi-transparent dark blue */
+  --model-select-color: #ffffff;                                    /* White text */
+  --model-select-border-color: #ffffff;                             /* White border */
+}
+
+/* ========================================
+   Labels & Text Elements
+   ======================================== */
+
+.theme-icq {
+  /* Labels */
+  --input-label-color: #ffffff;   /* White labels */
+  --output-label-color: #ffffff;  /* White labels */
+  --section-title-color: #ffffff; /* White section titles */
+
+  /* Descriptions */
+  --api-key-description-color: #ffffff;  /* White description text */
+  --api-key-link-color: #ffff00;         /* Yellow links */
+  --api-key-link-hover-color: #ffffff;   /* White hover links */
+}
+
+/* ========================================
+   Containers & Layout
+   ======================================== */
+
+.theme-icq {
+  /* Overlay Container */
+  --overlay-container-background-color: rgba(74, 144, 226, 0.95);   /* Semi-transparent ICQ blue */
+  --overlay-container-border-color: #ffffff;                        /* White border */
+
+  /* Settings Container */
+  --settings-container-background-color: rgba(74, 144, 226, 0.95);  /* Semi-transparent ICQ blue */
+  --settings-container-border-color: #ffffff;                       /* White border */
+
+  /* Current Settings Display */
+  --current-settings-display-background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  --current-settings-display-border-color: #ffffff;                 /* White border */
+  --current-settings-display-color: #000000;                        /* Black text */
+}
+
+/* ========================================
+   Loading & Status Elements
+   ======================================== */
+
+.theme-icq {
+  /* Loading Indicator */
+  --loading-indicator-background-color: rgba(74, 144, 226, 0.9);    /* Semi-transparent ICQ blue */
+  --loading-indicator-border-color: #ffffff;                        /* White border */
+  --spinner-color: #00ff00;                                         /* Green spinner */
+  --loading-text-color: #ffffff;                                    /* White loading text */
+
+  /* Message Displays */
+  --message-display-success-background-color: rgba(0, 255, 0, 0.8);  /* Semi-transparent green success */
+  --message-display-success-color: #ffffff;                          /* White success text */
+  --message-display-success-border-color: #00ff00;                   /* Green success border */
+  --message-display-error-background-color: rgba(255, 102, 0, 0.8);  /* Semi-transparent orange error */
+  --message-display-error-color: #ffffff;                           /* White error text */
+  --message-display-error-border-color: #ff6600;                     /* Orange error border */
+
+  /* Message Icons */
+  --message-icon-success-color: #00ff00;  /* Green success icon */
+  --message-icon-error-color: #ff6600;    /* Orange error icon */
+}
+
+/* ========================================
+   Scrollbars
+   ======================================== */
+
+.theme-icq {
+  /* Scrollbar Track */
+  --scrollbar-track-background-color: #4a90e2;                      /* ICQ blue track */
+  --scrollbar-track-border-color: #ffffff;                          /* White track border */
+
+  /* Scrollbar Thumb */
+  --scrollbar-thumb-background-color: rgba(255, 255, 255, 0.3);     /* Semi-transparent white thumb */
+  --scrollbar-thumb-border-color: #ffffff;                          /* White thumb border */
+  --scrollbar-thumb-hover-background-color: rgba(255, 255, 255, 0.5); /* More opaque white on hover */
+  --scrollbar-thumb-hover-border-color: #00ff00;                    /* Green hover border */
+  --scrollbar-thumb-active-background-color: rgba(255, 102, 0, 0.4); /* Orange active background */
+  --scrollbar-thumb-active-border-color: #ff6600;                   /* Orange active border */
+
+  /* Scrollbar Corner & Buttons */
+  --scrollbar-corner-background-color: #4a90e2;                      /* ICQ blue corner */
+  --scrollbar-corner-border-color: #ffffff;                         /* White corner border */
+  --scrollbar-button-background-color: rgba(255, 255, 255, 0.1);    /* Semi-transparent white button */
+  --scrollbar-button-border-color: #ffffff;                         /* White button border */
+
+  /* Firefox Scrollbar */
+  --scrollbar-color: rgba(255, 255, 255, 0.3) #4a90e2;  /* White thumb, ICQ blue track */
+}
+
+/* ========================================
+   Select Options
+   ======================================== */
+
+.theme-icq {
+  /* Select Dropdown Options */
+  --select-option-background-color: #0066cc;                        /* Dark blue option background */
+  --select-option-color: #ffffff;                                   /* White option text */
+  --select-option-hover-background-color: rgba(0, 136, 255, 0.8);   /* Lighter blue hover */
+  --select-option-hover-color: #ffffff;                             /* White hover text */
+  --select-option-checked-background-color: rgba(0, 255, 0, 0.8);   /* Green checked */
+  --select-option-checked-color: #ffffff;                           /* White checked text */
 }

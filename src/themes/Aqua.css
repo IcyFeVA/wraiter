@@ -1,3 +1,8 @@
+/* ========================================
+   Aqua Theme - Classic macOS Aqua Style
+   ======================================== */
+
+/* Base Typography & Layout */
 .theme-aqua {
   /* Typography */
   --font-family: 'Lucida Grande', 'Helvetica Neue', Arial, sans-serif;
@@ -6,256 +11,234 @@
   --font-weight: 400;
 
   /* Base Colors */
-  --color: #333;
-  --background-color: #E8E8E8;
+  --color: #333333;                    /* Dark gray text */
+  --background-color: #E8E8E8;         /* Light gray background */
+  --border-color: #A6A6A6;             /* Medium gray borders */
 
-  /* Aqua Blue Palette */
-  --aqua-blue: #4A90E2;
-  --aqua-blue-dark: #2E5C8A;
-  --aqua-blue-light: #7DB6E8;
-  --aqua-blue-gradient: linear-gradient(180deg, #5BA3F5 0%, #4A90E2 50%, #2E5C8A 100%);
-
-  /* Classic Aqua Colors */
-  --apple-blue: #0066CC;
-  --apple-blue-dark: #004499;
-  --apple-blue-light: #4A90E2;
-  --apple-gray: #CCCCCC;
-  --apple-gray-dark: #999999;
-  --apple-gray-light: #E8E8E8;
-  --apple-white: #FFFFFF;
-
-  /* Button Styling */
-  --button-border-radius: 6px;
-  --button-gradient: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 50%, #D0D0D0 100%);
-  --button-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.1);
-  --button-hover-gradient: linear-gradient(180deg, #F8F8F8 0%, #E8E8E8 50%, #D8D8D8 100%);
-  --button-active-gradient: linear-gradient(180deg, #D8D8D8 0%, #C8C8C8 50%, #B8B8B8 100%);
+  /* Border Radius */
+  --button-border-radius1: 6px;        /* Rounded corners for buttons */
+  --button-border-radius2: 6px;        /* Rounded corners for inputs */
 
   /* Links */
-  --link-color: #0066CC;
-  --link-hover-color: #004499;
-  --link-gradient: linear-gradient(180deg, #4A90E2 0%, #0066CC 100%);
+  --link-color: #0066CC;               /* Blue links */
+  --link-hover-color: #004499;         /* Darker blue on hover */
+}
 
-  /* Borders & Strokes */
-  --border-color: #A6A6A6;
-  --border-light: #CCCCCC;
-  --border-dark: #808080;
-  --stroke-light: rgba(255,255,255,0.7);
-  --stroke-dark: rgba(0,0,0,0.3);
+/* ========================================
+   Navigation & App Structure
+   ======================================== */
 
-  /* Window Elements */
-  --window-background: linear-gradient(180deg, #F8F8F8 0%, #E8E8E8 50%, #D8D8D8 100%);
-  --window-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  --drag-region-background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
-  --drag-region-border: #C2C2C2;
+.theme-aqua {
+  /* Drag Region */
+  --drag-region-border-bottom-color: #C2C2C2;                    /* Light gray border */
+  --drag-region-background-color: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);  /* Light gradient */
 
-  /* Tabs */
-  --active-tab-background: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);
-  --active-tab-color: #FFFFFF;
-  --active-tab-border: #2E5C8A;
-  --active-tab-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+  /* Navigation Tabs */
+  --active-tab-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue gradient */
+  --active-tab-color: #FFFFFF;                                      /* White text */
+  --active-tab-border-color: #2E5C8A;                               /* Dark blue border */
 
-  --inactive-tab-background: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 100%);
-  --inactive-tab-color: #666666;
-  --inactive-tab-border: #CCCCCC;
+  --inactive-tab-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 100%);  /* Light gray gradient */
+  --inactive-tab-color: #666666;                                    /* Medium gray text */
+  --inactive-tab-border-color: #CCCCCC;                             /* Light gray border */
 
-  --tab-hover-background: linear-gradient(180deg, #FAFAFA 0%, #E8E8E8 50%, #D8D8D8 100%);
-  --tab-hover-border: #B0B0B0;
+  /* Tab Interactions */
+  --tab-hover-background-color: linear-gradient(180deg, #FAFAFA 0%, #E8E8E8 50%, #D8D8D8 100%);  /* Lighter gray */
+  --tab-hover-border-color: #B0B0B0;                                /* Medium gray border */
+  --tab-active-background-color: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 100%);  /* Blue gradient */
+  --tab-active-border-color: #1A3F66;                               /* Dark blue border */
+}
 
-  --tab-active-background: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 100%);
-  --tab-active-border: #1A3F66;
+/* ========================================
+   Buttons & Interactive Elements
+   ======================================== */
 
-  /* Overlays & Containers */
-  --overlay-background: linear-gradient(180deg, rgba(248,248,248,0.95) 0%, rgba(232,232,232,0.95) 100%);
-  --overlay-border: #B0B0B0;
-  --overlay-shadow: 0 8px 24px rgba(0,0,0,0.2);
+.theme-aqua {
+  /* Button Base */
+  --button-hover-border-color: #7D7D7D;                              /* Medium gray hover border */
+  --button-hover-background-color: linear-gradient(180deg, #F8F8F8 0%, #E8E8E8 50%, #D8D8D8 100%);  /* Light hover gradient */
+  --button-active-border-color: #646464;                             /* Dark gray active border */
+  --button-active-background-color: linear-gradient(180deg, #D8D8D8 0%, #C8C8C8 50%, #B8B8B8 100%); /* Dark active gradient */
 
-  /* Buttons & Controls */
-  --action-button-background: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);
-  --action-button-color: #333333;
-  --action-button-border: #B0B0B0;
-  --action-button-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 1px 2px rgba(0,0,0,0.1);
+  /* Action Buttons (Proofread, Tone, Draft) */
+  --action-button-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);  /* Light gray gradient */
+  --action-button-color: #333333;                                       /* Dark gray text */
+  --action-button-border-color: #B0B0B0;                                /* Medium gray border */
+  --action-button-active-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue active */
+  --action-button-active-color: #FFFFFF;                               /* White text when active */
+  --action-button-active-border-color: #1A3F66;                        /* Dark blue border when active */
+  --action-button-hover-background-color: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 50%, #1A3F66 100%);  /* Blue hover */
+  --action-button-hover-border-color: #2E5C8A;                          /* Medium blue hover border */
 
-  --action-button-hover-background: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 50%, #1A3F66 100%);
-  --action-button-hover-color: #FFFFFF;
-  --action-button-hover-border: #2E5C8A;
+  /* Send Button */
+  --send-button-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);  /* Light gray gradient */
+  --send-button-color: #333333;                                         /* Dark gray text */
+  --send-button-border-color: #B0B0B0;                                  /* Medium gray border */
+  --send-button-hover-background-color: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 50%, #1A3F66 100%);  /* Blue hover */
+  --send-button-hover-border-color: #2E5C8A;                            /* Medium blue hover border */
+  --send-button-active-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue active */
+  --send-button-active-border-color: #1A3F66;                           /* Dark blue active border */
 
-  --action-button-active-background: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);
-  --action-button-active-color: #FFFFFF;
-  --action-button-active-border: #1A3F66;
+  /* Copy Button */
+  --copy-button-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);  /* Light gray gradient */
+  --copy-button-color: #333333;                                         /* Dark gray text */
+  --copy-button-border-color: #B0B0B0;                                  /* Medium gray border */
+  --copy-button-copied-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue when copied */
+  --copy-button-copied-color: #FFFFFF;                                  /* White text when copied */
+  --copy-button-copied-border-color: #2E5C8A;                           /* Dark blue border when copied */
+  --copy-button-hover-background-color: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 50%, #1A3F66 100%);  /* Blue hover */
+  --copy-button-hover-border-color: #2E5C8A;                            /* Medium blue hover border */
+  --copy-button-active-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue active */
+  --copy-button-active-border-color: #1A3F66;                           /* Dark blue active border */
 
-  /* Form Elements */
-  --input-background: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%);
-  --input-color: #333333;
-  --input-border: #B0B0B0;
-  --input-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  /* Settings Buttons */
+  --save-key-button-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);  /* Light gray gradient */
+  --save-key-button-color: #333333;                                     /* Dark gray text */
+  --save-key-button-border-color: #B0B0B0;                              /* Medium gray border */
+  --save-key-button-hover-border-color: #2E5C8A;                        /* Medium blue hover border */
+  --save-key-button-active-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue active */
+  --save-key-button-active-border-color: #1A3F66;                       /* Dark blue active border */
 
-  --select-background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);
-  --select-color: #333333;
-  --select-border: #B0B0B0;
+  --load-models-button-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);  /* Light gray gradient */
+  --load-models-button-color: #333333;                                  /* Dark gray text */
+  --load-models-button-border-color: #B0B0B0;                           /* Medium gray border */
+  --load-models-button-hover-background-color: linear-gradient(180deg, #4A90E2 0%, #2E5C8A 50%, #1A3F66 100%);  /* Blue hover */
+  --load-models-button-hover-border-color: #2E5C8A;                     /* Medium blue hover border */
+  --load-models-button-active-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue active */
+  --load-models-button-active-border-color: #1A3F66;                    /* Dark blue active border */
+  --load-models-button-disabled-background-color: #F5F5F5;              /* Light gray disabled */
+  --load-models-button-disabled-color: #BDBDBD;                         /* Light gray disabled text */
+  --load-models-button-disabled-border-color: #E0E0E0;                  /* Very light gray disabled border */
 
-  /* Text Colors */
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --text-inverse: #FFFFFF;
+  /* Icons */
+  --button-icon-color: #333333;  /* Dark gray icons */
+}
 
-  /* Status Colors */
-  --success-background: linear-gradient(180deg, #E8F5E8 0%, #D4E8D4 100%);
-  --success-color: #2D5A2D;
-  --success-border: #C8D9C8;
+/* ========================================
+   Form Elements & Inputs
+   ======================================== */
 
-  --error-background: linear-gradient(180deg, #F5E8E8 0%, #E8D4D4 100%);
-  --error-color: #A94442;
-  --error-border: #D9C8C8;
+.theme-aqua {
+  /* Tone Selection */
+  --tone-select-background-color: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);  /* White to light gray gradient */
+  --tone-select-color: #333333;                         /* Dark gray text */
+  --tone-select-border-color: #B0B0B0;                  /* Medium gray border */
 
-  --warning-background: linear-gradient(180deg, #FDF8E8 0%, #F0E8D4 100%);
-  --warning-color: #8A6D2D;
-  --warning-border: #E8D9C8;
+  /* Text Inputs & Textareas */
+  --text-input-background-color: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%);  /* White to light gray gradient */
+  --text-input-color: #333333;                              /* Dark gray text */
+  --text-input-border-color: #B0B0B0;                       /* Medium gray border */
+  --text-output-background-color: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%); /* White to light gray gradient */
+  --text-output-color: #333333;                             /* Dark gray text */
+  --text-output-border-color: #B0B0B0;                      /* Medium gray border */
 
-  /* Scrollbars */
-  --scrollbar-track-background: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);
-  --scrollbar-track-border: #D0D0D0;
-  --scrollbar-thumb-background: linear-gradient(180deg, #C8C8C8 0%, #B8B8B8 50%, #A8A8A8 100%);
-  --scrollbar-thumb-border: #A0A0A0;
-  --scrollbar-thumb-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  /* API Key Input */
+  --api-key-input-background-color: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%);  /* White to light gray gradient */
+  --api-key-input-color: #333333;                               /* Dark gray text */
+  --api-key-input-border-color: #B0B0B0;                        /* Medium gray border */
 
-  --scrollbar-thumb-hover-background: linear-gradient(180deg, #D8D8D8 0%, #C8C8C8 50%, #B8B8B8 100%);
-  --scrollbar-thumb-hover-border: #B0B0B0;
+  /* Model Selection */
+  --model-select-background-color: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);  /* White to light gray gradient */
+  --model-select-color: #333333;                                /* Dark gray text */
+  --model-select-border-color: #B0B0B0;                         /* Medium gray border */
+}
 
-  --scrollbar-thumb-active-background: linear-gradient(180deg, #B8B8B8 0%, #A8A8A8 50%, #989898 100%);
-  --scrollbar-thumb-active-border: #909090;
+/* ========================================
+   Labels & Text Elements
+   ======================================== */
 
-  /* Loading & Progress */
-  --loading-background: linear-gradient(180deg, rgba(248,248,248,0.95) 0%, rgba(232,232,232,0.95) 100%);
-  --loading-border: #B0B0B0;
-  --spinner-color: #4A90E2;
-  --progress-color: #4A90E2;
+.theme-aqua {
+  /* Labels */
+  --input-label-color: #333333;   /* Dark gray labels */
+  --output-label-color: #333333;  /* Dark gray labels */
+  --section-title-color: #333333; /* Dark gray section titles */
 
-  /* Settings */
-  --settings-background: linear-gradient(180deg, rgba(248,248,248,0.95) 0%, rgba(232,232,232,0.95) 100%);
-  --settings-border: #B0B0B0;
-  --settings-icon-color: #4A90E2;
-  --settings-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  /* Descriptions */
+  --api-key-description-color: #666666;  /* Medium gray description text */
+  --api-key-link-color: #0066CC;         /* Blue links */
+  --api-key-link-hover-color: #004499;   /* Darker blue hover links */
+}
 
-  /* Legacy variable mappings for compatibility */
-  --button-border-radius1: 6px;
-  --button-border-radius2: 6px;
-  --button-hover-border-color: #7D7D7D;
-  --button-hover-background-color: var(--button-hover-gradient);
-  --button-active-border-color: #646464;
-  --button-active-background-color: var(--button-active-gradient);
-  --drag-region-border-bottom-color: #C2C2C2;
-  --drag-region-background-color: var(--drag-region-background);
-  --active-tab-background-color: var(--active-tab-background);
-  --active-tab-color: var(--active-tab-color);
-  --active-tab-border-color: var(--active-tab-border);
-  --inactive-tab-background-color: var(--inactive-tab-background);
-  --inactive-tab-color: var(--inactive-tab-color);
-  --inactive-tab-border-color: var(--inactive-tab-border);
-  --tab-hover-background-color: var(--tab-hover-background);
-  --tab-hover-border-color: var(--tab-hover-border);
-  --tab-active-background-color: var(--tab-active-background);
-  --tab-active-border-color: var(--tab-active-border);
-  --overlay-container-background-color: var(--overlay-background);
-  --overlay-container-border-color: var(--overlay-border);
-  --action-button-background-color: var(--action-button-background);
-  --action-button-color: var(--action-button-color);
-  --action-button-border-color: var(--action-button-border);
-  --action-button-active-background-color: var(--action-button-active-background);
-  --action-button-active-color: var(--action-button-active-color);
-  --action-button-active-border-color: var(--action-button-active-border);
-  --action-button-hover-background-color: var(--action-button-hover-background);
-  --action-button-hover-border-color: var(--action-button-hover-border);
-  --tone-select-background-color: var(--select-background);
-  --tone-select-color: var(--select-color);
-  --tone-select-border-color: var(--select-border);
-  --input-label-color: var(--text-primary);
-  --output-label-color: var(--text-primary);
-  --text-input-background-color: var(--input-background);
-  --text-input-color: var(--input-color);
-  --text-input-border-color: var(--input-border);
-  --text-output-background-color: var(--input-background);
-  --text-output-color: var(--input-color);
-  --text-output-border-color: var(--input-border);
-  --copy-button-background-color: var(--action-button-background);
-  --copy-button-color: var(--action-button-color);
-  --copy-button-border-color: var(--action-button-border);
-  --copy-button-copied-background-color: var(--active-tab-background);
-  --copy-button-copied-color: var(--text-inverse);
-  --copy-button-copied-border-color: var(--active-tab-border);
-  --copy-button-hover-background-color: var(--action-button-hover-background);
-  --copy-button-hover-border-color: var(--action-button-hover-border);
-  --loading-indicator-background-color: var(--loading-background);
-  --loading-indicator-border-color: var(--loading-border);
-  --loading-text-color: var(--text-primary);
-  --settings-container-background-color: var(--settings-background);
-  --settings-container-border-color: var(--settings-border);
-  --settings-title-color: var(--text-primary);
-  --message-display-success-background-color: var(--success-background);
-  --message-display-success-color: var(--success-color);
-  --message-display-success-border-color: var(--success-border);
-  --message-display-error-background-color: var(--error-background);
-  --message-display-error-color: var(--error-color);
-  --message-display-error-border-color: var(--error-border);
-  --message-icon-success-color: var(--success-color);
-  --message-icon-error-color: var(--error-color);
-  --section-title-color: var(--text-primary);
-  --api-key-description-color: var(--text-secondary);
-  --api-key-link-color: var(--link-color);
-  --api-key-link-hover-color: var(--link-hover-color);
-  --api-key-input-background-color: var(--input-background);
-  --api-key-input-color: var(--input-color);
-  --api-key-input-border-color: var(--input-border);
-  --save-key-button-background-color: var(--action-button-background);
-  --save-key-button-color: var(--action-button-color);
-  --save-key-button-border-color: var(--action-button-border);
-  --save-key-button-hover-border-color: var(--action-button-hover-border);
-  --button-icon-color: var(--text-primary);
-  --load-models-button-background-color: var(--action-button-background);
-  --load-models-button-color: var(--action-button-color);
-  --load-models-button-border-color: var(--action-button-border);
-  /* --load-models-button-hover-background-color: var(--action-button-hover-background); */
-  --load-models-button-hover-border-color: var(--action-button-hover-border);
-  --load-models-button-disabled-background-color: #F5F5F5;
-  --load-models-button-disabled-color: #BDBDBD;
-  --load-models-button-disabled-border-color: #E0E0E0;
-  --model-select-background-color: var(--select-background);
-  --model-select-color: var(--select-color);
-  --model-select-border-color: var(--select-border);
-  --save-model-button-background-color: var(--action-button-background);
-  --save-model-button-color: var(--action-button-color);
-  --save-model-button-border-color: var(--action-button-border);
-  --save-model-button-hover-background-color: var(--action-button-hover-background);
-  --save-model-button-hover-border-color: var(--action-button-hover-border);
-  --save-model-button-disabled-background-color: #F5F5F5;
-  --save-model-button-disabled-color: #BDBDBD;
-  --save-model-button-disabled-border-color: #E0E0E0;
-  --current-settings-display-background-color: var(--input-background);
-  --current-settings-display-border-color: var(--input-border);
-  --current-settings-display-color: var(--text-primary);
-  --danger-zone-border-top-color: #FF6666;
-  --danger-title-color: #A94442;
-  --clear-settings-button-background-color: var(--error-background);
-  --clear-settings-button-color: var(--error-color);
-  --clear-settings-button-border-color: var(--error-border);
-  --clear-settings-button-hover-background-color: #EBC2C2;
-  --clear-settings-button-hover-border-color: #E0B3B3;
-  --select-option-background-color: var(--apple-white);
-  --select-option-color: var(--text-primary);
-  --select-option-hover-background-color: var(--tab-hover-background);
-  --select-option-hover-color: var(--text-primary);
-  --select-option-checked-background-color: var(--active-tab-background);
-  --select-option-checked-color: var(--text-inverse);
-  --scrollbar-track-background-color: var(--scrollbar-track-background);
-  --scrollbar-track-border-color: var(--scrollbar-track-border);
-  --scrollbar-thumb-background-color: var(--scrollbar-thumb-background);
-  --scrollbar-thumb-border-color: var(--scrollbar-thumb-border);
-  --scrollbar-thumb-hover-background-color: var(--scrollbar-thumb-hover-background);
-  --scrollbar-thumb-hover-border-color: var(--scrollbar-thumb-hover-border);
-  --scrollbar-thumb-active-background-color: var(--scrollbar-thumb-active-background);
-  --scrollbar-thumb-active-border-color: var(--scrollbar-thumb-active-border);
-  --scrollbar-corner-background-color: var(--scrollbar-track-background);
-  --scrollbar-corner-border-color: var(--scrollbar-track-border);
-  --scrollbar-button-background-color: var(--action-button-background);
-  --scrollbar-button-border-color: var(--action-button-border);
+/* ========================================
+   Containers & Layout
+   ======================================== */
+
+.theme-aqua {
+  /* Overlay Container */
+  --overlay-container-background-color: linear-gradient(180deg, rgba(248,248,248,0.95) 0%, rgba(232,232,232,0.95) 100%);  /* Semi-transparent light gradient */
+  --overlay-container-border-color: #B0B0B0;  /* Medium gray border */
+
+  /* Settings Container */
+  --settings-container-background-color: linear-gradient(180deg, rgba(248,248,248,0.95) 0%, rgba(232,232,232,0.95) 100%);  /* Semi-transparent light gradient */
+  --settings-container-border-color: #B0B0B0;  /* Medium gray border */
+
+  /* Current Settings Display */
+  --current-settings-display-background-color: linear-gradient(180deg, #FFFFFF 0%, #F8F8F8 100%);  /* White to light gray gradient */
+  --current-settings-display-border-color: #B0B0B0;  /* Medium gray border */
+  --current-settings-display-color: #333333;          /* Dark gray text */
+}
+
+/* ========================================
+   Loading & Status Elements
+   ======================================== */
+
+.theme-aqua {
+  /* Loading Indicator */
+  --loading-indicator-background-color: linear-gradient(180deg, rgba(248,248,248,0.95) 0%, rgba(232,232,232,0.95) 100%);  /* Semi-transparent light gradient */
+  --loading-indicator-border-color: #B0B0B0;  /* Medium gray border */
+  --spinner-color: #4A90E2;                    /* Blue spinner */
+  --loading-text-color: #333333;               /* Dark gray loading text */
+
+  /* Message Displays */
+  --message-display-success-background-color: linear-gradient(180deg, #E8F5E8 0%, #D4E8D4 100%);  /* Light green success background */
+  --message-display-success-color: #2D5A2D;                         /* Dark green success text */
+  --message-display-success-border-color: #C8D9C8;                  /* Light green success border */
+  --message-display-error-background-color: linear-gradient(180deg, #F5E8E8 0%, #E8D4D4 100%);  /* Light red error background */
+  --message-display-error-color: #A94442;                           /* Dark red error text */
+  --message-display-error-border-color: #D9C8C8;                    /* Light red error border */
+
+  /* Message Icons */
+  --message-icon-success-color: #2D5A2D;  /* Dark green success icon */
+  --message-icon-error-color: #A94442;    /* Dark red error icon */
+}
+
+/* ========================================
+   Scrollbars
+   ======================================== */
+
+.theme-aqua {
+  /* Scrollbar Track */
+  --scrollbar-track-background-color: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);  /* Light gray track gradient */
+  --scrollbar-track-border-color: #D0D0D0;  /* Light gray track border */
+
+  /* Scrollbar Thumb */
+  --scrollbar-thumb-background-color: linear-gradient(180deg, #C8C8C8 0%, #B8B8B8 50%, #A8A8A8 100%);  /* Gray thumb gradient */
+  --scrollbar-thumb-border-color: #A0A0A0;  /* Medium gray thumb border */
+  --scrollbar-thumb-hover-background-color: linear-gradient(180deg, #D8D8D8 0%, #C8C8C8 50%, #B8B8B8 100%);  /* Lighter gray hover */
+  --scrollbar-thumb-hover-border-color: #B0B0B0;  /* Light gray hover border */
+  --scrollbar-thumb-active-background-color: linear-gradient(180deg, #B8B8B8 0%, #A8A8A8 50%, #989898 100%);  /* Darker gray active */
+  --scrollbar-thumb-active-border-color: #909090;  /* Medium gray active border */
+
+  /* Scrollbar Corner & Buttons */
+  --scrollbar-corner-background-color: linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);  /* Light gray corner */
+  --scrollbar-corner-border-color: #D0D0D0;  /* Light gray corner border */
+  --scrollbar-button-background-color: linear-gradient(180deg, #F5F5F5 0%, #E5E5E5 50%, #D5D5D5 100%);  /* Light gray button */
+  --scrollbar-button-border-color: #B0B0B0;  /* Medium gray button border */
+
+  /* Firefox Scrollbar */
+  --scrollbar-color: linear-gradient(180deg, #C8C8C8 0%, #B8B8B8 50%, #A8A8A8 100%) linear-gradient(180deg, #F0F0F0 0%, #E0E0E0 100%);  /* Gray thumb, light track */
+}
+
+/* ========================================
+   Select Options
+   ======================================== */
+
+.theme-aqua {
+  /* Select Dropdown Options */
+  --select-option-background-color: #FFFFFF;                         /* White option background */
+  --select-option-color: #333333;                                    /* Dark gray option text */
+  --select-option-hover-background-color: linear-gradient(180deg, #FAFAFA 0%, #E8E8E8 50%, #D8D8D8 100%);  /* Light gray hover */
+  --select-option-hover-color: #333333;                              /* Dark gray hover text */
+  --select-option-checked-background-color: linear-gradient(180deg, #deefff 0%, #a6d1ff 50%, #c6dfff 100%);  /* Blue checked */
+  --select-option-checked-color: #FFFFFF;                            /* White checked text */
 }
