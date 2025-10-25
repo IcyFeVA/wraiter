@@ -34,6 +34,7 @@ body {
   box-sizing: border-box;
   padding: 8px;
   margin: 0;
+  overflow: auto;
 }
 
 p, span, h1, h2, h3, h4, h5, h6, strong, label {
@@ -118,13 +119,115 @@ input, textarea {
   margin-right: 5px;
 }
 
+/* App Layout */
+.app-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-navigation {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--button-border-radius2);
+  cursor: default;
+  transition: all 0.3s ease;
+  min-height: 20px;
+}
+
+.nav-tab__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.nav-tab--active {
+  background: var(--active-tab-background-color);
+  color: var(--active-tab-color);
+  border: 1px solid var(--active-tab-border-color);
+}
+
+.nav-tab--inactive {
+  background: var(--inactive-tab-background-color);
+  color: var(--inactive-tab-color);
+  border: 1px solid var(--inactive-tab-border-color);
+}
+
+.nav-tab--close {
+  background: var(--inactive-tab-background-color);
+  color: var(--inactive-tab-color);
+  border: 1px solid var(--inactive-tab-border-color);
+  padding: 2px 6px;
+}
+
+.nav-tab:hover {
+  background: var(--tab-hover-background-color);
+  border-color: var(--tab-hover-border-color);
+}
+
+.nav-tab:active {
+  background: var(--tab-active-background-color);
+  border-color: var(--tab-active-border-color);
+}
+
 .drag-region {
   -webkit-app-region: drag;
   app-region: drag;
+  height: 20px;
+  flex: 1;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
   border-bottom: 1px solid var(--drag-region-border-bottom-color);
   background-color: var(--drag-region-background-color);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
+.drag-region__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 4px;
+}
+
+.drag-region__version {
+  font-size: 12px;
+  opacity: 0;
+}
+
+.drag-region__title {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.app-content {
+  flex: 1;
+  overflow: auto;
+}
+
+/* Legacy support - remove these after all components are updated */
 .active-tab {
   background: var(--active-tab-background-color);
   color: var(--active-tab-color);
@@ -136,7 +239,7 @@ input, textarea {
   background: var(--inactive-tab-background-color);
   color: var(--inactive-tab-color);
   border: 1px solid var(--inactive-tab-border-color);
-  border-radius: var(--button-border-radius2);  
+  border-radius: var(--button-border-radius2);
 }
 
 .active-tab:hover,
@@ -151,9 +254,25 @@ input, textarea {
   border: 1px solid var(--tab-active-border-color);
 }
 
-.overlay-container {
-  /* background: var(--overlay-container-background-color); */
-  /* border: 1px solid var(--overlay-container-border-color); */
+/* Overlay Component */
+.overlay {
+  padding: 4px 0;
+}
+
+.overlay__container {
+  background: var(--overlay-container-background-color);
+  border: 1px solid var(--overlay-container-border-color);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 8px;
 }
 
 .action-button {
@@ -164,24 +283,228 @@ input, textarea {
   gap: 4px;
   display: flex;
   align-items: center;
+  cursor: default;
+  transition: all 0.3s ease;
+  padding: 2px 8px;
+  font-size: var(--font-size);
+  border-radius: var(--button-border-radius1);
 }
 
-.action-button.active {
+.action-button__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.action-button--active {
   background: var(--action-button-active-background-color);
   color: var(--action-button-active-color);
-  border: 1px solid var(--action-button-border-color);
+  border: 1px solid var(--action-button-active-border-color);
 }
 
-/* .action-button:hover {
+.action-button:hover {
   background: var(--action-button-hover-background-color);
   border: 1px solid var(--action-button-hover-border-color);
-} */
+}
 
 .action-button:active {
   background: var(--action-button-active-background-color);
   border: 1px solid var(--action-button-active-border-color);
 }
 
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tone-selection {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tone-selection__label {
+  font-size: var(--font-size);
+  white-space: nowrap;
+  color: var(--input-label-color);
+  font-weight: bold;
+}
+
+.tone-selection__select {
+  background: var(--tone-select-background-color);
+  color: var(--tone-select-color);
+  border: 1px solid var(--tone-select-border-color);
+  border-radius: var(--button-border-radius2);
+  padding: 2px 4px;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  flex: 1;
+}
+
+.send-button-container {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size);
+  min-height: 20px;
+  padding: 4px 8px;
+  background: var(--send-button-background-color, var(--action-button-background-color));
+  color: var(--send-button-color, var(--action-button-color));
+  border: 1px solid var(--send-button-border-color, var(--action-button-border-color));
+  border-radius: var(--button-border-radius1);
+  transition: all 0.3s ease;
+}
+
+.send-button__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.send-button:hover {
+  background: var(--send-button-hover-background-color, var(--action-button-hover-background-color));
+  border-color: var(--send-button-hover-border-color, var(--action-button-hover-border-color));
+}
+
+.send-button:active {
+  background: var(--send-button-active-background-color, var(--action-button-active-background-color));
+  border-color: var(--send-button-active-border-color, var(--action-button-active-border-color));
+}
+
+.send-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input-section {
+  margin-bottom: 8px;
+}
+
+.input-section__label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--input-label-color);
+  font-weight: bold;
+  font-size: var(--font-size);
+}
+
+.input-section__textarea {
+  width: 100%;
+  min-height: 128px;
+  background: var(--text-input-background-color);
+  color: var(--text-input-color);
+  border: 1px solid var(--text-input-border-color);
+  border-radius: var(--button-border-radius2);
+  padding: 4px 8px;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.output-section {
+  margin-bottom: 4px;
+  border-top: 1px dashed var(--drag-region-border-bottom-color);
+  padding-top: 8px;
+}
+
+.output-section__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.output-section__label {
+  color: var(--output-label-color);
+  font-weight: bold;
+  font-size: var(--font-size);
+}
+
+.output-section__textarea {
+  width: 100%;
+  min-height: 128px;
+  background: var(--text-output-background-color);
+  color: var(--text-output-color);
+  border: 1px solid var(--text-output-border-color);
+  border-radius: var(--button-border-radius2);
+  padding: 4px 8px;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.copy-button {
+  background: var(--copy-button-background-color);
+  color: var(--copy-button-color);
+  border: 1px solid var(--copy-button-border-color);
+  border-radius: var(--button-border-radius1);
+  padding: 2px 6px;
+  font-size: var(--font-size);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+  min-height: 20px;
+}
+
+.copy-button__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.copy-button--copied {
+  background: var(--copy-button-copied-background-color);
+  color: var(--copy-button-copied-color);
+  border: 1px solid var(--copy-button-copied-border-color);
+}
+
+.copy-button:hover {
+  background: var(--copy-button-hover-background-color);
+  border: 1px solid var(--copy-button-hover-border-color);
+}
+
+.copy-button:active {
+  background: var(--copy-button-active-background-color);
+  border: 1px solid var(--copy-button-active-border-color);
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background: var(--loading-indicator-background-color);
+  border: 1px solid var(--loading-indicator-border-color);
+  margin-top: 8px;
+  border-radius: var(--button-border-radius1);
+}
+
+.loading-indicator__spinner {
+  animation: spin 1s linear infinite;
+  color: var(--spinner-color);
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.loading-indicator__text {
+  font-size: var(--font-size);
+  color: var(--loading-text-color);
+}
+
+/* Legacy support - remove these after all components are updated */
 .action-buttons-container {
   display: flex;
   gap: 2px;
@@ -207,16 +530,6 @@ input, textarea {
   margin-bottom: 8px;
   display: flex;
   justify-content: flex-end;
-}
-
-.send-button {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: var(--font-size);
-  min-height: 20px;
-  padding: 4px 8px;
 }
 
 .output-container {
@@ -273,16 +586,6 @@ input, textarea {
   border: 1px solid var(--copy-button-active-border-color);
 }
 
-.loading-indicator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  background: var(--loading-indicator-background-color);
-  border: 1px solid var(--loading-indicator-border-color);
-  margin-top: 8px;
-}
-
 .spinner {
   animation: spin 1s linear infinite;
   color: var(--spinner-color);
@@ -294,6 +597,357 @@ input, textarea {
   color: var(--loading-text-color);
 }
 
+/* Settings Component */
+.settings {
+  padding: 4px 0;
+}
+
+.settings__container {
+  margin: 0 auto;
+  background: var(--settings-container-background-color);
+  border: 1px solid var(--settings-container-border-color);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.message-display {
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size);
+  border-radius: var(--button-border-radius1);
+}
+
+.message-display--success {
+  background: var(--message-display-success-background-color);
+  color: var(--message-display-success-color);
+  border: 1px solid var(--message-display-success-border-color);
+}
+
+.message-display--error {
+  background: var(--message-display-error-background-color);
+  color: var(--message-display-error-color);
+  border: 1px solid var(--message-display-error-border-color);
+}
+
+.message-display__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.message-display__icon--success {
+  color: var(--message-icon-success-color);
+}
+
+.message-display__icon--error {
+  color: var(--message-icon-error-color);
+}
+
+.message-display__text {
+  flex: 1;
+}
+
+.settings__section {
+  margin-bottom: 16px;
+}
+
+.settings__section:last-child {
+  margin-bottom: 0;
+}
+
+.settings__section-title {
+  margin-bottom: 4px;
+  color: var(--section-title-color);
+  font-size: var(--font-size);
+  font-weight: bold;
+}
+
+.settings__api-description {
+  margin-bottom: 8px;
+  color: var(--api-key-description-color);
+  font-size: var(--font-size);
+}
+
+.settings__api-link {
+  color: var(--api-key-link-color);
+  text-decoration: none;
+}
+
+.settings__api-link:hover {
+  color: var(--api-key-link-hover-color);
+}
+
+.settings__input-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.settings__input-container {
+  flex: 1;
+}
+
+.settings__api-input {
+  width: 100%;
+  padding: 2px 4px;
+  border: 1px solid var(--api-key-input-border-color);
+  border-radius: var(--button-border-radius2);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background: var(--api-key-input-background-color);
+  color: var(--api-key-input-color);
+  box-sizing: border-box;
+}
+
+.settings__save-button {
+  padding: 2px 8px;
+  background: var(--save-key-button-background-color);
+  color: var(--save-key-button-color);
+  border: 1px solid var(--save-key-button-border-color);
+  border-radius: var(--button-border-radius1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size);
+  min-height: 20px;
+  transition: all 0.3s ease;
+}
+
+.settings__save-button:hover {
+  border-color: var(--save-key-button-hover-border-color);
+  background: var(--save-key-button-hover-background-color);
+}
+
+.settings__save-button:active {
+  background: var(--save-key-button-active-background-color);
+  border-color: var(--save-key-button-active-border-color);
+}
+
+.settings__button-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--button-icon-color);
+}
+
+.settings__load-button {
+  padding: 2px 8px;
+  background: var(--load-models-button-background-color);
+  color: var(--load-models-button-color);
+  border: 1px solid var(--load-models-button-border-color);
+  border-radius: var(--button-border-radius1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size);
+  min-height: 20px;
+  transition: all 0.3s ease;
+}
+
+.settings__load-button:hover {
+  background: var(--load-models-button-hover-background-color);
+  border-color: var(--load-models-button-hover-border-color);
+}
+
+.settings__load-button:active {
+  background: var(--load-models-button-active-background-color);
+  border-color: var(--load-models-button-active-border-color);
+}
+
+.settings__load-button--disabled {
+  background: var(--load-models-button-disabled-background-color);
+  color: var(--load-models-button-disabled-color);
+  cursor: not-allowed;
+  border: 1px solid var(--load-models-button-disabled-border-color);
+}
+
+.settings__spinner {
+  animation: spin 1s linear infinite;
+}
+
+.settings__current-model {
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: var(--current-settings-display-background-color);
+  border: 1px solid var(--current-settings-display-border-color);
+  font-size: var(--font-size);
+  color: var(--current-settings-display-color);
+  border-radius: var(--button-border-radius1);
+}
+
+.settings__select-container {
+  margin-bottom: 8px;
+}
+
+.settings__model-select {
+  width: 100%;
+  padding: 2px 4px;
+  border: 1px solid var(--model-select-border-color);
+  border-radius: var(--button-border-radius2);
+  font-size: var(--font-size);
+  background: var(--model-select-background-color);
+  color: var(--model-select-color);
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+.settings__spacer {
+  height: 16px;
+}
+
+.settings__setting-row {
+  margin-bottom: 16px;
+}
+
+.settings__setting-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--font-size);
+  font-weight: bold;
+  color: var(--section-title-color);
+}
+
+.settings__setting-description {
+  font-size: var(--font-size);
+  color: var(--color);
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+/* AppSettings Component */
+.app-settings {
+  padding: 4px 0;
+}
+
+.app-settings__container {
+  margin: 0 auto;
+  background: var(--settings-container-background-color);
+  border: 1px solid var(--settings-container-border-color);
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.app-settings__section {
+  margin-bottom: 16px;
+}
+
+.app-settings__section:last-child {
+  margin-bottom: 0;
+}
+
+.app-settings__section-title {
+  margin-bottom: 4px;
+  color: var(--section-title-color);
+  font-size: var(--font-size);
+  font-weight: bold;
+}
+
+.app-settings__input-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.app-settings__input-container {
+  flex: 1;
+}
+
+.app-settings__shortcut-input {
+  width: 100%;
+  padding: 2px 4px;
+  border: 1px solid var(--api-key-input-border-color);
+  border-radius: var(--button-border-radius2);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  background: var(--api-key-input-background-color);
+  color: var(--api-key-input-color);
+  box-sizing: border-box;
+}
+
+.app-settings__action-button {
+  padding: 2px 8px;
+  background: var(--save-key-button-background-color);
+  color: var(--save-key-button-color);
+  border: 1px solid var(--save-key-button-border-color);
+  border-radius: var(--button-border-radius1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size);
+  min-height: 20px;
+  transition: all 0.3s ease;
+}
+
+.app-settings__action-button:hover {
+  border-color: var(--save-key-button-hover-border-color);
+  background: var(--save-key-button-hover-background-color);
+}
+
+.app-settings__action-button:active {
+  background: var(--save-key-button-active-background-color);
+  border-color: var(--save-key-button-active-border-color);
+}
+
+.app-settings__setting-row {
+  margin-bottom: 16px;
+}
+
+.app-settings__setting-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: var(--font-size);
+  font-weight: bold;
+  color: var(--section-title-color);
+}
+
+.app-settings__checkbox-container {
+  margin-bottom: 8px;
+}
+
+.app-settings__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size);
+  cursor: pointer;
+  padding: 0 4px;
+  width: 100%;
+}
+
+.app-settings__checkbox {
+  margin: 0;
+}
+
+.app-settings__setting-description {
+  font-size: var(--font-size);
+  color: var(--color);
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.app-settings__select-container {
+  margin-bottom: 8px;
+}
+
+.app-settings__theme-select {
+  width: 100%;
+  padding: 2px 4px;
+  border: 1px solid var(--model-select-border-color);
+  border-radius: var(--button-border-radius2);
+  font-size: var(--font-size);
+  background: var(--model-select-background-color);
+  color: var(--model-select-color);
+  font-family: var(--font-family);
+  box-sizing: border-box;
+}
+
+/* Legacy support - remove these after all components are updated */
 .settings-container {
   padding: 0 8px;
   margin: 0 auto;
@@ -543,7 +1197,7 @@ textarea {
   cursor: pointer;
   font-size: var(--font-size);
   min-height: 20px;
-  
+
 }
 
 .save-model-button:hover {

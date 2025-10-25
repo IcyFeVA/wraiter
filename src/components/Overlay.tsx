@@ -38,8 +38,6 @@ const Overlay: React.FC<OverlayProps> = () => {
     return () => window.removeEventListener('focus', handleFocus);
   }, [selectedAction, autoCloseEnabled]);
 
-
-
   const loadClipboardText = async () => {
     try {
       const clipboardText = await invoke<string>('get_clipboard_text');
@@ -162,41 +160,42 @@ const Overlay: React.FC<OverlayProps> = () => {
   ];
 
   return (
-    <div className="inner">
-      <div className="settings-container">
-        <div className="action-buttons-container">
+    <div className="overlay">
+      <div className="overlay__container">
+        <div className="action-buttons">
           <button
             onClick={() => handleActionSelect('proofread')}
             disabled={isLoading}
-            className={`action-button ${selectedAction === 'proofread' ? 'active' : ''}`}
+            className={`action-button ${selectedAction === 'proofread' ? 'action-button--active' : ''}`}
           >
-            <Edit3 size={12} />
+            <Edit3 size={12} className="action-button__icon" />
             Proofread
           </button>
           <button
             onClick={() => handleActionSelect('tone')}
             disabled={isLoading}
-            className={`action-button ${selectedAction === 'tone' ? 'active' : ''}`}
+            className={`action-button ${selectedAction === 'tone' ? 'action-button--active' : ''}`}
           >
-            <MessageSquare size={12} />
+            <MessageSquare size={12} className="action-button__icon" />
             Change Tone
           </button>
           <button
             onClick={() => handleActionSelect('draft')}
             disabled={isLoading}
-            className={`action-button ${selectedAction === 'draft' ? 'active' : ''}`}
+            className={`action-button ${selectedAction === 'draft' ? 'action-button--active' : ''}`}
           >
-            <PenTool size={12} />
+            <PenTool size={12} className="action-button__icon" />
             Draft
           </button>
         </div>
+
         {selectedAction === 'tone' && (
-          <div className="tone-selection-container">
-            <label className="tone-label">Tone:</label>
+          <div className="tone-selection">
+            <label className="tone-selection__label">Tone:</label>
             <select
               value={selectedTone}
               onChange={(e) => setSelectedTone(e.target.value)}
-              className="model-select"
+              className="tone-selection__select"
             >
               {toneOptions.map(tone => (
                 <option key={tone} value={tone}>
@@ -206,6 +205,7 @@ const Overlay: React.FC<OverlayProps> = () => {
             </select>
           </div>
         )}
+
         {selectedAction && (
           <div className="send-button-container">
             <button
@@ -213,53 +213,50 @@ const Overlay: React.FC<OverlayProps> = () => {
               disabled={isLoading}
               className="send-button"
             >
-              <MessageSquare size={12} />
+              <MessageSquare size={12} className="send-button__icon" />
               Send to AI
             </button>
           </div>
         )}
-        <div className="input-container">
-          <label className="input-label">Input:</label>
+
+        <div className="input-section">
+          <label className="input-section__label">Input:</label>
           <textarea
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
             placeholder="Enter text here or use selected text from clipboard..."
-            className="text-input"
+            className="input-section__textarea"
           />
         </div>
+
         {outputText && !(
           autoCloseEnabled || selectedAction === 'proofread'
         ) && (
-          <div className="output-container">
-            <div className="output-header">
-              <label className="output-label">Output:</label>
+          <div className="output-section">
+            <div className="output-section__header">
+              <label className="output-section__label">Output:</label>
               <button
                 onClick={copyToClipboard}
-                className={`copy-button ${copied ? 'copied' : ''}`}
+                className={`copy-button ${copied ? 'copy-button--copied' : ''}`}
               >
-                {copied ? <Check size={12} /> : <Copy size={12} />}
+                {copied ? <Check size={12} className="copy-button__icon" /> : <Copy size={12} className="copy-button__icon" />}
                 {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>
             <textarea
               value={outputText}
               readOnly
-              className="text-output"
+              className="output-section__textarea"
             />
           </div>
         )}
+
         {isLoading && (
           <div className="loading-indicator">
-            <Loader2 size={16} className="spinner" />
-            <span className="loading-text">Processing with AI...</span>
+            <Loader2 size={16} className="loading-indicator__spinner" />
+            <span className="loading-indicator__text">Processing with AI...</span>
           </div>
         )}
-        <style>{`
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-        `}</style>
       </div>
     </div>
   );

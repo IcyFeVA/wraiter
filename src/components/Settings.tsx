@@ -40,8 +40,6 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   }, [defaultTone, isLoaded]);
 
-
-
   const loadSettings = () => {
     const savedApiKey = localStorage.getItem('openrouter_api_key') || '';
     const savedModel = localStorage.getItem('selected_model') || '';
@@ -116,216 +114,158 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   };
 
-  // const saveModelSelection = () => {
-  //   if (!selectedModel) {
-  //     setMessage({ type: 'error', text: 'Please select a model' });
-  //     return;
-  //   }
-
-  //   localStorage.setItem('selected_model', selectedModel);
-  //   setMessage({ type: 'success', text: 'Model selection saved!' });
-  // };
-
-  // const clearSettings = () => {
-  //   localStorage.removeItem('openrouter_api_key');
-  //   localStorage.removeItem('selected_model');
-  //   localStorage.removeItem('max_tokens');
-  //   localStorage.removeItem('default_tone');
-  //   setApiKey('');
-  //   setSelectedModel('');
-  //   setMaxTokens('2000');
-  //   setDefaultTone('professional');
-  //   setModels([]);
-  //   setMessage({ type: 'success', text: 'Settings cleared!' });
-  // };
+  const toneOptions = [
+    'professional',
+    'casual',
+    'friendly',
+    'formal',
+    'enthusiastic',
+    'empathetic',
+    'confident',
+    'concise'
+  ];
 
   return (
-    <div className="settings-container">
-
-      {/* Message Display */}
-      {message && (
-        <div
-          className={
-            message.type === "success"
-              ? "message-display success"
-              : "message-display error"
-          }
-        >
-          {message.type === "success" ? (
-            <Check size={12} className="message-icon success" />
-          ) : (
-            <AlertCircle size={12} className="message-icon error" />
-          )}
-          <span className="message-text">{message.text}</span>
-        </div>
-      )}
-
-      {/* API Key Section */}
-      <div className="settings-section">
-        <h3 className="section-title">OpenRouter API Key:</h3>
-        <p className="api-key-description">
-          Get your API key from{" "}
-          <a
-            href="https://openrouter.ai/keys"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="api-key-link"
-          >
-            openrouter.ai/keys
-          </a>{" "}
-          (free account available)
-        </p>
-        <div className="input-row">
-          <div className="input-container">
-            <input
-              type="password"
-              value={apiKey}
-              onChange={(e) => setApiKey(e.target.value)}
-              placeholder="Enter your OpenRouter API key..."
-              className="api-key-input"
-            />
+    <div className="settings">
+      <div className="settings__container">
+        {/* Message Display */}
+        {message && (
+          <div className={`message-display message-display--${message.type}`}>
+            {message.type === "success" ? (
+              <Check size={12} className={`message-display__icon message-display__icon--${message.type}`} />
+            ) : (
+              <AlertCircle size={12} className={`message-display__icon message-display__icon--${message.type}`} />
+            )}
+            <span className="message-display__text">{message.text}</span>
           </div>
-          <button onClick={saveApiKey} className="save-key-button">
-            <Key size={12} className="button-icon" />
-            Save Key
-          </button>
-        </div>
-
-        <button
-          onClick={fetchModels}
-          disabled={isLoadingModels || !apiKey}
-          className={
-            isLoadingModels || !apiKey
-              ? "load-models-button disabled"
-              : "load-models-button"
-          }
-        >
-          {isLoadingModels ? (
-            <Loader2 size={12} className="spin button-icon" />
-          ) : null}
-          {isLoadingModels ? "Loading Models..." : "Load Available Models"}
-        </button>
-
-        {selectedModel && (<div style={{ marginTop: '4px' }}>
-          <strong>Current Model:</strong> {selectedModel}
-        </div>
         )}
-      </div>
 
-      {/* Model Selection Section */}
-      {models.length > 0 && (
-        <div className="settings-section">
-          <h3 className="section-title">Model Selection</h3>
-          <div className="select-container">
-            <select
-              value={selectedModel}
-              onChange={(e) => {
-                setSelectedModel(e.target.value)
-                localStorage.setItem('selected_model', e.target.value);
-                setMessage({ type: 'success', text: 'Model selection saved!' });
-              }}
-              className="model-select"
+        {/* API Key Section */}
+        <section className="settings__section">
+          <h3 className="settings__section-title">OpenRouter API Key:</h3>
+          <p className="settings__api-description">
+            Get your API key from{" "}
+            <a
+              href="https://openrouter.ai/keys"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="settings__api-link"
             >
-              <option value="">Select a model...</option>
-              {[...models]
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((model) => (
-                  <option key={model.id} value={model.id}>
-                    {model.name}{" "}
-                    {model.description ? ` - ${model.description}` : ""}
+              openrouter.ai/keys
+            </a>{" "}
+            (free account available)
+          </p>
+          <div className="settings__input-row">
+            <div className="settings__input-container">
+              <input
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="Enter your OpenRouter API key..."
+                className="settings__api-input"
+              />
+            </div>
+            <button onClick={saveApiKey} className="settings__save-button">
+              <Key size={12} className="settings__button-icon" />
+              Save Key
+            </button>
+          </div>
+
+          <button
+            onClick={fetchModels}
+            disabled={isLoadingModels || !apiKey}
+            className={`settings__load-button ${isLoadingModels || !apiKey ? 'settings__load-button--disabled' : ''}`}
+          >
+            {isLoadingModels ? (
+              <Loader2 size={12} className="settings__spinner settings__button-icon" />
+            ) : null}
+            {isLoadingModels ? "Loading Models..." : "Load Available Models"}
+          </button>
+
+          {selectedModel && (
+            <div className="settings__current-model">
+              <strong>Current Model:</strong> {selectedModel}
+            </div>
+          )}
+        </section>
+
+        {/* Model Selection Section */}
+        {models.length > 0 && (
+          <section className="settings__section">
+            <h3 className="settings__section-title">Model Selection</h3>
+            <div className="settings__select-container">
+              <select
+                value={selectedModel}
+                onChange={(e) => {
+                  setSelectedModel(e.target.value)
+                  localStorage.setItem('selected_model', e.target.value);
+                  setMessage({ type: 'success', text: 'Model selection saved!' });
+                }}
+                className="settings__model-select"
+              >
+                <option value="">Select a model...</option>
+                {[...models]
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((model) => (
+                    <option key={model.id} value={model.id}>
+                      {model.name}{" "}
+                      {model.description ? ` - ${model.description}` : ""}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          </section>
+        )}
+
+        {/* AI Settings Section */}
+        <section className="settings__section">
+          <div className="settings__spacer"></div>
+
+          {/* Max Tokens Setting */}
+          <div className="settings__setting-row">
+            <label className="settings__setting-label">
+              Max Tokens:
+            </label>
+            <div className="settings__select-container">
+              <input
+                type="number"
+                value={maxTokens}
+                onChange={(e) => setMaxTokens(e.target.value)}
+                placeholder="2000"
+                min="1000"
+                max="10000"
+                className="settings__model-select"
+              />
+            </div>
+            <div className="settings__setting-description">
+              Maximum tokens to use for AI responses (default: 2000)
+            </div>
+          </div>
+
+          {/* Default Tone Setting */}
+          <div className="settings__setting-row">
+            <label className="settings__setting-label">
+              Default Tone:
+            </label>
+            <div className="settings__select-container">
+              <select
+                value={defaultTone}
+                onChange={(e) => setDefaultTone(e.target.value)}
+                className="settings__model-select"
+              >
+                {toneOptions.map(tone => (
+                  <option key={tone} value={tone}>
+                    {tone.charAt(0).toUpperCase() + tone.slice(1)}
                   </option>
                 ))}
-            </select>
+              </select>
+            </div>
+            <div className="settings__setting-description">
+              For "Change Tone" action
+            </div>
           </div>
-
-          {/* <button
-            onClick={saveModelSelection}
-            disabled={!selectedModel}
-            className={
-              !selectedModel
-                ? "save-model-button disabled"
-                : "save-model-button"
-            }
-          >
-            Save Model Selection
-          </button> */}
-        </div>
-      )}
-
-      {/* AI Settings Section */}
-      <div className="settings-section">
-        <div className="spacer-16" />
-
-        {/* Max Tokens Setting */}
-        <div className="setting-row">
-          <label className="setting-label">
-            Max Tokens:
-          </label>
-          <div className="select-container">
-            <input
-              type="number"
-              value={maxTokens}
-              onChange={(e) => setMaxTokens(e.target.value)}
-              placeholder="2000"
-              min="1000"
-              max="10000"
-              className="model-select"
-            />
-          </div>
-          <div className="setting-description">
-            Maximum tokens to use for AI responses (default: 2000)
-          </div>
-        </div>
-
-        {/* Default Tone Setting */}
-        <div className="setting-row">
-          <label className="setting-label">
-            Default Tone:
-          </label>
-          <div className="select-container">
-            <select
-              value={defaultTone}
-              onChange={(e) => setDefaultTone(e.target.value)}
-              className="model-select"
-            >
-              <option value="professional">Professional</option>
-              <option value="casual">Casual</option>
-              <option value="friendly">Friendly</option>
-              <option value="formal">Formal</option>
-              <option value="enthusiastic">Enthusiastic</option>
-              <option value="empathetic">Empathetic</option>
-              <option value="confident">Confident</option>
-              <option value="concise">Concise</option>
-            </select>
-          </div>
-          <div className="setting-description">
-            For "Change Tone" action
-          </div>
-        </div>
-
-
+        </section>
       </div>
-
-
-
-      {/* Danger Zone */}
-{/*       <div className="danger-zone">
-        <h3 className="danger-title">Danger Zone</h3>
-        <button onClick={clearSettings} className="clear-settings-button">
-          Clear All Settings
-        </button>
-      </div> */}
-
-      <style>{`
-        .spin {
-          animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 };

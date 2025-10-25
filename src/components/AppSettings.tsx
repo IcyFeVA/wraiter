@@ -98,118 +98,111 @@ const AppSettings: React.FC = () => {
   };
 
   return (
-    <div className="settings-container">
-      {/* Message Display */}
-      {message && (
-        <div className={`message-display ${message.type}`}>
-          <span className="message-text">{message.text}</span>
-        </div>
-      )}
-
-      {/* Keyboard Shortcut Section */}
-      <div className="settings-section">
-        <h3 className="section-title">Global Keyboard Shortcut</h3>
-        {/* <p className="setting-description">
-            <code>Ctrl + Shift + Alt + A</code> (default Window/Linux)<br/><code>Command + Shift + Option + A</code> (default Mac)
-
-        </p> */}
-        <div className="input-row">
-          <div className="input-container">
-            <input
-              type="text"
-              value={shortcut}
-              onKeyDown={handleShortcutChange}
-              placeholder="Press keys to set shortcut..."
-              className="api-key-input" // Reusing style
-              readOnly
-            />
+    <div className="app-settings">
+      <div className="app-settings__container">
+        {/* Message Display */}
+        {message && (
+          <div className={`message-display message-display--${message.type}`}>
+            <span className="message-display__text">{message.text}</span>
           </div>
-          <button onClick={saveShortcut} className="save-key-button">
-            Save
-          </button>
-          <button onClick={resetShortcut} className="save-key-button" style={{ marginLeft: '2px' }}>
-            Reset
-          </button>
-        </div>
+        )}
 
-      </div>
-
-      {/* Autostart Section */}
-      <div className="settings-section">
-        <h3 className="section-title">Autostart</h3>
-        <div className="setting-row">
-          {/* <label className="setting-label">
-            <Power size={14} style={{ marginRight: '8px' }} />
-            Launch at login:
-          </label> */}
-          <div className="select-container">
-            <label className="checkbox-label">
+        {/* Keyboard Shortcut Section */}
+        <section className="app-settings__section">
+          <h3 className="app-settings__section-title">Global Keyboard Shortcut</h3>
+          <div className="app-settings__input-row">
+            <div className="app-settings__input-container">
               <input
-                type="checkbox"
-                checked={autostart}
-                onChange={toggleAutostart}
-                className="checkbox"
+                type="text"
+                value={shortcut}
+                onKeyDown={handleShortcutChange}
+                placeholder="Press keys to set shortcut..."
+                className="app-settings__shortcut-input"
+                readOnly
               />
-              <span>Enable</span>
-            </label>
+            </div>
+            <button onClick={saveShortcut} className="app-settings__action-button">
+              Save
+            </button>
+            <button onClick={resetShortcut} className="app-settings__action-button">
+              Reset
+            </button>
           </div>
-          <div className="setting-description">
-            Automatically start the application when you log in to your computer.
-          </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Auto-close Setting */}
-      <div className="settings-section">
-        <div className="setting-row">
-          <label className="setting-label">
-            Auto-Close:
-          </label>
-          <div className="select-container">
-            <label className="checkbox-label">
-              <input
-                type="checkbox"
-                checked={autoClose}
-                onChange={async (e) => {
-                  const checked = e.target.checked;
-                  setAutoClose(checked);
-                  try {
-                    await invoke('set_auto_close', { autoClose: checked });
-                    setMessage({ type: 'success', text: 'Auto-close setting saved' });
-                  } catch (error) {
-                    console.error('Failed to save auto-close setting:', error);
-                    setMessage({ type: 'error', text: 'Failed to save auto-close setting' });
-                  }
-                }}
-                className="checkbox"
-              />
-              <span>Close window after copying result (proofread always auto-closes)</span>
-            </label>
+        {/* Autostart Section */}
+        <section className="app-settings__section">
+          <h3 className="app-settings__section-title">Autostart</h3>
+          <div className="app-settings__setting-row">
+            <div className="app-settings__checkbox-container">
+              <label className="app-settings__checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={autostart}
+                  onChange={toggleAutostart}
+                  className="app-settings__checkbox"
+                />
+                <span>Enable</span>
+              </label>
+            </div>
+            <div className="app-settings__setting-description">
+              Automatically start the application when you log in to your computer.
+            </div>
           </div>
-          <div className="setting-description">
-            Automatically copy result to clipboard and hide window
-          </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Theme Selection Section */}
-      <div className="settings-section">
-        <h3 className="section-title">Theme:</h3>
-        <div className="select-container">
-          <select
-            value={theme}
-            onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ')}
-            className="model-select"
-          >
-            <option value="NSX">NSX</option>
-            <option value="Aqua">Aqua</option>
-            <option value="AquaDark">Aqua Dark</option>
-            <option value="Console">Console</option>
-            <option value="Abelton">Abelton</option>
-            <option value="Lamasass">Lamasass</option>
-            <option value="ICQ">ICQ</option>
-          </select>
-        </div>
+        {/* Auto-close Setting */}
+        <section className="app-settings__section">
+          <div className="app-settings__setting-row">
+            <label className="app-settings__setting-label">
+              Auto-Close:
+            </label>
+            <div className="app-settings__checkbox-container">
+              <label className="app-settings__checkbox-label">
+                <input
+                  type="checkbox"
+                  checked={autoClose}
+                  onChange={async (e) => {
+                    const checked = e.target.checked;
+                    setAutoClose(checked);
+                    try {
+                      await invoke('set_auto_close', { autoClose: checked });
+                      setMessage({ type: 'success', text: 'Auto-close setting saved' });
+                    } catch (error) {
+                      console.error('Failed to save auto-close setting:', error);
+                      setMessage({ type: 'error', text: 'Failed to save auto-close setting' });
+                    }
+                  }}
+                  className="app-settings__checkbox"
+                />
+                <span>Close window after copying result (proofread always auto-closes)</span>
+              </label>
+            </div>
+            <div className="app-settings__setting-description">
+              Automatically copy result to clipboard and hide window
+            </div>
+          </div>
+        </section>
+
+        {/* Theme Selection Section */}
+        <section className="app-settings__section">
+          <h3 className="app-settings__section-title">Theme:</h3>
+          <div className="app-settings__select-container">
+            <select
+              value={theme}
+              onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ')}
+              className="app-settings__theme-select"
+            >
+              <option value="NSX">NSX</option>
+              <option value="Aqua">Aqua</option>
+              <option value="AquaDark">Aqua Dark</option>
+              <option value="Console">Console</option>
+              <option value="Abelton">Abelton</option>
+              <option value="Lamasass">Lamasass</option>
+              <option value="ICQ">ICQ</option>
+            </select>
+          </div>
+        </section>
       </div>
     </div>
   );

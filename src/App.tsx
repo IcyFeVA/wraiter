@@ -15,98 +15,71 @@ function App() {
   useWindowResize(contentRef);
 
   return (
-    <div id="app" ref={contentRef} className={isThemeLoaded ? `theme-${theme.toLowerCase()}` : ''} style={{ overflow: 'auto'}}>
-      <div className="inner">
-        <div style={{ marginBottom: '8px' }}>
-          <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+    <div id="app" ref={contentRef} className={isThemeLoaded ? `theme-${theme.toLowerCase()}` : ''}>
+      <div className="app-inner">
+        <nav className="app-navigation">
+          <div className="nav-tabs">
             <button
               onClick={() => setCurrentView('main')}
-              className={currentView === 'main' ? 'active-tab' : 'inactive-tab'}
-              style={{
-                fontSize: '11px',
-                padding: '2px 8px',
-              }}
+              className={`nav-tab ${currentView === 'main' ? 'nav-tab--active' : 'nav-tab--inactive'}`}
             >
-            <Home size={12} className="button-icon" />
-
+              <Home size={12} className="nav-tab__icon" />
               MAIN
             </button>
             <button
               onClick={() => setCurrentView('settings')}
-              className={currentView === 'settings' ? 'active-tab' : 'inactive-tab'}
-              style={{
-                fontSize: '11px',
-                padding: '2px 8px',
-              }}
+              className={`nav-tab ${currentView === 'settings' ? 'nav-tab--active' : 'nav-tab--inactive'}`}
             >
-              <Cpu size={12} className="button-icon" />
-
+              <Cpu size={12} className="nav-tab__icon" />
               AI
             </button>
             <button
               onClick={() => setCurrentView('appSettings')}
-              className={currentView === 'appSettings' ? 'active-tab' : 'inactive-tab'}
-              style={{
-                fontSize: '11px',
-                padding: '2px 8px',
-              }}
+              className={`nav-tab ${currentView === 'appSettings' ? 'nav-tab--active' : 'nav-tab--inactive'}`}
             >
-            <AppWindow size={12} className="button-icon" />
-
+              <AppWindow size={12} className="nav-tab__icon" />
               APP
             </button>
-            {/* Draggable area to the right of AI settings button */}
-            <div
-              className="drag-region"
-              style={{
-                height: '20px',
-                width: '30px',
-                cursor: 'grab',
-                flex: 1,
-                WebkitUserSelect: 'none',
-                userSelect: 'none',
-                // border: '1px solid #00ffff3b',
-                marginLeft: '4px',
-                alignItems: 'center',
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-              data-tauri-drag-region="true"
-              onMouseDown={(e) => {
-                if (e.button === 0) { // Left mouse button
-                  e.currentTarget.style.cursor = 'grabbing';
-                }
-              }}
-              onMouseUp={(e) => {
-                e.currentTarget.style.cursor = 'grab';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.cursor = 'grab';
-              }}
-            >
-              <div style={{ justifyContent: 'space-between', alignItems: 'center', flexDirection: 'row', display: 'flex', width: '100%', padding: '0 4px' }}>
-                <div style={{ fontSize: '12px', opacity: 0.0 }}>1.0</div>
-                <div style={{ fontSize: '12px', opacity: 0.7 }}>Starstrike 1.0</div>
-              </div>
-            </div>
-            <button
-              onClick={() => getCurrentWindow().hide()}
-              className="inactive-tab"
-              style={{
-                fontSize: '11px',
-                padding: '2px 8px',
-              }}
-              title="Close"
-            >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
           </div>
-        </div>
-        {currentView === 'main' && <Overlay />}
-        {currentView === 'settings' && <Settings />}
-        {currentView === 'appSettings' && <AppSettings />}
+
+          {/* Draggable area */}
+          <div
+            className="drag-region"
+            data-tauri-drag-region="true"
+            onMouseDown={(e) => {
+              if (e.button === 0) {
+                e.currentTarget.style.cursor = 'grabbing';
+              }
+            }}
+            onMouseUp={(e) => {
+              e.currentTarget.style.cursor = 'grab';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.cursor = 'grab';
+            }}
+          >
+            <div className="drag-region__content">
+              <span className="drag-region__version">1.0</span>
+              <span className="drag-region__title">Starstrike 1.0</span>
+            </div>
+          </div>
+
+          <button
+            onClick={() => getCurrentWindow().hide()}
+            className="nav-tab nav-tab--close"
+            title="Close"
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 3L3 9M3 3L9 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </nav>
+
+        <main className="app-content">
+          {currentView === 'main' && <Overlay />}
+          {currentView === 'settings' && <Settings />}
+          {currentView === 'appSettings' && <AppSettings />}
+        </main>
       </div>
     </div>
   );
