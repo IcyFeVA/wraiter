@@ -7,7 +7,6 @@ const AppSettings: React.FC = () => {
   const [shortcut, setShortcut] = useState('');
   const [autostart, setAutostart] = useState(false);
   const [autoClose, setAutoClose] = useState(true);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Load settings from backend when component mounts
   useEffect(() => {
@@ -28,7 +27,6 @@ const AppSettings: React.FC = () => {
       setAutoClose(savedAutoClose);
     } catch (error) {
       console.error('Failed to load app settings:', error);
-      setMessage({ type: 'error', text: 'Failed to load settings' });
     }
   };
 
@@ -53,18 +51,10 @@ const AppSettings: React.FC = () => {
 
 
   const saveShortcut = async () => {
-    // Basic validation
-    if (!shortcut.includes('Control') && !shortcut.includes('Command') && !shortcut.includes('Alt') && !shortcut.includes('Shift')) {
-      setMessage({ type: 'error', text: 'Shortcut must include a modifier key (Ctrl, Alt, Shift, Command)' });
-      return;
-    }
-
     try {
       await invoke('set_shortcut', { shortcut });
-      setMessage({ type: 'success', text: 'Shortcut saved successfully!' });
     } catch (error) {
       console.error('Failed to save shortcut:', error);
-      setMessage({ type: 'error', text: `Failed to save shortcut: ${error}` });
     }
   };
 
@@ -73,10 +63,8 @@ const AppSettings: React.FC = () => {
       await invoke('reset_shortcut');
       const defaultShortcut = await invoke<string>('get_shortcut'); // Fetch the new default
       setShortcut(defaultShortcut);
-      setMessage({ type: 'success', text: 'Shortcut reset to default' });
     } catch (error) {
       console.error('Failed to reset shortcut:', error);
-      setMessage({ type: 'error', text: 'Failed to reset shortcut' });
     }
   };
 
@@ -85,27 +73,18 @@ const AppSettings: React.FC = () => {
       if (autostart) {
         await invoke('disable_autostart');
         setAutostart(false);
-        setMessage({ type: 'success', text: 'Autostart disabled' });
       } else {
         await invoke('enable_autostart');
         setAutostart(true);
-        setMessage({ type: 'success', text: 'Autostart enabled' });
       }
     } catch (error) {
       console.error('Failed to toggle autostart:', error);
-      setMessage({ type: 'error', text: `Failed to update autostart: ${error}` });
     }
   };
 
   return (
     <div className="app-settings">
       <div className="app-settings__container">
-        {/* Message Display */}
-        {message && (
-          <div className={`message-display message-display--${message.type}`}>
-            <span className="message-display__text">{message.text}</span>
-          </div>
-        )}
 
         {/* Keyboard Shortcut Section */}
         <section className="app-settings__section">
@@ -167,10 +146,8 @@ const AppSettings: React.FC = () => {
                     setAutoClose(checked);
                     try {
                       await invoke('set_auto_close', { autoClose: checked });
-                      setMessage({ type: 'success', text: 'Auto-close setting saved' });
                     } catch (error) {
                       console.error('Failed to save auto-close setting:', error);
-                      setMessage({ type: 'error', text: 'Failed to save auto-close setting' });
                     }
                   }}
                   className="app-settings__checkbox"
