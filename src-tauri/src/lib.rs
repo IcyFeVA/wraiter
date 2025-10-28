@@ -382,6 +382,14 @@ pub fn run() {
                 .build(app)?;
 
             let window = app.get_webview_window("main").unwrap();
+            
+            // Check if autostart is enabled and hide window if so
+            if let Ok(is_enabled) = app.autolaunch().is_enabled() {
+                if is_enabled {
+                    let _ = window.hide();
+                }
+            }
+            
             let window_ = window.clone();
             window.on_window_event(move |event| {
                 if let tauri::WindowEvent::CloseRequested { api, .. } = event {
