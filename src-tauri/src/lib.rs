@@ -3,6 +3,7 @@ use tauri::Manager;
 use tauri::menu::{Menu, MenuItem, CheckMenuItem};
 use tauri::tray::TrayIconBuilder;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
+use tauri_plugin_cli::CliExt;
 use tauri_plugin_clipboard_manager::ClipboardExt;
 use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent};
 use tauri_plugin_store::{StoreBuilder};
@@ -311,8 +312,9 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
-            Some(vec!["--flag1", "--flag2"]),
+            Some(vec!["--hidden"]),
         ))
+        .plugin(tauri_plugin_cli::init())
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_global_shortcut::Builder::new().build())
@@ -389,6 +391,11 @@ pub fn run() {
                     api.prevent_close();
                 }
             });
+
+            // Hide the window on startup if the --hidden flag is present
+            if app.cli().matches()?.args.contains_key("hidden") {
+                window.hide()?;
+            }
 
             Ok(())
         })
