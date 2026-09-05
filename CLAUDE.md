@@ -51,6 +51,8 @@ The window height auto-adjusts to content via [src/hooks/useWindowResize.ts](src
 
 ### Themes
 
+Typography is *not* per-theme. [src/styles/fonts.css](src/styles/fonts.css) defines the bundled Silkscreen pixel face (an 8px bitmap font, `.woff2` files in [src/assets/fonts/](src/assets/fonts/) so the app works offline) plus `--font-pixel`, `--font-size-pixel` and `--line-height-pixel`; every theme's `--font-family` / `--font-size` / `--line-height` just point at those tokens, so type is changed for the whole app from that one block. Silkscreen is drawn on an 8px em box — keep sizes and leading on that grid (8/16/24…) or glyph edges land on half-pixels and go soft, and don't hardcode a `font-size` in a rule when `var(--font-size)` will do. `-webkit-font-smoothing: none` in `App.css` is what keeps the glyphs hard-edged; don't remove it.
+
 Themes are plain CSS files under [src/themes/](src/themes/), applied by setting a `theme-{name}` class on `<body>` (from `SettingsContext`) and on the root app div (from `App.tsx`). The canonical list is the `THEMES` const in `SettingsContext`; adding a theme means adding the name there, the CSS file, and its import in [src/main.tsx](src/main.tsx). `Console` has a stylesheet but is deliberately filtered out of the picker in `AppSettings.tsx`.
 
 ### Versioning — bump in one place

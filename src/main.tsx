@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { SettingsProvider } from "./contexts/SettingsContext";
+import "./styles/fonts.css";
 import "./themes/NSX.css";
 import "./themes/Aqua.css";
 import "./themes/AquaDark.css";

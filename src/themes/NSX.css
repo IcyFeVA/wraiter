@@ -5,9 +5,9 @@
 /* Base Typography & Layout */
 .theme-nsx {
   /* Typography */
-  --font-family: monospace, 'Courier New', 'Consolas', 'Monaco';
-  --font-size: 11px;
-  --line-height: 16px;
+  --font-family: var(--font-pixel);
+  --font-size: var(--font-size-pixel);
+  --line-height: var(--line-height-pixel);
   --font-weight: 400;
 
   /* Base Colors */
@@ -120,7 +120,9 @@
 
 .theme-nsx {
   /* Tone Selection */
-  --tone-select-background-color: transparent;  /* Transparent background */
+  /* Must be a real color, not `transparent`: a <select> with no author
+     background falls back to the native WebKitGTK widget, which paints white. */
+  --tone-select-background-color: rgba(0, 255, 255, 0.05);  /* Very subtle cyan background */
   --tone-select-color: #00ffff;                 /* Cyan text */
   --tone-select-border-color: #00ffff;          /* Cyan border */
 

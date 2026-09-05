@@ -5,9 +5,9 @@
 /* Base Typography & Layout */
 .theme-icq {
   /* Typography */
-  --font-family: 'MS Sans Serif', 'Tahoma', 'Arial', sans-serif;
-  --font-size: 11px;
-  --line-height: 16px;
+  --font-family: var(--font-pixel);
+  --font-size: var(--font-size-pixel);
+  --line-height: var(--line-height-pixel);
   --font-weight: 400;
 
   /* Base Colors */

@@ -3,7 +3,7 @@ name = "starstrike"
 # Single source of truth for the app version: tauri.conf.json intentionally
 # omits `version` so it falls back to this, and the UI reads it at runtime via
 # getVersion(). Bump here only.
-version = "1.1.0"
+version = "1.2.1"
 description = "AI Text Genius"
 authors = ["Crushy Social Inc."]
 edition = "2021"

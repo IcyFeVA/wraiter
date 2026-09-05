@@ -6,9 +6,9 @@
 /* Base Typography & Layout */
 .theme-maverick {
   /* Typography */
-  --font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-size: 12px;
-  --line-height: 16px;
+  --font-family: var(--font-pixel);
+  --font-size: var(--font-size-pixel);
+  --line-height: var(--line-height-pixel);
   --font-weight: 500;
 
   /* Base Colors - F1 Premium Palette */

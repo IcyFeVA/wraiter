@@ -5,9 +5,9 @@
 /* Base Typography & Layout */
 .theme-abelton {
   /* Typography */
-  --font-family: 'Helvetica Neue', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-size: 13px;
-  --line-height: 1.4;
+  --font-family: var(--font-pixel);
+  --font-size: var(--font-size-pixel);
+  --line-height: var(--line-height-pixel);
   --font-weight: 400;
 
   /* Base Colors */

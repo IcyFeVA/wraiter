@@ -149,7 +149,7 @@ input, textarea {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: var(--font-size);
   padding: 2px 8px;
   border-radius: var(--button-border-radius2);
   cursor: default;
@@ -224,12 +224,12 @@ input, textarea {
 }
 
 .drag-region__version {
-  font-size: 12px;
+  font-size: var(--font-size);
   opacity: 0;
 }
 
 .drag-region__title {
-  font-size: 12px;
+  font-size: var(--font-size);
   opacity: 0.7;
 }
 
@@ -1006,7 +1006,7 @@ input, textarea {
 .settings-title {
   margin: 0;
   color: var(--settings-title-color);
-  font-size: 14px;
+  font-size: var(--font-size);
   font-weight: normal;
 }
 
