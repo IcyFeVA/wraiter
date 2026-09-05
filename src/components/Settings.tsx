@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { Key, Loader2, Check, AlertCircle } from 'lucide-react';
+import { useSettings } from '../contexts/SettingsContext';
 
 interface SettingsProps {}
 
@@ -10,95 +11,64 @@ interface Model {
   description?: string;
 }
 
+const TONE_OPTIONS = [
+  'professional',
+  'casual',
+  'friendly',
+  'formal',
+  'enthusiastic',
+  'empathetic',
+  'confident',
+  'concise'
+];
+
 const Settings: React.FC<SettingsProps> = () => {
-  const [apiKey, setApiKey] = useState('');
+  const { settings, isLoaded, updateSettings } = useSettings();
+
+  // Drafts for the inputs that should not hit the store on every keystroke.
+  const [apiKeyDraft, setApiKeyDraft] = useState('');
+  const [maxTokensDraft, setMaxTokensDraft] = useState(String(settings.max_tokens));
   const [models, setModels] = useState<Model[]>([]);
-  const [selectedModel, setSelectedModel] = useState('');
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
-  const [maxTokens, setMaxTokens] = useState('2000');
-  const [defaultTone, setDefaultTone] = useState('professional');
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // Load saved settings
-    (async () => {
-      await loadSettings();
-      setIsLoaded(true);
-    })();
-  }, []);
-
-  // Auto-save max tokens setting (only after initial load)
-  useEffect(() => {
-    if (isLoaded && maxTokens) {
-      localStorage.setItem('max_tokens', maxTokens);
+    if (isLoaded) {
+      setApiKeyDraft(settings.openrouter_api_key);
+      setMaxTokensDraft(String(settings.max_tokens));
     }
-  }, [maxTokens, isLoaded]);
+  }, [isLoaded, settings.openrouter_api_key, settings.max_tokens]);
 
-  // Auto-save default tone setting (only after initial load)
-  useEffect(() => {
-    if (isLoaded && defaultTone) {
-      localStorage.setItem('default_tone', defaultTone);
-    }
-  }, [defaultTone, isLoaded]);
-
-  const loadSettings = async () => {
-    try {
-      // Prefer the Tauri store for sensitive data (get_api_key). Fall back to localStorage for non-sensitive values.
-      const savedApiKey = await invoke<string>('get_api_key').catch(() => '');
-      const savedModel = localStorage.getItem('selected_model') || '';
-      const savedMaxTokens = localStorage.getItem('max_tokens') || '2000';
-      const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
-
-      setApiKey(savedApiKey);
-      setSelectedModel(savedModel);
-      setMaxTokens(savedMaxTokens);
-      setDefaultTone(savedDefaultTone);
-    } catch (e) {
-      console.error('Failed to load settings via Tauri store, falling back to localStorage', e);
-      const savedApiKey = localStorage.getItem('openrouter_api_key') || '';
-      setApiKey(savedApiKey);
-    }
-  };
-
-  const saveApiKey = () => {
-    if (!apiKey.trim()) {
+  const saveApiKey = async () => {
+    if (!apiKeyDraft.trim()) {
       setMessage({ type: 'error', text: 'Please enter an API key' });
       return;
     }
 
     // Basic API key format validation for OpenRouter
-    if (!apiKey.startsWith('sk-or-v1-')) {
+    if (!apiKeyDraft.startsWith('sk-or-v1-')) {
       setMessage({ type: 'error', text: 'Invalid API key format. OpenRouter API keys should start with "sk-or-v1-"' });
       return;
     }
 
-    // Save via Tauri store so the backend can access it and to avoid frontend storage permission issues
-    invoke('set_api_key', { apiKey })
-      .then(() => {
-        setMessage({ type: 'success', text: 'API key saved successfully!' });
-        // Also keep a local copy as a fallback
-        try { localStorage.setItem('openrouter_api_key', apiKey); } catch {}
-        // Automatically fetch models after saving API key
-        fetchModels();
-      })
-      .catch((err) => {
-        console.error('Failed to save API key via Tauri store:', err);
-        setMessage({ type: 'error', text: `Failed to save API key: ${err}` });
-      });
+    try {
+      await updateSettings({ openrouter_api_key: apiKeyDraft });
+      setMessage({ type: 'success', text: 'API key saved successfully!' });
+      // Automatically fetch models after saving API key
+      await fetchModels();
+    } catch (error) {
+      console.error('Failed to save API key:', error);
+      setMessage({ type: 'error', text: `Failed to save API key: ${error}` });
+    }
   };
 
+  // The backend reads the stored key itself — it is never passed through here.
   const fetchModels = async () => {
-    if (!apiKey.trim()) {
-      setMessage({ type: 'error', text: 'Please enter an API key first' });
-      return;
-    }
-
     setIsLoadingModels(true);
     setMessage(null);
 
     try {
-      const modelsData = await invoke<any[]>('fetch_openrouter_models', { apiKey });
+      const modelsData = await invoke<any[]>('fetch_openrouter_models');
 
       const formattedModels: Model[] = modelsData.map(model => ({
         id: model.id as string,
@@ -109,7 +79,7 @@ const Settings: React.FC<SettingsProps> = () => {
       setModels(formattedModels);
 
       // Set default model if none selected
-      if (!selectedModel && formattedModels.length > 0) {
+      if (!settings.selected_model && formattedModels.length > 0) {
         // Try to find a free model first, then Gemini 2.0 Flash
         const freeModel = formattedModels.find(m =>
           m.id.includes('free') || m.id.includes('gemini-2.0-flash-exp:free')
@@ -118,8 +88,7 @@ const Settings: React.FC<SettingsProps> = () => {
           m.id.includes('gemini-2.0-flash') || m.name.toLowerCase().includes('gemini')
         );
         const defaultModel = freeModel || geminiModel || formattedModels[0];
-        setSelectedModel(defaultModel.id);
-        localStorage.setItem('selected_model', defaultModel.id);
+        await updateSettings({ selected_model: defaultModel.id });
       }
 
       setMessage({ type: 'success', text: `Loaded ${formattedModels.length} models` });
@@ -131,16 +100,25 @@ const Settings: React.FC<SettingsProps> = () => {
     }
   };
 
-  const toneOptions = [
-    'professional',
-    'casual',
-    'friendly',
-    'formal',
-    'enthusiastic',
-    'empathetic',
-    'confident',
-    'concise'
-  ];
+  // Committed on blur rather than per keystroke to avoid a write per digit.
+  const commitMaxTokens = async () => {
+    const parsed = parseInt(maxTokensDraft, 10);
+    if (!Number.isFinite(parsed)) {
+      setMaxTokensDraft(String(settings.max_tokens));
+      return;
+    }
+
+    const clamped = Math.min(Math.max(parsed, 1000), 10000);
+    setMaxTokensDraft(String(clamped));
+    if (clamped === settings.max_tokens) return;
+
+    try {
+      await updateSettings({ max_tokens: clamped });
+    } catch (error) {
+      console.error('Failed to save max tokens:', error);
+      setMaxTokensDraft(String(settings.max_tokens));
+    }
+  };
 
   return (
     <div className="settings">
@@ -176,8 +154,8 @@ const Settings: React.FC<SettingsProps> = () => {
             <div className="settings__input-container">
               <input
                 type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
+                value={apiKeyDraft}
+                onChange={(e) => setApiKeyDraft(e.target.value)}
                 placeholder="Enter your OpenRouter API key..."
                 className="settings__api-input"
               />
@@ -190,8 +168,8 @@ const Settings: React.FC<SettingsProps> = () => {
 
           <button
             onClick={fetchModels}
-            disabled={isLoadingModels || !apiKey}
-            className={`settings__load-button ${isLoadingModels || !apiKey ? 'settings__load-button--disabled' : ''}`}
+            disabled={isLoadingModels || !settings.openrouter_api_key}
+            className={`settings__load-button ${isLoadingModels || !settings.openrouter_api_key ? 'settings__load-button--disabled' : ''}`}
           >
             {isLoadingModels ? (
               <Loader2 size={12} className="settings__spinner settings__button-icon" />
@@ -206,11 +184,15 @@ const Settings: React.FC<SettingsProps> = () => {
             <h3 className="settings__section-title">Model Selection</h3>
             <div className="settings__select-container">
               <select
-                value={selectedModel}
-                onChange={(e) => {
-                  setSelectedModel(e.target.value)
-                  localStorage.setItem('selected_model', e.target.value);
-                  setMessage({ type: 'success', text: 'Model selection saved!' });
+                value={settings.selected_model}
+                onChange={async (e) => {
+                  try {
+                    await updateSettings({ selected_model: e.target.value });
+                    setMessage({ type: 'success', text: 'Model selection saved!' });
+                  } catch (error) {
+                    console.error('Failed to save model selection:', error);
+                    setMessage({ type: 'error', text: `Failed to save model selection: ${error}` });
+                  }
                 }}
                 className="settings__model-select"
               >
@@ -224,9 +206,9 @@ const Settings: React.FC<SettingsProps> = () => {
                     </option>
                   ))}
               </select>
-              {selectedModel && (
+              {settings.selected_model && (
                 <div className="settings__current-model">
-                  <strong>Current Model:</strong> {selectedModel}
+                  <strong>Current Model:</strong> {settings.selected_model}
                 </div>
               )}
             </div>
@@ -245,8 +227,9 @@ const Settings: React.FC<SettingsProps> = () => {
             <div className="settings__select-container">
               <input
                 type="number"
-                value={maxTokens}
-                onChange={(e) => setMaxTokens(e.target.value)}
+                value={maxTokensDraft}
+                onChange={(e) => setMaxTokensDraft(e.target.value)}
+                onBlur={commitMaxTokens}
                 placeholder="2000"
                 min="1000"
                 max="10000"
@@ -265,11 +248,16 @@ const Settings: React.FC<SettingsProps> = () => {
             </label>
             <div className="settings__select-container">
               <select
-                value={defaultTone}
-                onChange={(e) => setDefaultTone(e.target.value)}
+                value={settings.default_tone}
+                disabled={!isLoaded}
+                onChange={(e) =>
+                  updateSettings({ default_tone: e.target.value }).catch((error) =>
+                    console.error('Failed to save default tone:', error)
+                  )
+                }
                 className="settings__model-select"
               >
-                {toneOptions.map(tone => (
+                {TONE_OPTIONS.map(tone => (
                   <option key={tone} value={tone}>
                     {tone.charAt(0).toUpperCase() + tone.slice(1)}
                   </option>

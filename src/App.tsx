@@ -4,18 +4,18 @@ import "./App.css";
 import Overlay from "./components/Overlay";
 import Settings from "./components/Settings";
 import AppSettings from "./components/AppSettings";
-import { useTheme } from "./contexts/ThemeContext";
+import { useSettings } from "./contexts/SettingsContext";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { AppWindow, Cpu, Home } from 'lucide-react';
 
 function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings' | 'appSettings'>('main');
   const contentRef = useRef<HTMLDivElement>(null);
-  const { theme, isThemeLoaded } = useTheme();
+  const { settings, isLoaded } = useSettings();
   useWindowResize(contentRef);
 
   return (
-    <div id="app" ref={contentRef} className={isThemeLoaded ? `theme-${theme.toLowerCase()}` : ''}>
+    <div id="app" ref={contentRef} className={isLoaded ? `theme-${settings.theme.toLowerCase()}` : ''}>
       <div className="app-inner">
         <nav className="app-navigation">
           <div className="nav-tabs">

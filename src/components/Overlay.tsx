@@ -2,30 +2,44 @@ import React, { useState, useEffect, useRef } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Edit3, MessageSquare, PenTool, Loader2, Copy, Check } from 'lucide-react';
+import { useSettings } from '../contexts/SettingsContext';
 
 interface OverlayProps {}
 
+const TONE_OPTIONS = [
+  'professional',
+  'casual',
+  'friendly',
+  'formal',
+  'enthusiastic',
+  'empathetic',
+  'confident',
+  'concise'
+];
+
 const Overlay: React.FC<OverlayProps> = () => {
+  const { settings, isLoaded } = useSettings();
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedAction, setSelectedAction] = useState<'proofread' | 'tone' | 'draft'>('proofread');
-  const [selectedTone, setSelectedTone] = useState('professional');
+  // Session-local override of the stored default tone.
+  const [selectedTone, setSelectedTone] = useState(settings.default_tone);
   const [copied, setCopied] = useState(false);
-  const [autoCloseEnabled, setAutoCloseEnabled] = useState(false);
   const sendButtonRef = useRef<HTMLButtonElement>(null);
+
+  const autoCloseEnabled = settings.auto_close;
 
   useEffect(() => {
     // Load clipboard text when component mounts
     loadClipboardText();
-
-    // Load default tone setting
-    const savedDefaultTone = localStorage.getItem('default_tone') || 'professional';
-    setSelectedTone(savedDefaultTone);
-
-    // Load auto_close setting
-    invoke<boolean>('get_auto_close').then(setAutoCloseEnabled);
   }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      setSelectedTone(settings.default_tone);
+    }
+  }, [isLoaded, settings.default_tone]);
 
   // Handle window focus to refresh clipboard content (but only when not auto-closing)
   useEffect(() => {
@@ -38,7 +52,7 @@ const Overlay: React.FC<OverlayProps> = () => {
       // and the current action is 'proofread'
       if (selectedAction === 'proofread' && sendButtonRef.current) {
         sendButtonRef.current.focus();
-      }      
+      }
     };
 
     window.addEventListener('focus', handleFocus);
@@ -65,43 +79,24 @@ const Overlay: React.FC<OverlayProps> = () => {
       return;
     }
 
+    // The backend reads the key and model from the store and validates them
+    // too; these checks only give faster feedback.
+    if (!settings.openrouter_api_key) {
+      alert('Please set your OpenRouter API key in Settings first');
+      return;
+    }
+    if (!settings.selected_model) {
+      alert('Please select a model in Settings first');
+      return;
+    }
+
     setIsLoading(true);
 
     try {
-      // Get settings from localStorage
-      const apiKey = localStorage.getItem('openrouter_api_key') || '';
-      const model = localStorage.getItem('selected_model') || '';
-
-      // If no model is selected, show an error
-      if (!model) {
-        alert('Please select a model in Settings first');
-        setIsLoading(false);
-        return;
-      }
-
-      if (!apiKey) {
-        alert('Please set your OpenRouter API key in Settings first');
-        setIsLoading(false);
-        return;
-      }
-
-      // Validate API key format
-      if (!apiKey.startsWith('sk-or-v1-')) {
-        alert('Invalid API key format. Please check your OpenRouter API key in Settings.');
-        setIsLoading(false);
-        return;
-      }
-
-      // Get max tokens setting
-      const maxTokens = localStorage.getItem('max_tokens') || '2000';
-
       const result = await invoke<string>('process_text_with_ai', {
         text: inputText,
         action: selectedAction,
-        model,
-        apiKey,
-        tone: selectedAction === 'tone' ? selectedTone : undefined,
-        maxTokens: parseInt(maxTokens)
+        tone: selectedAction === 'tone' ? selectedTone : undefined
       });
 
       setOutputText(result);
@@ -155,17 +150,6 @@ const Overlay: React.FC<OverlayProps> = () => {
     }
   };
 
-  const toneOptions = [
-    'professional',
-    'casual',
-    'friendly',
-    'formal',
-    'enthusiastic',
-    'empathetic',
-    'confident',
-    'concise'
-  ];
-
   return (
     <div className="overlay">
       <div className="overlay__container">
@@ -204,7 +188,7 @@ const Overlay: React.FC<OverlayProps> = () => {
               onChange={(e) => setSelectedTone(e.target.value)}
               className="tone-selection__select"
             >
-              {toneOptions.map(tone => (
+              {TONE_OPTIONS.map(tone => (
                 <option key={tone} value={tone}>
                   {tone.charAt(0).toUpperCase() + tone.slice(1)}
                 </option>

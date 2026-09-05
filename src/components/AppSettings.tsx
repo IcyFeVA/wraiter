@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/core';
-import { useTheme } from '../contexts/ThemeContext';
+import { useSettings, Theme, THEMES } from '../contexts/SettingsContext';
+
+const THEME_LABELS: Partial<Record<Theme, string>> = {
+  AquaDark: 'Aqua Dark',
+};
+
+const themeLabel = (theme: Theme) => THEME_LABELS[theme] ?? theme;
+
+// Console exists as a stylesheet but is not offered in the picker.
+// Default theme first, the rest alphabetical.
+const SELECTABLE_THEMES = THEMES.filter((theme) => theme !== 'Console' && theme !== 'NSX')
+  .slice()
+  .sort((a, b) => themeLabel(a).localeCompare(themeLabel(b)));
 
 const AppSettings: React.FC = () => {
-  const { theme, setTheme } = useTheme();
-  const [shortcut, setShortcut] = useState('');
+  const { settings, isLoaded, updateSettings, resetShortcut } = useSettings();
+
+  // The shortcut input is a draft until saved, so it needs local state.
+  const [shortcutDraft, setShortcutDraft] = useState(settings.shortcut);
   const [autostart, setAutostart] = useState(false);
-  const [autoClose, setAutoClose] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Load settings from backend when component mounts
   useEffect(() => {
-    loadSettings();
+    setShortcutDraft(settings.shortcut);
+  }, [settings.shortcut]);
+
+  // Autostart is an OS-level toggle owned by the autostart plugin, not a
+  // stored setting — it stays on its own commands.
+  useEffect(() => {
+    invoke<boolean>('is_autostart_enabled')
+      .then(setAutostart)
+      .catch((err) => console.error('Failed to read autostart state:', err));
   }, []);
-
-
-
-
-
-  const loadSettings = async () => {
-    try {
-      const savedShortcut = await invoke<string>('get_shortcut');
-      const isAutostartEnabled = await invoke<boolean>('is_autostart_enabled');
-      const savedAutoClose = await invoke<boolean>('get_auto_close');
-      setShortcut(savedShortcut);
-      setAutostart(isAutostartEnabled);
-      setAutoClose(savedAutoClose);
-    } catch (error) {
-      console.error('Failed to load app settings:', error);
-    }
-  };
 
   const handleShortcutChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -46,45 +50,52 @@ const AppSettings: React.FC = () => {
       shortcutString.push(key.toUpperCase());
     }
 
-    setShortcut(shortcutString.join('+'));
+    setShortcutDraft(shortcutString.join('+'));
   };
 
-
   const saveShortcut = async () => {
+    setError(null);
     try {
-      await invoke('set_shortcut', { shortcut });
-    } catch (error) {
-      console.error('Failed to save shortcut:', error);
+      await updateSettings({ shortcut: shortcutDraft });
+    } catch (err) {
+      // The backend rejects a shortcut it cannot register and keeps the old one.
+      console.error('Failed to save shortcut:', err);
+      setError(`${err}`);
+      setShortcutDraft(settings.shortcut);
     }
   };
 
-  const resetShortcut = async () => {
+  const handleResetShortcut = async () => {
+    setError(null);
     try {
-      await invoke('reset_shortcut');
-      const defaultShortcut = await invoke<string>('get_shortcut'); // Fetch the new default
-      setShortcut(defaultShortcut);
-    } catch (error) {
-      console.error('Failed to reset shortcut:', error);
+      await resetShortcut();
+    } catch (err) {
+      console.error('Failed to reset shortcut:', err);
+      setError(`${err}`);
     }
   };
 
   const toggleAutostart = async () => {
     try {
-      if (autostart) {
-        await invoke('disable_autostart');
-        setAutostart(false);
-      } else {
-        await invoke('enable_autostart');
-        setAutostart(true);
-      }
-    } catch (error) {
-      console.error('Failed to toggle autostart:', error);
+      await invoke(autostart ? 'disable_autostart' : 'enable_autostart');
+      setAutostart(!autostart);
+    } catch (err) {
+      console.error('Failed to toggle autostart:', err);
     }
   };
+
+  const persist = (label: string) => (promise: Promise<unknown>) =>
+    promise.catch((err) => console.error(`Failed to save ${label}:`, err));
 
   return (
     <div className="app-settings">
       <div className="app-settings__container">
+
+        {error && (
+          <div className="message-display message-display--error">
+            <span className="message-display__text">{error}</span>
+          </div>
+        )}
 
         {/* Keyboard Shortcut Section */}
         <section className="app-settings__section">
@@ -93,7 +104,7 @@ const AppSettings: React.FC = () => {
             <div className="app-settings__input-container">
               <input
                 type="text"
-                value={shortcut}
+                value={shortcutDraft}
                 onKeyDown={handleShortcutChange}
                 placeholder="Press keys to set shortcut..."
                 className="app-settings__shortcut-input"
@@ -103,7 +114,7 @@ const AppSettings: React.FC = () => {
             <button onClick={saveShortcut} className="app-settings__action-button">
               Save
             </button>
-            <button onClick={resetShortcut} className="app-settings__action-button">
+            <button onClick={handleResetShortcut} className="app-settings__action-button">
               Reset
             </button>
           </div>
@@ -140,16 +151,11 @@ const AppSettings: React.FC = () => {
               <label className="app-settings__checkbox-label">
                 <input
                   type="checkbox"
-                  checked={autoClose}
-                  onChange={async (e) => {
-                    const checked = e.target.checked;
-                    setAutoClose(checked);
-                    try {
-                      await invoke('set_auto_close', { autoClose: checked });
-                    } catch (error) {
-                      console.error('Failed to save auto-close setting:', error);
-                    }
-                  }}
+                  checked={settings.auto_close}
+                  disabled={!isLoaded}
+                  onChange={(e) =>
+                    persist('auto-close setting')(updateSettings({ auto_close: e.target.checked }))
+                  }
                   className="app-settings__checkbox"
                 />
                 <span>Close window after copying result (proofread always auto-closes)</span>
@@ -166,20 +172,19 @@ const AppSettings: React.FC = () => {
           <h3 className="app-settings__section-title">Theme:</h3>
           <div className="app-settings__select-container">
             <select
-              value={theme}
-              onChange={(e) => setTheme(e.target.value as 'NSX' | 'Aqua' | 'AquaDark' | 'Abelton' | 'Lamasass' | 'ICQ' | 'Ampwin' | 'Maverick')}
+              value={settings.theme}
+              disabled={!isLoaded}
+              onChange={(e) =>
+                persist('theme')(updateSettings({ theme: e.target.value as Theme }))
+              }
               className="app-settings__theme-select"
             >
               <option value="NSX">NSX</option>
-              <option value="Ampwin">Ampwin</option>
-              <option value="Aqua">Aqua</option>
-              <option value="AquaDark">Aqua Dark</option>
-              <option value="Abelton">Abelton</option>
-              <option value="ICQ">ICQ</option>
-              <option value="Lamasass">Lamasass</option>
-              <option value="Maverick">Maverick</option>
-
-              {/* <option value="Console">Console</option> */}
+              {SELECTABLE_THEMES.map((theme) => (
+                <option key={theme} value={theme}>
+                  {themeLabel(theme)}
+                </option>
+              ))}
             </select>
           </div>
         </section>

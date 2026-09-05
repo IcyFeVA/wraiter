@@ -1,7 +1,7 @@
 
 # Starstrike — AI Quick Actions Desktop Tool
 
-Starstrike is a lightweight, cross-platform desktop utility (Windows + macOS) that gives you access to AI-powered quick text actions from anywhere on your system via a global shortcut. It opens a minimal overlay where you can proofread, rewrite with a different tone, or draft new content using OpenRouter-backed models.
+Starstrike is a lightweight, cross-platform desktop utility (Linux, Windows and macOS) that gives you access to AI-powered quick text actions from anywhere on your system via a global shortcut. Packaged builds currently target Linux only (`.rpm`); Windows and macOS bundling is planned. It opens a minimal overlay where you can proofread, rewrite with a different tone, or draft new content using OpenRouter-backed models.
 
 Key goals:
 - Fast global shortcut to open a small overlay window
