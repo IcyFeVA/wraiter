@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { getVersion } from "@tauri-apps/api/app";
 import { useWindowResize } from "./hooks/useWindowResize";
 import "./App.css";
 import Overlay from "./components/Overlay";
@@ -12,7 +13,15 @@ function App() {
   const [currentView, setCurrentView] = useState<'main' | 'settings' | 'appSettings'>('main');
   const contentRef = useRef<HTMLDivElement>(null);
   const { settings, isLoaded } = useSettings();
+  // Read from the bundle rather than hardcoding, so it tracks Cargo.toml.
+  const [version, setVersion] = useState("");
   useWindowResize(contentRef);
+
+  useEffect(() => {
+    getVersion()
+      .then(setVersion)
+      .catch((err) => console.error("Failed to read app version:", err));
+  }, []);
 
   return (
     <div id="app" ref={contentRef} className={isLoaded ? `theme-${settings.theme.toLowerCase()}` : ''}>
@@ -70,8 +79,8 @@ function App() {
             }}
           >
             <div className="drag-region__content">
-              <span className="drag-region__version">1.0</span>
-              <span className="drag-region__title">Starstrike 1.0</span>
+              <span className="drag-region__version">{version}</span>
+              <span className="drag-region__title">Starstrike {version}</span>
             </div>
           </div>
 

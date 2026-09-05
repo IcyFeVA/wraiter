@@ -5,7 +5,7 @@ use tauri::tray::TrayIconBuilder;
 use tauri::Manager;
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use tauri_plugin_clipboard_manager::ClipboardExt;
-use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent};
+use tauri_plugin_global_shortcut::{GlobalShortcutExt, Shortcut, ShortcutEvent, ShortcutState};
 use tauri_plugin_store::StoreBuilder;
 use std::str::FromStr;
 use std::sync::Mutex;
@@ -155,12 +155,20 @@ fn register_shortcut(app: &tauri::AppHandle, shortcut: &str) -> Result<(), Strin
         .map_err(|e| e.to_string())?;
 
     app.global_shortcut()
-        .on_shortcut(parsed, |app: &tauri::AppHandle, _shortcut: &Shortcut, _event: ShortcutEvent| {
-            // Debounce rapid shortcut triggers (ignore if triggered within 200ms)
+        .on_shortcut(parsed, |app: &tauri::AppHandle, _shortcut: &Shortcut, event: ShortcutEvent| {
+            // The handler fires for both press and release. Acting on release
+            // only gives a single toggle per keypress no matter how long the
+            // key is held — pressing fired "show" and releasing fired "hide".
+            if event.state != ShortcutState::Released {
+                return;
+            }
+
+            // Guard against a duplicated release event from the OS. Kept well
+            // below human double-tap speed so intentional taps still register.
             if let Ok(mut last_trigger) = LAST_SHORTCUT_TRIGGER.lock() {
                 if let Some(last) = *last_trigger {
-                    if last.elapsed() < Duration::from_millis(200) {
-                        return; // Ignore rapid successive triggers
+                    if last.elapsed() < Duration::from_millis(50) {
+                        return;
                     }
                 }
                 *last_trigger = Some(Instant::now());

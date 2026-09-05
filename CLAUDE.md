@@ -43,6 +43,8 @@ On the frontend, [src/contexts/SettingsContext.tsx](src/contexts/SettingsContext
 
 There is one webview window, `main` (defined in [src-tauri/tauri.conf.json](src-tauri/tauri.conf.json): 500x200, undecorated, transparent, always-on-top). It is never destroyed — the global shortcut, tray "Show UI" item, and the in-app close button all just toggle visibility via `apply_main_window_visibility`. The window's `CloseRequested` event is intercepted (`api.prevent_close()`) and hides the window instead. Visibility is mirrored into a process-wide `Mutex<bool>` (`MAIN_WINDOW_VISIBLE`) so the shortcut toggle and the OS-reported window state can be kept in sync.
 
+The global shortcut handler **must act on `ShortcutState::Released` only** (see `register_shortcut`). `on_shortcut` fires for both press and release, so handling both toggled twice per keypress — the window appeared on press and vanished on release when the key was held. The X11 backend sends exactly one `Pressed` and one `Released` per physical press (auto-repeat is filtered by the plugin), so release-only gives one toggle regardless of hold duration. The short debounce that remains is only a guard against a duplicated OS event; it is deliberately well under human double-tap speed so real taps are never swallowed.
+
 The window height auto-adjusts to content via [src/hooks/useWindowResize.ts](src/hooks/useWindowResize.ts), which observes the root element's `scrollHeight` (capped at 700px) and calls the `resize_window` Rust command. Width is fixed at 500.
 
 `src-tauri/capabilities/default.json` grants permissions to windows `["main", "overlay"]`, but no `overlay` window is actually declared in `tauri.conf.json` — treat that as a vestigial/planned reference, not a second window that exists today.
@@ -50,6 +52,12 @@ The window height auto-adjusts to content via [src/hooks/useWindowResize.ts](src
 ### Themes
 
 Themes are plain CSS files under [src/themes/](src/themes/), applied by setting a `theme-{name}` class on `<body>` (from `SettingsContext`) and on the root app div (from `App.tsx`). The canonical list is the `THEMES` const in `SettingsContext`; adding a theme means adding the name there, the CSS file, and its import in [src/main.tsx](src/main.tsx). `Console` has a stylesheet but is deliberately filtered out of the picker in `AppSettings.tsx`.
+
+### Versioning — bump in one place
+
+The app version lives **only** in `version` in [src-tauri/Cargo.toml](src-tauri/Cargo.toml). `tauri.conf.json` deliberately has no `version` key so Tauri falls back to Cargo.toml, and the UI reads it at runtime with `getVersion()` rather than hardcoding it. Don't re-add a version to `tauri.conf.json` or type one into a component.
+
+This matters for installs, not just tidiness: the rpm's NEVRA comes from this version, so shipping two different builds as the same version makes `dnf install`/`upgrade` a no-op ("nothing to do") and forces a `remove` + `install`. Bump the version for any build you intend to install over an existing one.
 
 ### Platform targets
 

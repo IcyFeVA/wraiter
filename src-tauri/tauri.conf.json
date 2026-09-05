@@ -1,7 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Starstrike",
-  "version": "1.0.0",
   "identifier": "com.crushy.starstrike",
   "build": {
     "beforeDevCommand": "yarn dev",
